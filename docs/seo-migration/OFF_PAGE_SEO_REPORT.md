@@ -1,10 +1,19 @@
 # Off-Page SEO & Search Performance Report — pathwayproductions.in
 
-Collected 2026-10-31. Sources: Semrush (connected to this project — real data), Porter Metrics (connected, but access blocked for this specific site — see below). Google Search Console and GA4 data for pathwayproductions.in itself were **not obtainable** this pass; this is stated plainly below rather than estimated.
+Collected 2026-10-31. Sources: Semrush (connected to this project — real data), Porter Metrics (connected, but access blocked for this specific site — see below). Google Search Console and GA4 data for pathwayproductions.in itself were **not obtainable via Porter** this pass; this is stated plainly below rather than estimated.
+
+> **Superseded (2026-10-31, second pass):** GSC data *is* obtainable — just not
+> through Porter. A direct, read-only browser-based GSC audit was completed
+> using the `marketing@pathwayproductions.in` Google account, which already
+> had Search Console access configured. See `GSC_SEARCH_PERFORMANCE_AUDIT.md`
+> for the full first-party report, and `GSC_QUERY_PAGE_MAPPING.csv` for the
+> query-to-page mapping. The Porter connection gap described below remains
+> accurate (and still blocks GA4), but is no longer the only path to GSC data
+> for this property.
 
 ## 1. What could NOT be pulled, and why (read this first)
 
-- **Google Search Console — pathwayproductions.in has no connected property.** The Porter Metrics workspace tied to this account has GSC access for two *other* brands (`http://www.wowtam.com/` and `https://courses.gardencity.university/` / `sc-domain:gardencity.university`) but **not** for pathwayproductions.in, even though Rank Math on the WordPress side confirms GSC is linked there directly. **Action needed**: connect the pathwayproductions.in Search Console property to Porter (or grant a direct GSC API connection) to get real clicks/impressions/query/position data for the next version of this audit.
+- **Google Search Console — pathwayproductions.in has no connected property *in Porter*.** The Porter Metrics workspace tied to this account has GSC access for two *other* brands (`http://www.wowtam.com/` and `https://courses.gardencity.university/` / `sc-domain:gardencity.university`) but **not** for pathwayproductions.in, even though Rank Math on the WordPress side confirms GSC is linked there directly. This gap in Porter specifically is still real and worth fixing for future automated reporting — but it no longer blocks getting GSC data for this audit; see the superseding note above.
 - **Google Analytics 4 — a "Pathway Website" GA4 property exists in Porter but querying it is currently blocked.** Two separate plan limits hit: (1) the workspace already has more connected accounts than the current Porter plan allows (3), so querying this new property would need another to be disconnected first — not something done without your approval, since it could affect other clients' reporting; (2) even within that cap, the plan's history window is capped at the **last 30 days** — the brief asked for 12-16 months with a 3-month comparison, which this plan cannot serve regardless. **Action needed**: either free up an account slot (your call on which to disconnect) or upgrade the Porter plan, then re-run this query.
 - **Jetpack's own on-site stats**: not reachable — the logged-in WordPress account (Editor role) has no "Stats" menu item visible.
 
