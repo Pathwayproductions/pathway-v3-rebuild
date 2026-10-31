@@ -9,6 +9,16 @@
 
 /* ---- Dark cinematic hero (film/production pages) ---- */
 .hero-dark{position:relative;min-height:480px;display:flex;align-items:flex-end;overflow:hidden}
+/* ---- Concept-preview images (temporary, non-final — see asset handover review) ---- */
+.concept-media{background:none}
+.concept-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.concept-tag{
+  position:absolute;bottom:10px;right:10px;z-index:3;
+  background:rgba(14,18,20,.82);color:#eef3f5;
+  font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 9px;border:1px solid rgba(255,255,255,.25);
+}
+
 .hero-dark .placeholder-media{position:absolute;inset:0}
 .hero-dark::after{
   content:'';position:absolute;inset:0;z-index:1;
