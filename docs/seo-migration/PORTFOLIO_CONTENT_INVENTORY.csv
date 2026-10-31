@@ -1,0 +1,23 @@
+project_title,client_name,category,source_page,video_ids,status,notes
+Success Stories case studies,"Arun Excello, CIPET, Grand Sweets, Jio (named on page)",case study / testimonial,/success-stories/,none embedded (image-based per this pass's scan),verified-published,"Real named clients across diverse industries (real estate, plastics tech, FMCG, telecom) - strong portfolio proof; full case-study copy not yet extracted"
+NTC corporate film,NTC,corporate video,/corporate-video-productions/ and /advertising-agency/,ZKrhWmWMinw,verified-published,High-confidence per prior audit pass
+N Trust corporate film,N Trust,corporate video,/corporate-video-productions/ and /advertising-agency/,nJ6FobPBQh4,verified-published,High-confidence per prior audit pass
+LECS corporate film,LECS,corporate video,/corporate-video-productions/ and /advertising-agency/,f-_IY9gUqaE,verified-published,High-confidence per prior audit pass
+GoStocks explainer video,GoStocks,explainer video,/explainer-video-company/,n4ZgXaIZxhE,verified-published,Named in original audit brief as research candidate
+GCU explainer video,Garden City University,explainer video,/explainer-video-company/,PQ-urzRuKY0,verified-published,"GCU is a confirmed current Pathway client (agency's own marketing records)"
+Fashion Profiles explainer video,Fashion Profiles,explainer video,/explainer-video-company/,DoexLxR8tF8,verified-published,Named in original audit brief as research candidate
+Phozhil explainer video,Phozhil,explainer video,/explainer-video-company/,ogK5rdgI6Zw,verified-published,Named in original audit brief as research candidate
+We Box ad film,We Box,ad film,/ad-films/ and /3d-animation-services/,Ve3r6RINF1g,verified-published,Named in original audit brief as research candidate
+Spice Hill ad film,Spice Hill,ad film,/ad-films/,rbKELyHuRiw,verified-published,Named in original audit brief as research candidate
+Akara Research whiteboard animation,Akara Research,whiteboard animation,/whiteboard-animation/,F1wBcxE6-iU,verified-published,No destination page in new 29-page build - at risk
+Ecobuddy Cool Drinks whiteboard animation,Ecobuddy Cool Drinks,whiteboard animation,/whiteboard-animation/,jp1yNYBOsmw,verified-published,No destination page in new 29-page build - at risk
+Lifespice whiteboard animation,Lifespice (possibly same as LifeSpice Masala - connected GA4 property under Pathway's own marketing account),whiteboard animation,/whiteboard-animation/,UPjchAVot9k,verified-published,"Possible same client as the LifeSpice Masala GA4 property Pathway manages - worth confirming, could indicate an ongoing/current client relationship"
+Hard Truth 2D animation,Hard Truth,2D animation,/2d-animation-services/,NPIpvOq2EOI,verified-published,No destination page in new 29-page build - at risk
+Smart pic 2D animation,Smart pic,2D animation,/2d-animation-services/,026Fo3v1EgQ,verified-published,No destination page in new 29-page build - at risk
+mSiren 2D animation,mSiren,2D animation,/2d-animation-services/,o_SvTlfQhf0,verified-published,No destination page in new 29-page build - at risk
+Minmini App 2D animation,Minmini App,2D animation,/2d-animation-services/,W6EbJp5xf8Q,verified-published,No destination page in new 29-page build - at risk
+3D Industrial Animation project,unconfirmed,3D animation,/3d-animation-services/,gq5uKG0Uwv0,requires approval,Client name not identified from page content
+3D Explainer Video project,unconfirmed,3D animation,/3d-animation-services/,g3yL1f8f0oE,requires approval,Client name not identified from page content
+Kurai Ondrum Illai,Pathway Productions (own production - crowdfunded feature film directed by Karthik Ravi),feature film,/feature-films/,oXF7jquWRsE,verified-published,"First crowd-funded Tamil feature film by Pathway; Karthik Ravi (director) is the WP admin account used for this audit - confirms agency's own IP"
+Music Album portfolio (7 titles),unconfirmed per-track,music video,/music-album/,"UK8bmqzm07Y, hEFvXgGNe-A, 49Xb9q8-iMg, _EB6xqNE-Yg, gznRuEwMaXE, lYXI4Dhfios, Sy5K5BmUlPw",verified-published,"Prior audit pass noted 7 titles listed as plain text with no embedded video; THIS pass found 7 embedded YouTube IDs on the same page - CORRECTION, videos are present. Per-title name mapping not yet done."
+NOTE,,,,,,"Distinguish verified-published (confirmed live on the current site) from requires approval (client name unclear or association unconfirmed) per Phase 6 instruction. None of the above should be treated as automatically approved for reuse in the new build - all require Arun's explicit sign-off before republishing, per client confidentiality and rights considerations."
