@@ -10,7 +10,8 @@
     "aspect_ratio": "16:9",
     "embed_behavior": "Modal/inline player, no autoplay",
     "availability": "Verification pending",
-    "notes": "Page already flags 'Showreel \u2014 verification pending (VID-001)'. Do not invent a YouTube ID, thumbnail or embed until the real video and its URL are supplied and approved."
+    "notes": "Page already flags 'Showreel \u2014 verification pending (VID-001)'. Do not invent a YouTube ID, thumbnail or embed until the real video and its URL are supplied and approved.",
+    "live_site_candidate": "https://www.youtube.com/watch?v=i2sVGKLNDn4 \u2014 labeled 'creative video productions' on live /creative-video-productions/, possible showreel. Unconfirmed, not approved \u2014 see docs/LIVE_SITE_SEO_AND_LINKS_AUDIT.md \u00a75."
   },
   {
     "page_url": "/ad-films/",
@@ -23,7 +24,8 @@
     "aspect_ratio": "16:9",
     "embed_behavior": "Modal/inline player, no autoplay",
     "availability": "Not yet sourced",
-    "notes": "No ad-film video is currently embedded on this page (only static project-still placeholders, IMG-ADF-01/02/03). Add a video register entry once a specific approved ad-film project and URL are confirmed."
+    "notes": "No ad-film video is currently embedded on this page (only static project-still placeholders, IMG-ADF-01/02/03). Add a video register entry once a specific approved ad-film project and URL are confirmed.",
+    "live_site_candidate": "Three ad films are live on /ad-films/ today: youtube.com/embed/sPfqvPyO66o (unlabeled hero), Ve3r6RINF1g (We Box), rbKELyHuRiw (Spice Hill). None confirmed as the one to feature — see docs/LIVE_SITE_SEO_AND_LINKS_AUDIT.md §5."
   },
   {
     "page_url": "/films/",
@@ -49,7 +51,8 @@
     "aspect_ratio": "16:9",
     "embed_behavior": "Modal/inline player, no autoplay",
     "availability": "Not yet sourced",
-    "notes": "Same as VID-003 \u2014 gated on film-approved materials."
+    "notes": "Same as VID-003 \u2014 gated on film-approved materials.",
+    "live_site_candidate": "youtube.com/watch?v=oXF7jquWRsE, labeled 'Watch Movie' on live /feature-films/ directly under the Kurai Ondrum Illai description \u2014 strong match, still unconfirmed/unapproved for the rebuild."
   },
   {
     "page_url": "/corporate-video-productions/",
@@ -62,7 +65,8 @@
     "aspect_ratio": "16:9",
     "embed_behavior": "Modal/inline player, no autoplay",
     "availability": "Not yet sourced",
-    "notes": "Current page shows static approved-concept-preview stills only (IMG-NTC-02/03/04, IMG-CVP-NTC/NTRUST/LECS) \u2014 no finished corporate-film video is embedded or linked. Add once client supplies finished films and approves publication."
+    "notes": "Current page shows static approved-concept-preview stills only (IMG-NTC-02/03/04, IMG-CVP-NTC/NTRUST/LECS) \u2014 no finished corporate-film video is embedded or linked. Add once client supplies finished films and approves publication.",
+    "live_site_candidate": "All three are live today on /corporate-video-productions/ and /advertising-agency/: NTC = youtube.com/embed/ZKrhWmWMinw, N Trust = nJ6FobPBQh4, LECS = f-_IY9gUqaE. Direct name match to this row's three projects \u2014 high-confidence candidates, still needs Arun's explicit go-ahead to treat as approved for the rebuild."
   },
   {
     "page_url": "/explainer-video-company/",
@@ -75,7 +79,8 @@
     "aspect_ratio": "16:9",
     "embed_behavior": "N/A",
     "availability": "No approved project credits exist",
-    "notes": "Page explicitly states (02 / Examples) that no approved explainer-video project credits exist yet; nothing is embedded or implied as a stand-in. Register entry is a placeholder for when the first approved project is confirmed."
+    "notes": "Page explicitly states (02 / Examples) that no approved explainer-video project credits exist yet; nothing is embedded or implied as a stand-in. Register entry is a placeholder for when the first approved project is confirmed.",
+    "live_site_candidate": "Live /explainer-video-company/ already shows 5 examples: hero NjXDMDcsPFk, GoStocks n4ZgXaIZxhE, GCU PQ-urzRuKY0, Phozhil ogK5rdgI6Zw, Fashion Profiles DoexLxR8tF8. 'No credits exist yet' is true only for new V3-approved credits — worth confirming with Arun whether any of these carry over."
   },
   {
     "page_url": "/music-album/",
