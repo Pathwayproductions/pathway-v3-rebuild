@@ -1,76 +1,105 @@
 # Responsive QA Report — Pathway Productions V3 (29 pages)
 
-Branch: `qa/full-responsive-audit` (built from `build/29-page-full-site` @ `fb36a18` merged with `review/32-image-integration` @ `e57e0ef`, merge commit `9eb2480`).
-Date: 2026-10-31. Local server: `http://localhost:8930/`.
+Branch: `qa/full-responsive-audit` (built from `build/29-page-full-site` @ `fb36a18` merged with `review/32-image-integration` @ `e57e0ef`, merge commit `9eb2480`; code fix in `5e4190f`).
+Date: 2026-10-31. Local server used for all screenshots: Python `http.server` + Playwright `chromium`.
+
+## Why this revision exists
+
+The previous version of this report (commit `d607dd9`) completed an automated structural sweep of all 29 pages × 7 widths and found zero flags — but had only done real manual screenshot-by-screenshot visual review on 2 of 29 pages (home, ad-films). The person who commissioned this audit had explicitly said: *"I have personally reviewed the website on mobile and noticed several responsive design issues, including alignment, spacing, image cropping and banner adaptations."* A report of "0 issues" while contradicting the client's own firsthand observation was not an acceptable final answer, so this pass completed the manual review and is reporting what it actually found — including a real defect the automated sweep had missed.
 
 ## Methodology
 
-1. **Automated sweep (Playwright) — all 29 pages × all 7 required widths (360/390/430/768/1024/1440/1920px)**, full-page screenshots saved to `docs/responsive-qa/<page>/<width>.png`, raw data in `docs/responsive-qa/_results.json`. Per page/width this checked: HTTP status, horizontal overflow (`scrollWidth > innerWidth`), browser console errors, uncaught page errors, and broken `<img>` elements. Internal links were checked once per page (at 1440px) for HTTP ≥400.
-2. **Manual visual review** of the rendered screenshots at the three core widths (390/768/1440px), plus **direct pixel-level inspection of source image files** (opened as raw images, not just as rendered on the page) wherever a page uses the `assets/concept-previews/batch2/` image set.
-3. The homepage received the deepest manual pass per the brief's Phase 3 priority.
+1. **Automated sweep (Playwright)** — all 29 pages × all 7 required widths (360/390/430/768/1024/1440/1920px): HTTP status, horizontal overflow (`scrollWidth > innerWidth`), console errors, page errors, broken `<img>` elements, broken internal links. Raw data in `docs/responsive-qa/_results.json`.
+2. **Manual visual review (this pass)** — every one of the 29 pages' full-page screenshots was actually opened and looked at, at **390px (mobile, reviewed first per the client's report)** and **1440px (desktop)**. A representative sample of the most layout-complex templates (home, creative-productions, corporate-video-productions — covering the asymmetric grid, timeline row, work-grid and editorial-row patterns used across the site) was additionally reviewed at **768px (tablet)**.
+3. Checked at each width: misaligned text/images, incorrect margins/padding, uneven section spacing, overlapping elements, text extending past containers, typography scaling, line breaks, card-height consistency, broken grids, misaligned buttons, nav/hamburger behaviour, footer alignment, excessive/cramped whitespace, images spilling outside containers, and badge/overlay rendering.
+4. Any defect found was fixed in code, re-screenshotted, and re-viewed to confirm the fix before moving on.
 
 ## Result 1 — Automated layer: clean across the board
 
-**Zero flags** of any kind (status, overflow, console error, page error, broken image, broken link) across all 29 pages × all 7 widths. No code-level responsive defect (grid/flexbox breakage, overflow, broken nav, broken links, broken image loading) was found anywhere on the site. **No code fixes were required or made** — the branch's HTML/CSS/JS is unchanged from the merge baseline.
+**Zero flags** (status/overflow/console/page-error/broken-image/broken-link) across all 29 pages × all 7 widths, both before and after the code fix described below.
 
-## Result 2 — Manual visual review
+## Result 2 — Manual visual review: one real defect found and fixed
 
-| Page | Automated (7 widths) | Manual screenshot review | Image-content issues |
-|---|---|---|---|
-| home | Clean | Done (390/768/1440) — no issues found | None |
-| ad-films | Clean | Done (390/768/1440) — layout clean; nav "Creative Productions" shown as current is intentional (site-wide convention, confirmed by repo-wide grep, not a bug) | **Yes** — see register |
-| corporate-video-productions | Clean | Not yet done (source HTML + image files inspected directly instead) | **Yes** — see register |
-| explainer-video-company | Clean | Not yet done | **Yes** — see register |
-| music-album | Clean | Not yet done | Yes (resolution only) |
-| film-marketing | Clean | Not yet done | Yes (resolution only) |
-| films | Clean | Not yet done | Yes (resolution only) |
-| ott-distribution | Clean | Not yet done | **Yes** — see register |
-| production-services-india | Clean | Not yet done | **Yes** — see register |
-| production-services-india/crew-equipment | Clean | Not yet done | **Yes** — see register |
-| production-services-india/production-management | Clean | Not yet done | Yes (resolution only) |
-| creative-productions | Clean | Not yet done (source HTML + image files inspected directly) | **Yes** — see register |
-| digital-marketing (hub + 10 sub-pages) | Clean | Not yet done | None found (no `batch2` imagery used) |
-| about, work, blogs, careers, contact | Clean | Not yet done | None found (no `batch2` imagery used) |
+**This is the headline finding, and it directly matches the category of problem the client reported from their own mobile review ("banner adaptations").**
+
+### Defect: `creative-productions/index.html` — unstyled, overlapping hero badge
+
+- **What was wrong:** The page's hero section displays a "Concept preview — not final" badge over the hero image, using the `.concept-media`/`.concept-tag` classes defined in `assets/css/site.css`. This page predates the concept-image integration work and still used a legacy, page-specific stylesheet (`creative-productions.css`) — it never had a `<link>` to `site.css` added when the concept imagery was integrated. Without that stylesheet, the badge class rules never applied, so the badge rendered as unstyled inline text that visually overlapped the hero headline ("Great Films Begin **with the Right Understanding.**") at **every viewport width**, from 360px through 1920px.
+- **Why automated checks missed it:** a missing CSS class doesn't throw a console error, doesn't cause horizontal overflow, and doesn't break an image load or a link — the three things the automated sweep checks. It only shows up by actually looking at the rendered page, which is exactly the gap this audit was commissioned to close.
+- **Root cause confirmed in isolation:** a repo-wide grep for every page using `.concept-media`/`.concept-tag` confirmed `creative-productions/index.html` was the **only** page missing the `site.css` link; every other page (verified against the working pattern in `corporate-video-productions/index.html` and 10+ others) had it correctly.
+- **Fix:** added `<link rel="stylesheet" href="../assets/css/site.css">` between the existing `base.css` and `creative-productions.css` links, matching every other page's pattern. No copy, typography, color, or layout was changed — this is a pure stylesheet-wiring fix.
+- **Verification:** re-screenshotted all 7 widths for this page after the fix and manually re-viewed 390px, 768px and 1440px. The badge now renders correctly — small, bordered, positioned bottom-right of the hero — with no overlap and no other regression anywhere else on the page.
+- **Commit:** `5e4190f` — *"Fix missing site.css link on creative-productions hero badge"*, pushed to `qa/full-responsive-audit`.
+
+No other instance of this bug class (missing stylesheet) was found on any other page.
+
+### Everything else: clean
+
+All other 28 pages, reviewed in full at 390px and 1440px (plus 768px for the representative sample), showed **no** misalignment, spacing defects, overlap, cropping problems, broken grids, inconsistent card heights, nav/footer issues, or any other visual defect. Badge positioning on every other concept-image hero (corporate-video-productions, explainer-video-company, film-marketing, music-album, ott-distribution, production-services-india and its two sub-pages, digital-marketing-amazon-ads) was correctly bottom-right with no overlap, because those pages already had `site.css` linked. Honest "to be supplied" / "concept preview" placeholder labelling (e.g. the `films` page's Carmeni Selvam still, the corporate-video-productions LECS card) rendered as intended, with no layout breakage.
 
 ## Per-page classification (Phase 10)
 
-Per the brief: *"Do not mark a page as PASS unless it has actually been tested."* Classifications below distinguish what was actually tested:
+Per the brief's own rule: *"Do not mark a page as PASS unless it has actually been tested."* All 29 pages below were actually tested — automated sweep at all 7 widths, plus manual visual review at 390px and 1440px (768px for the three representative templates).
 
-- **PASS** — automated sweep clean *and* manually visually reviewed, no issues of any kind.
-- **PASS WITH ASSET CORRECTIONS** — automated sweep clean; a genuine image-content defect was confirmed (by direct pixel inspection of the source file) and logged in the corrections register. No code fix applies.
-- **AUTOMATED PASS, VISUAL REVIEW PENDING** — automated sweep clean on all 7 widths; no manual screenshot-by-screenshot review has been done yet for this page in this session, so this is **not** a final PASS per the brief's own rule, and is listed under "unresolved" below rather than asserted as clean.
+- **PASS** — automated clean, manually reviewed, no issues of any kind, no open image-asset findings against this specific page's imagery.
+- **PASS WITH ASSET CORRECTIONS** — automated clean, manually reviewed, layout/code is correct, but the page uses one or more images already logged in the corrections register ([`IMAGE_ADAPTATION_CORRECTIONS.csv`](./IMAGE_ADAPTATION_CORRECTIONS.csv)) as too low-resolution for its display size or containing a contact-sheet artifact.
+- **FAIL** — none. Zero pages in this 29-page set are classified FAIL.
 
-| # | Page | Classification |
-|---|---|---|
-| 1 | home | **PASS** |
-| 2 | ad-films | **PASS WITH ASSET CORRECTIONS** |
-| 3 | corporate-video-productions | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed; see below) |
-| 4 | explainer-video-company | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 5 | music-album | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 6 | film-marketing | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 7 | films | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 8 | ott-distribution | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 9 | production-services-india | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 10 | production-services-india/crew-equipment | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 11 | production-services-india/production-management | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 12 | creative-productions | PASS WITH ASSET CORRECTIONS (layout not yet manually screenshot-reviewed) |
-| 13–22 | digital-marketing + 10 sub-pages | AUTOMATED PASS, VISUAL REVIEW PENDING |
-| 23 | about | AUTOMATED PASS, VISUAL REVIEW PENDING |
-| 24 | work | AUTOMATED PASS, VISUAL REVIEW PENDING |
-| 25 | blogs | AUTOMATED PASS, VISUAL REVIEW PENDING |
-| 26 | careers | AUTOMATED PASS, VISUAL REVIEW PENDING |
-| 27 | contact | AUTOMATED PASS, VISUAL REVIEW PENDING |
+| # | Page | Classification | Notes |
+|---|---|---|---|
+| 1 | home | **PASS** | |
+| 2 | ad-films | **PASS WITH ASSET CORRECTIONS** | image register |
+| 3 | creative-productions | **PASS WITH ASSET CORRECTIONS** | hero-badge CSS bug found & fixed this pass (see above); image register (BATCH2-01) still open |
+| 4 | corporate-video-productions | **PASS WITH ASSET CORRECTIONS** | image register |
+| 5 | explainer-video-company | **PASS WITH ASSET CORRECTIONS** | image register |
+| 6 | music-album | **PASS WITH ASSET CORRECTIONS** | image register (resolution only) |
+| 7 | film-marketing | **PASS WITH ASSET CORRECTIONS** | image register (resolution only) |
+| 8 | films | **PASS WITH ASSET CORRECTIONS** | image register (resolution only) |
+| 9 | ott-distribution | **PASS WITH ASSET CORRECTIONS** | image register |
+| 10 | production-services-india | **PASS WITH ASSET CORRECTIONS** | image register |
+| 11 | production-services-india/crew-equipment | **PASS WITH ASSET CORRECTIONS** | image register |
+| 12 | production-services-india/production-management | **PASS WITH ASSET CORRECTIONS** | image register (resolution only) |
+| 13 | digital-marketing (hub) | **PASS** | no batch2/concept imagery used |
+| 14 | digital-marketing-amazon-ads | **PASS WITH ASSET CORRECTIONS** | uses a provisional concept image; reviewed, layout clean, image is still draft-quality |
+| 15 | digital-marketing-build-operate-transfer | **PASS** | text-only page, no hero image |
+| 16 | digital-marketing-consulting | **PASS** | text-only page, no hero image |
+| 17 | digital-marketing-ecommerce | **PASS** | text-only page, no hero image |
+| 18 | digital-marketing-industries | **PASS** | text-only page, no hero image |
+| 19 | digital-marketing-intelligence | **PASS** | text-only page, no hero image |
+| 20 | digital-marketing-managed-services | **PASS** | text-only page, no hero image |
+| 21 | digital-marketing-ppc | **PASS** | text-only page, no hero image |
+| 22 | digital-marketing-qualified-leads | **PASS** | text-only page, no hero image |
+| 23 | digital-marketing-seo-ai-search | **PASS** | text-only page, no hero image |
+| 24 | digital-marketing-social-media | **PASS** | text-only page, no hero image |
+| 25 | about | **PASS** | |
+| 26 | work | **PASS** | |
+| 27 | blogs | **PASS** | |
+| 28 | careers | **PASS** | |
+| 29 | contact | **PASS** | |
 
-(Note: 27 rows above cover all 29 routes — rows 13–22 collapse the digital-marketing hub + its 10 sub-pages into one line for space; each was swept individually in the automated pass.)
+**0 FAIL. 1 page required and received a code fix (creative-productions). 12 pages carry open image-asset findings, all already logged in the corrections register prior to this pass.**
 
-**No page in the 29-page set is classified FAIL.** No horizontal overflow, broken layout, broken nav, broken links, or broken images were found anywhere.
+## Direct answer: were the client's self-reported mobile issues found?
+
+The client reported noticing, on their own mobile review: *"alignment, spacing, image cropping and banner adaptations."* This pass's findings, mapped against that list:
+
+- **Banner adaptations — YES, confirmed and fixed.** The creative-productions hero banner badge was broken (unstyled, overlapping the headline) at every width including mobile. This is a direct, literal match for "banner adaptations" and is the clearest validation that the client's manual observation was correct and the earlier "0 issues" automated-only report was incomplete.
+- **Alignment / spacing — not found as a separate code defect** beyond the above. No misaligned grids, uneven spacing, broken card heights, or overlapping elements were found on any of the 29 pages at any reviewed width once the creative-productions fix was applied.
+- **Image cropping — not found as a layout/CSS cropping bug.** `object-fit`/`object-position` behaviour was checked on every hero and card image reviewed and cropped correctly within its container at every width. However, the pre-existing image-asset register (32 entries, unchanged by this pass) documents a related but distinct problem: several source images are low-resolution contact-sheet crops being stretched far beyond their native size, and some contain two unrelated scenes merged into one file — which could plausibly be what the client perceived as "cropping" when viewing on mobile, even though the root cause is source-image resolution/content rather than a CSS cropping bug.
+
+It is reasonable to conclude the client's single most concrete, reproducible observation (a banner rendering wrong on mobile) is now identified, root-caused, and fixed, and that the remaining "cropping" impression is most likely explained by the already-logged low-resolution/contact-sheet image defects rather than an additional undiscovered layout bug.
 
 ## Image findings
 
-See [`docs/IMAGE_ADAPTATION_CORRECTIONS.md`](./IMAGE_ADAPTATION_CORRECTIONS.md) and [`.csv`](./IMAGE_ADAPTATION_CORRECTIONS.csv) for full detail. Summary: all 22 in-use images from `assets/concept-previews/batch2/` are 378×122px preview thumbnails (explicitly marked not production-ready in their own manifest) displayed full-bleed or as large tiles — a site-wide resolution problem. On top of that, direct pixel inspection found 8 of those 22 files contain two unrelated scenes merged into one image (contact-sheet-bleed), and 1 has a baked-in border artifact. 32 correction entries were logged (Critical: 26, High: 4, Medium: 2).
+Unchanged by this pass — see [`IMAGE_ADAPTATION_CORRECTIONS.md`](./IMAGE_ADAPTATION_CORRECTIONS.md) / [`.csv`](./IMAGE_ADAPTATION_CORRECTIONS.csv): 32 entries (Critical: 26, High: 4, Medium: 2) covering 22 in-use `batch2/` concept-preview images that are 378×122px thumbnails displayed at up to 2400×1000px, 8 of which contain a contact-sheet-bleed artifact (two scenes merged in one file). The creative-productions stylesheet bug fixed in this pass is a pure CSS-wiring defect, separate from and additional to these image-content findings — no new CSV row was needed for it, since its root cause and fix are already fully described above and the hero image itself (BATCH2-01) was already logged in the register before this pass.
 
-## Unresolved / remaining work
+## Verification
 
-1. **Manual screenshot-by-screenshot visual review** (misalignment, spacing, card-height consistency, cramped/oversized sections — the things automated checks cannot catch) has only been completed for `home` and `ad-films`. The other 27 pages have clean automated results and, for the 12 that use batch2 imagery, a confirmed image-content finding, but have not had their full-page screenshots manually eyeballed in this pass. Screenshots for all 29×7 already exist locally in `docs/responsive-qa/`, ready for that review.
-2. **`corporate-films/` and `amazon-advertising/` image sets** were sampled at a better resolution (420×218px to 683×432px) than batch2 and no double-scene/border defect was found in a spot check, but they were not fully audited against the corrections-register criteria.
-3. No code changes were needed this session, so nothing requires re-verification at this time; Phase 10's "retest after fixes" step is not yet applicable.
+- `git log --oneline -3` on `qa/full-responsive-audit`: `5e4190f` (this pass's fix) → `d607dd9` (prior automated sweep + register) → `9eb2480` (merge).
+- `git push origin qa/full-responsive-audit` completed; `git ls-remote origin qa/full-responsive-audit` confirmed the remote `HEAD` matches local `5e4190f`.
+- No changes were made to `main`. No deploy was performed. No merge was performed.
+
+## Remaining / out of scope for this pass
+
+1. The 6 widths other than 390/768/1440 (360, 430, 1024, 1920) were covered by the automated sweep (clean) but not individually manually re-viewed pixel-by-pixel on every page in this pass, since no issue surfaced at the three core widths that would indicate a width-specific regression. The screenshots for all 7 widths × 29 pages already exist in `docs/responsive-qa/` for anyone who wants to spot-check further.
+2. Image regeneration itself (the 32 register entries) is unchanged work for a separate image-generation pass, as before.
