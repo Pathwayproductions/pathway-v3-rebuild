@@ -1,0 +1,3 @@
+record_type,asset_id,target_page,target_section,title_or_visual_goal,source_url,local_file,verification_status,approval_status,notes
+image,IMG-001,Creative Productions,Hero,Wide naturalistic production set with large active crew,,,not_started,pending,ChatGPT to generate and user to approve
+video,VID-001,Creative Productions,Portfolio,Verified Pathway portfolio film,,,not_verified,pending,Retrieve from existing website or YouTube channel; do not invent URL
