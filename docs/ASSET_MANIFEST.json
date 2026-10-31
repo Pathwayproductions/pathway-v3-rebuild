@@ -1,0 +1,392 @@
+{
+  "_meta": {
+    "description": "Centralized manifest linking page sections to asset/video IDs for the Pathway V3 29-page build. Replace a placeholder by: (1) adding the approved file to the path listed, (2) updating that asset's 'status' field here and in ASSET_REQUIREMENTS_REGISTER, (3) removing the .placeholder-media wrapper / placeholder-label markup in the page's HTML and replacing it with an <img> or <picture> tag pointing at the new file, using the alt_text from the register.",
+    "generated": "2026-10-31",
+    "asset_register": "docs/ASSET_REQUIREMENTS_REGISTER.json",
+    "video_register": "docs/VIDEO_MEDIA_REGISTER.json"
+  },
+  "pages": {
+    "/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-HOME-01",
+          "section": "Hero",
+          "filename_path": "assets/images/home-hero-storyboard.jpg",
+          "status": "In place"
+        }
+      ],
+      "video_assets": []
+    },
+    "/ad-films/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-ADF-01",
+          "section": "Selected Work grid \u2014 Project 1",
+          "filename_path": "assets/images/ad-films/project-1-still.jpg",
+          "status": "Placeholder \u2014 pending client-approved still"
+        },
+        {
+          "asset_id": "IMG-ADF-02",
+          "section": "Selected Work grid \u2014 Project 2",
+          "filename_path": "assets/images/ad-films/project-2-still.jpg",
+          "status": "Placeholder \u2014 pending client-approved still"
+        },
+        {
+          "asset_id": "IMG-ADF-03",
+          "section": "Selected Work grid \u2014 Project 3",
+          "filename_path": "assets/images/ad-films/project-3-still.jpg",
+          "status": "Placeholder \u2014 pending client-approved still"
+        }
+      ],
+      "video_assets": [
+        {
+          "media_id": "VID-002",
+          "section": "Selected Work",
+          "video_url": "URL REQUIRED",
+          "availability": "Not yet sourced"
+        }
+      ]
+    },
+    "/corporate-video-productions/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-NTC-HERO",
+          "section": "Hero",
+          "filename_path": "assets/concept-previews/corporate-films/director-on-location.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-NTC-02",
+          "section": "Intro \u2014 team monitor review",
+          "filename_path": "assets/concept-previews/corporate-films/team-monitor-review.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-NTC-03",
+          "section": "Intro \u2014 interview production",
+          "filename_path": "assets/concept-previews/corporate-films/interview-production.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-NTC-04",
+          "section": "Intro \u2014 outdoor camera crew",
+          "filename_path": "assets/concept-previews/corporate-films/outdoor-camera-crew.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-NTC-05",
+          "section": "Close \u2014 post-production editor",
+          "filename_path": "assets/concept-previews/corporate-films/post-production-editor.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-CVP-NTC",
+          "section": "Client work \u2014 NTC project still",
+          "filename_path": "assets/images/corporate-video-productions/ntc-still.jpg",
+          "status": "Placeholder \u2014 pending client-approved still"
+        },
+        {
+          "asset_id": "IMG-CVP-NTRUST",
+          "section": "Client work \u2014 Ntrust project still",
+          "filename_path": "assets/images/corporate-video-productions/ntrust-still.jpg",
+          "status": "Placeholder \u2014 pending client-approved still"
+        },
+        {
+          "asset_id": "IMG-CVP-LECS",
+          "section": "Client work \u2014 LECS project still",
+          "filename_path": "assets/images/corporate-video-productions/lecs-still.jpg",
+          "status": "Placeholder \u2014 pending client-approved still"
+        },
+        {
+          "asset_id": "IMG-CVP-TL1",
+          "section": "Process timeline \u2014 story direction",
+          "filename_path": "assets/images/corporate-video-productions/timeline-story.jpg",
+          "status": "Placeholder"
+        },
+        {
+          "asset_id": "IMG-CVP-TL2",
+          "section": "Process timeline \u2014 storyboard review",
+          "filename_path": "assets/images/corporate-video-productions/timeline-storyboard.jpg",
+          "status": "Placeholder"
+        },
+        {
+          "asset_id": "IMG-CVP-TL3",
+          "section": "Process timeline \u2014 on-location capture",
+          "filename_path": "assets/images/corporate-video-productions/timeline-location.jpg",
+          "status": "Placeholder"
+        },
+        {
+          "asset_id": "IMG-CVP-CTA",
+          "section": "Close CTA",
+          "filename_path": "assets/images/corporate-video-productions/close-cta.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": [
+        {
+          "media_id": "VID-005",
+          "section": "Selected Work (NTC/Ntrust/LECS)",
+          "video_url": "URL REQUIRED",
+          "availability": "Not yet sourced"
+        }
+      ]
+    },
+    "/explainer-video-company/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-EXP-01",
+          "section": "Hero",
+          "filename_path": "assets/images/explainer-video-company/hero.jpg",
+          "status": "Placeholder"
+        },
+        {
+          "asset_id": "IMG-EXP-02",
+          "section": "What an Explainer Video Can Do",
+          "filename_path": "assets/images/explainer-video-company/storyboard-review.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": [
+        {
+          "media_id": "VID-006",
+          "section": "Examples",
+          "video_url": "N/A \u2014 none exist",
+          "availability": "No approved project credits exist"
+        }
+      ]
+    },
+    "/music-album/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-MVP-01",
+          "section": "Hero",
+          "filename_path": "assets/images/music-album/hero.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": [
+        {
+          "media_id": "VID-007",
+          "section": "Examples",
+          "video_url": "N/A \u2014 none exist",
+          "availability": "No approved project credits exist"
+        }
+      ]
+    },
+    "/film-marketing/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-FM-01",
+          "section": "Hero",
+          "filename_path": "assets/images/film-marketing/hero.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": []
+    },
+    "/films/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-FILMS-01",
+          "section": "Hero",
+          "filename_path": "assets/images/films/hero.jpg",
+          "status": "Placeholder \u2014 pending film-approved materials"
+        },
+        {
+          "asset_id": "IMG-FILMS-CS",
+          "section": "Film still \u2014 Carmeni Selvam",
+          "filename_path": "assets/images/films/cs-still.jpg",
+          "status": "Placeholder \u2014 pending film-approved materials"
+        },
+        {
+          "asset_id": "IMG-FILMS-KOI",
+          "section": "Film still \u2014 Kurai Ondrum Illai",
+          "filename_path": "assets/images/films/koi-still.jpg",
+          "status": "Placeholder \u2014 pending film-approved materials"
+        }
+      ],
+      "video_assets": [
+        {
+          "media_id": "VID-003",
+          "section": "Film details",
+          "video_url": "URL REQUIRED",
+          "availability": "Not yet sourced"
+        },
+        {
+          "media_id": "VID-004",
+          "section": "Film details",
+          "video_url": "URL REQUIRED",
+          "availability": "Not yet sourced"
+        }
+      ]
+    },
+    "/ott-distribution/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-OTT-01",
+          "section": "Hero",
+          "filename_path": "assets/images/ott-distribution/hero.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": []
+    },
+    "/production-services-india/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-PSI-01",
+          "section": "Hero",
+          "filename_path": "assets/images/production-services-india/hero.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": []
+    },
+    "/production-services-india/crew-equipment/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-PSI-CE-01",
+          "section": "Hero",
+          "filename_path": "assets/images/production-services-india/crew-equipment-hero.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": []
+    },
+    "/production-services-india/production-management/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-PSI-PM-01",
+          "section": "Hero",
+          "filename_path": "assets/images/production-services-india/production-management-hero.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": []
+    },
+    "/creative-productions/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-CP-01",
+          "section": "Project grid 01",
+          "filename_path": "assets/images/creative-productions/project-01.jpg",
+          "status": "Placeholder"
+        },
+        {
+          "asset_id": "IMG-CP-02",
+          "section": "Project grid 02",
+          "filename_path": "assets/images/creative-productions/project-02.jpg",
+          "status": "Placeholder"
+        }
+      ],
+      "video_assets": [
+        {
+          "media_id": "VID-001",
+          "section": "Showreel",
+          "video_url": "URL REQUIRED",
+          "availability": "Verification pending"
+        }
+      ]
+    },
+    "/digital-marketing/amazon-ads/": {
+      "image_assets": [
+        {
+          "asset_id": "IMG-AMZ-01",
+          "section": "Hero split",
+          "filename_path": "assets/concept-previews/amazon-advertising/ecommerce-laptop.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-AMZ-02",
+          "section": "Audience targeting",
+          "filename_path": "assets/concept-previews/amazon-advertising/audience-targeting-concept.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-AMZ-03",
+          "section": "Shipping/fulfilment",
+          "filename_path": "assets/concept-previews/amazon-advertising/shipping-boxes-concept.webp",
+          "status": "Live (concept preview)"
+        },
+        {
+          "asset_id": "IMG-AMZ-04",
+          "section": "Close CTA",
+          "filename_path": "assets/concept-previews/amazon-advertising/campaign-strategy-team.webp",
+          "status": "Live (concept preview)"
+        }
+      ],
+      "video_assets": []
+    },
+    "/digital-marketing/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/ppc/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/seo-ai-search/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/social-media/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/qualified-leads/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/ecommerce/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/industries/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/consulting/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/intelligence/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/managed-services/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/digital-marketing/build-operate-transfer/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/about/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/work/": {
+      "image_assets": [],
+      "video_assets": [
+        {
+          "media_id": "VID-008",
+          "section": "Selected Marketing Case Studies",
+          "video_url": "URL REQUIRED",
+          "availability": "Not yet sourced"
+        }
+      ]
+    },
+    "/blogs/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/careers/": {
+      "image_assets": [],
+      "video_assets": []
+    },
+    "/contact/": {
+      "image_assets": [],
+      "video_assets": []
+    }
+  }
+}
