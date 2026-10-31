@@ -219,3 +219,23 @@
   .step-row .step{border-right:0;border-bottom:1px solid var(--line);margin-right:0;padding-bottom:18px}
   .timeline-row{grid-template-columns:1fr}
 }
+
+/* Existing WordPress project videos: responsive, swipeable portfolio carousel. */
+.video-carousel{margin-top:28px;max-width:100%;min-width:0}
+.video-carousel__track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/3);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-inline:contain;scrollbar-width:none;padding:0 0 10px}
+.video-carousel__track::-webkit-scrollbar{display:none}
+.video-card{min-width:0;scroll-snap-align:start}
+.video-card__link{display:block;text-decoration:none;color:inherit}
+.video-card__visual{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#151b20;border-radius:4px}
+.video-card__visual img{display:block;width:100%;height:100%;object-fit:cover}
+.video-card__play{position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:rgba(0,0,0,.72);color:white;font-size:19px;transition:background .2s}
+.video-card__link:hover .video-card__play,.video-card__link:focus-visible .video-card__play{background:#177a96}
+.video-card__title{display:block;font-size:19px;font-weight:600;margin-top:14px}
+.video-card p{margin:6px 0 0;font-size:14px;line-height:1.6}
+.video-carousel__controls{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
+.video-carousel__arrow{width:42px;height:42px;cursor:pointer;border:1px solid #87949b;border-radius:50%;background:transparent;color:inherit;font:inherit;font-size:22px}
+.video-carousel__arrow:disabled{opacity:.3;cursor:default}
+.video-carousel__note{margin-top:16px;font-size:13px;opacity:.75}
+@media(max-width:900px){.video-carousel__track{grid-auto-columns:calc((100% - 16px)/2);gap:16px}}
+@media(max-width:600px){.video-carousel__track{grid-auto-columns:86%;gap:14px}.video-card__title{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.video-carousel__track{scroll-behavior:auto}}
