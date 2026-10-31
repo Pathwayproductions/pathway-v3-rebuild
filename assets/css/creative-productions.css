@@ -21,7 +21,7 @@
 .cp-service{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 28px;min-height:200px;display:flex;flex-direction:column;background:#fff}
 .cp-service .cp-service-top{display:flex;align-items:center;justify-content:space-between;color:var(--blue);margin-bottom:22px}
 .cp-service .cp-service-top svg{width:30px;height:30px;stroke-width:1.4}
-.cp-service .cp-service-top span{font-size:11px;letter-spacing:.14em;color:#6b7378} /* 4.56:1 on white, was 2.59 */
+.cp-service .cp-service-top span{font-size:11px;letter-spacing:.14em;color:#5c6267} /* 6.18:1 on white */
 .cp-service h3{font-family:var(--serif);font-size:28px;font-weight:400;letter-spacing:-.02em;margin:0 0 10px}
 .cp-service p{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 18px;max-width:280px}
 .cp-service .link{margin-top:auto;font-size:12px}
