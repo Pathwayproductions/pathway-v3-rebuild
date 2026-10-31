@@ -8,8 +8,24 @@ Collected 2026-10-31. Sources: Semrush (connected to this project — real data)
 > had Search Console access configured. See `GSC_SEARCH_PERFORMANCE_AUDIT.md`
 > for the full first-party report, and `GSC_QUERY_PAGE_MAPPING.csv` for the
 > query-to-page mapping. The Porter connection gap described below remains
-> accurate (and still blocks GA4), but is no longer the only path to GSC data
-> for this property.
+> accurate (and still blocks GA4 via Porter specifically), but is no longer
+> the only path to GSC data for this property.
+
+> **Superseded (2026-10-31, third pass):** GA4 data *is* also obtainable —
+> again, just not through Porter. A direct, read-only browser-based GA4 audit
+> was completed using the same `marketing@pathwayproductions.in` account,
+> which already had GA4 access configured for the "Pathway Website" property.
+> See `GA4_AUDIT.md` for the full first-party report. The Porter plan limits
+> described in item 2 below remain accurate for Porter specifically (worth
+> fixing for future automated/scheduled reporting), but are no longer the
+> only path to GA4 data for this property. The GA4 audit also surfaces two
+> findings that should inform how every number in this Semrush-based report
+> is read: a large share of the site's reported traffic shows a bot/
+> datacenter signature (see `GA4_AUDIT.md` §2.4), and real Google Ads paid
+> traffic does exist (`GA4_AUDIT.md` §2.1-2.2), which corrects the "0 paid
+> Google Ads keywords" figure in §2 below — that figure was a third-party
+> Semrush estimate of ranking paid keywords, not a measure of whether any
+> paid traffic exists.
 
 ## 1. What could NOT be pulled, and why (read this first)
 

@@ -16,6 +16,24 @@ position improved by ~17 spots year-over-year (3-month YoY comparison) — the
 site has real positive momentum to protect through the migration, not just a
 flat baseline to avoid losing.
 
+**Update (2026-10-31, third pass):** a further, strictly read-only Google
+Analytics 4 audit has since been completed via direct browser access — see
+`GA4_AUDIT.md`. This supersedes the "GA4 not obtainable" note in §3 below and
+in `OFF_PAGE_SEO_REPORT.md` (that note was specific to Porter's connector
+plan limits, not a true access gap). Two new findings materially change how
+the rest of this audit should be read: (a) a large share of this property's
+reported traffic — plausibly approaching half — shows a textbook
+bot/datacenter signature (Singapore + China = 47.6% of 16-month users, each
+at 1-4 second average engagement times), so every traffic-volume number
+anywhere in this engagement should be read with that discount in mind; and
+(b) the current site's primary "contact" conversion event is a disguised
+pageview counter (682 fires track 1:1 with `/contact/` pageviews), while the
+real form-completion signal (`form_submit`, 15 fires in 16 months) isn't
+marked as a key event at all — meaning no historical "conversion rate" or
+"lead volume" figure from this property is reliable, and the new site's
+event architecture needs explicit, action-named conversion events designed
+from scratch.
+
 ## 1. Executive summary (top findings)
 
 1. **41 blog posts have no destination in the new build.** The new site's `/blogs/` is an index page only — no article template exists yet. 14 of those posts were published since June 2026 and are actively earning fresh search visibility today. This is the largest single risk found.
@@ -23,7 +41,7 @@ flat baseline to avoid losing.
 3. **A legacy URL is carrying 328 backlinks on a canonical tag, not a redirect.** `/creative-productions/explainer-videos/` (pre-redesign URL structure) only survives today because of a canonical tag pointing to `/explainer-video-company/` — that mechanism won't carry across a platform migration without a real 301.
 4. **Privacy Policy and Terms & Conditions don't exist in the new 29-page build.** Both are legally required and currently missing.
 5. **Organic visibility is narrow and brand-dependent.** Of ~239 estimated monthly organic visits, 208 come from the single branded keyword "pathway productions." Service-intent keywords rank 10th-90th with near-zero traffic — the real opportunity for the new site is broadening non-branded visibility, while the preservation priority is protecting the branded-search dominance that already exists.
-6. **GSC data is now available (second pass)** — see `GSC_SEARCH_PERFORMANCE_AUDIT.md`. GA4 for the site itself is still not obtainable (access/connection gap, see §3 below). The Off-Page report remains built on third-party Semrush estimates for backlink-profile depth, now cross-checked against GSC's own (more limited) Links report.
+6. **GSC and GA4 data are now both available** — see `GSC_SEARCH_PERFORMANCE_AUDIT.md` and `GA4_AUDIT.md`. GA4's own data surfaces two further critical findings: a large share of reported traffic (plausibly near half) carries a bot/datacenter signature (Singapore + China = 47.6% of 16-month users at 1-4s engagement times), and the site's primary "contact" conversion event is a disguised pageview counter, not a verified lead signal (the real `form_submit` event, 15 fires in 16 months, isn't even marked as a key event). The Off-Page report remains built on third-party Semrush estimates for backlink-profile depth, now cross-checked against GSC's own (more limited) Links report.
 7. **11-16 individual pages have no mapped destination** in the new 29-page build (whiteboard animation, 2D/3D animation services — together holding ~21 embedded client-project videos, advertising-agency, team, two digital-marketing sub-services, and others) — each needs a consolidate/keep/drop decision.
 8. **On-page SEO has a few concrete, fixable bugs**: a duplicated meta description between Terms & Privacy, 3 pages with no H1, 23+ images missing alt text on the homepage alone, and a broken homepage `og:image`.
 
@@ -35,7 +53,7 @@ flat baseline to avoid losing.
 
 **Could access**: WordPress admin (Editor-level account, not Administrator — plugin list, theme name, and redirect-plugin settings were blocked), public sitemap/robots.txt, Rank Math's own SEO Analyzer and bulk post/page lists, live page source for all 29 pages + spot-checks of legacy URLs, Semrush (real backlink and keyword-ranking data).
 
-**Could not access (first pass)**: Google Search Console for pathwayproductions.in — **resolved in the second pass**: `marketing@pathwayproductions.in` already had GSC access configured; see `GSC_SEARCH_PERFORMANCE_AUDIT.md` for the full read-only audit, including Core Web Vitals (now available via GSC's Experience report). **Still not accessible**: GA4 for the Pathway site (blocked by a Porter plan account-slot limit and a 30-day history cap), Jetpack's on-site stats, full plugin/theme inventory, full per-post metadata for all 41 blog posts (bulk SEO-score data was pulled instead).
+**Could not access (first pass)**: Google Search Console for pathwayproductions.in — **resolved in the second pass**: `marketing@pathwayproductions.in` already had GSC access configured; see `GSC_SEARCH_PERFORMANCE_AUDIT.md` for the full read-only audit, including Core Web Vitals (now available via GSC's Experience report). GA4 for the Pathway site was initially blocked by a Porter plan account-slot limit — **resolved in the third pass** via direct, authenticated browser access to the GA4 UI; see `GA4_AUDIT.md`. That audit's own GA4 Explore tool is capped to a short (~90-day) lookback on this property, so a handful of page-level tables there are 1-month snapshots rather than the full 16-month window — see `GA4_AUDIT.md` §8 for the recommended Admin fix. **Still not accessible**: Jetpack's on-site stats, full plugin/theme inventory, full per-post metadata for all 41 blog posts (bulk SEO-score data was pulled instead).
 
 ## 4. SEO risks ranked by severity
 
@@ -62,8 +80,9 @@ All deliverables are in `docs/seo-migration/` on branch `build/29-page-full-site
 `SEO_PRESERVATION_CHECKLIST.md`, `NEW_WEBSITE_SEO_IMPLEMENTATION.md`,
 `MEDIA_INTEGRATION_MANIFEST.json` (first pass), plus
 `GSC_SEARCH_PERFORMANCE_AUDIT.md` and `GSC_QUERY_PAGE_MAPPING.csv` (second
-pass, first-party Google data). This file is the executive summary tying them
-all together.
+pass, first-party Google Search Console data), plus `GA4_AUDIT.md` (third
+pass, first-party Google Analytics 4 data, via direct browser access). This
+file is the executive summary tying them all together.
 
 ## 9. Items requiring Arun's approval before migration
 
@@ -72,5 +91,7 @@ all together.
 3. Redirect targets for 6 "tentative" mappings (lead-generation, seo, online-sales, success-stories, feature-films→films, team).
 4. Consolidate/drop decision for 8 pages with no mapped destination (whiteboard-animation, 2d/3d-animation-services, advertising-agency, virtual-reality, team, web-development, brand-awareness).
 5. Whether any of the client video work found (NTC, N Trust, LECS, GoStocks, GCU, Fashion Profiles, Phozhil, We Box, Spice Hill, Akara Research, Ecobuddy, and others) is approved for reuse in the new build.
-6. Freeing a Porter account slot or upgrading the plan to unblock GA4 data access for future reporting (GSC is now accessible directly, see above).
-7. Mobile Core Web Vitals on the current site are confirmed "Poor" for 100% of measured URLs (0 Good, 0 Needs Improvement) — the new build should treat mobile performance as a launch-blocking QA item, not a post-launch nice-to-have.
+6. GA4 data is now directly accessible (see `GA4_AUDIT.md`); the remaining action is whether to increase this property's Data Retention setting in GA4 Admin to lift the ~90-day Explore cap, and whether/when to free a Porter account slot for ongoing automated reporting going forward.
+7. Mobile Core Web Vitals on the current site are confirmed "Poor" for 100% of measured URLs (0 Good, 0 Needs Improvement) — corroborated by GA4: organic-search mobile sessions show a perfect 100% engagement rate vs. desktop's 82.6%, suggesting poor mobile performance is suppressing an inherently strong-converting segment. The new build should treat mobile performance as a launch-blocking QA item, not a post-launch nice-to-have.
+8. Whether to redesign the current site's (and by extension the new site's) conversion-tracking architecture: today's "contact" Key Event is a disguised pageview counter, `page_view` itself is marked as a Key Event, and no distinct phone/email/WhatsApp-click events exist. See `GA4_AUDIT.md` §5 and §9 for the specific recommended event set (`contact_form_submit`, `phone_click`, `email_click`, `whatsapp_click`, `consultation_request`).
+9. Whether to set up bot/datacenter-traffic filtering on the new GA4 property before launch, given the current property's Singapore+China traffic pattern (see `GA4_AUDIT.md` §2.4).
