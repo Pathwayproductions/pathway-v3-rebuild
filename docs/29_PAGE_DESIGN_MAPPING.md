@@ -1,16 +1,31 @@
 # 29-Page Design Mapping
 
 Proposed section layouts, reference templates, backgrounds and asset requirements
-for all 29 pages, per `docs/DESIGN_SOURCE_HIERARCHY.md`. This is a **proposal for
-approval** — no HTML/CSS changes have been made on this branch yet.
+for all 29 pages, per `docs/DESIGN_SOURCE_HIERARCHY.md`. Pages not yet built remain
+a **proposal for approval**. Two pages — Corporate Films and Amazon Advertising —
+have now been implemented as the first representative pair; their entries below
+describe what was actually built, not just proposed, and are marked accordingly.
 
 Grounded in: the six approved templates' real section structure (read read-only
 from `Pathwebsite`, `design-system/templates-approved/`), the old templates'
 `README.md` (which assigns a template family to each 2026-10-30-approved batch),
-and the real extracted copy of all 24 live routes already used to build Milestone 2.
+the real extracted copy of all 24 live routes already used to build Milestone 2,
+and (§7 update) the imagery/art-direction brief in `DESIGN_SOURCE_HIERARCHY.md`.
 Nothing below invents content — every section named is backed by real source text;
 where a page has no real content for a section type, that section is omitted
 rather than padded.
+
+**Strengthened anti-repetition guidance (this update):** avoiding repetition is
+not just a matter of swapping background colors or grid column counts — two pages
+can still read as the same page if every section uses the same *shape* (e.g. every
+page gets a flat icon grid). Corporate Films and Amazon Advertising below show the
+two ends of this: full-bleed dark cinematic sections with alternating image/text
+rows vs. a bright, contained-panel asymmetric layout with staggered cards. When
+the remaining Digital Marketing pages are built, each should be assigned one of
+several distinct "shapes" — not just a different column count — so the family
+doesn't read as nine copies of the same template once PPC, SEO, Social, Qualified
+Leads, E-commerce, Industries, Managed Services, Consulting and Build–Operate–
+Transfer are all live.
 
 **Background key:** W = white `#FFFFFF` · P = paper/light-grey `#F1F3F5` ·
 C = charcoal `#292D31` · CA = alternate charcoal `#30363B`
@@ -23,7 +38,7 @@ C = charcoal `#292D31` · CA = alternate charcoal `#30363B`
 | 2 | Ad Films | Phase-1 own structure | image, dark | C(hero)·W·P·W·CA |
 | 3 | PPC | Phase-1 own structure | text, light | W(hero)·P·W·P·CA |
 | 4 | Creative Productions | T1 *(approved by client — verify only)* | image, dark | C(hero)·P·C·W·CA |
-| 5 | Corporate Films | T2 (approved rep) | image, dark | C(hero)·W·C·W·CA |
+| 5 | Corporate Films | T2 (approved rep) **· BUILT** | image, dark | C(hero)·W·C·W·img-CTA |
 | 6 | Explainer Videos | — *(no content; proposed only)* | image, dark | C(hero)·W·CA |
 | 7 | Music Video Production | — *(no content; proposed only)* | image, dark | C(hero)·W·CA |
 | 8 | Production Services India | T1 family | image, dark | C(hero)·P·W·CA |
@@ -36,7 +51,7 @@ C = charcoal `#292D31` · CA = alternate charcoal `#30363B`
 | 15 | SEO & AI Search | T4 family | text, light | W(hero)·P·W·CA |
 | 16 | Social Media | T4 family | text, light | W(hero)·P·W·CA |
 | 17 | Qualified Leads | T4 family (richer) | text, light | W(hero)·W·P·W·CA |
-| 18 | Amazon Advertising | T4 (approved rep) | text, light | W(hero)·P·W·CA |
+| 18 | Amazon Advertising | T4 (approved rep) **· BUILT** | image+text split, bright | W(split-hero)·P·W·CA(split) |
 | 19 | E-commerce | T4 family | text, light | W(hero)·P·W·CA |
 | 20 | Industries | T4 family (lighter) | text, light | W(hero)·P·W·CA |
 | 21 | Managed Services | T4 family | text, light | W(hero)·P·W·CA |
@@ -107,19 +122,36 @@ rules in this document once they're approved, since it predates this brief.
 4-card service grid (P) → "Stories We've Brought to Life" portfolio (C) →
 "Beyond Filmmaking" link-list (W) → Closing CTA (CA).
 
-### 5. Corporate Films — T2 (approved representative)
+### 5. Corporate Films — T2 (approved representative) · **BUILT**
 **Hero:** dark, wide film-led image — "Every Organisation Has a Story Beyond What
 It Does."
-**Sections:**
-1. Hero (C) — image.
-2. "What Your Corporate Film Can Show" (W) — editorial split, 3 formats.
-3. "Stories We've Helped Tell" (C) — portfolio/work strip.
-4. "From Your Brief to a Finished Film" (W) — process timeline.
-5. Closing CTA (CA) — "Your Organisation Has a Story."
-**Assets needed:** hero still, 2+ project stills for the portfolio strip.
+**Sections, as built:**
+1. Hero (C) — full-bleed image, dark gradient overlay.
+2. "What Your Corporate Film Can Show" (W) — **editorial alternating rows**, not a
+   card grid: 3 rows, each pairing a placeholder image with one of the 3 formats
+   (People & Culture / Work & Capabilities / Journey & Vision), alternating
+   image-left/image-right for visual rhythm.
+3. "Stories We've Helped Tell" (C) — **asymmetric portfolio**: one large featured
+   project (NTC) beside two smaller stacked projects (NTrust, LECS), not three
+   equal cards.
+4. "From Your Brief to a Finished Film" (W) — **horizontal timeline** with a
+   connecting line and a small still per step (Discover/Develop/Capture/Deliver),
+   alternating vertical offset — not a flat 4-up step row.
+5. Closing CTA — **full-bleed image band** (`img-cta`), not the flat charcoal-alt
+   text block used elsewhere: a wide image with a dark gradient, heading and CTA
+   overlaid directly on it.
+**Assets needed:** hero still; 3 editorial-row images (team collaborating indoors,
+facility/product walkthrough, leader in conversation); 3 portfolio stills (NTC,
+NTrust, LECS); 4 small process stills; 1 wide closing-CTA image (team
+collaborating/celebrating). All currently honest placeholders per the §7 imagery
+brief — natural light, authentic interaction, no generic stock.
 **Differs from Creative Productions (T1):** single-column narrative intro instead
 of a 4-card grid; process section sits after the portfolio, not interleaved with
-services — T1 is a *hub*, T2 is a *narrative*.
+services — T1 is a *hub*, T2 is a *narrative*. **Differs from Amazon Advertising
+(built this same pass):** full-bleed dark imagery throughout vs. Amazon's bright,
+contained-panel imagery; alternating-row/asymmetric-portfolio/timeline vs.
+Amazon's split-hero/staggered-cards/split-feature; image-background CTA vs.
+Amazon's image-panel CTA — no shared section shape between the two.
 
 ### 6. Explainer Videos — no suitable template, no source content
 **Flag:** no live page and no draft template exist anywhere for this page — only
@@ -283,18 +315,36 @@ Opportunities."
 **Differs:** three content sections instead of the usual two for this family —
 richest Digital Marketing sub-page, justified by its real content depth.
 
-### 18. Amazon Advertising — T4 (approved representative)
-**Hero:** light, text — "Reach People Across Amazon's Wider Ecosystem."
-**Sections:**
-1. Hero (W).
-2. "Three Ways to Reach an Audience" (P) — 3-col: Amazon-Owned & Operated /
-   Third-Party Publishers / Delivery & Packaging.
-3. "Go Beyond a Basic Demographic" (W) — asymmetric split + a review-note callout
-   flagging the copy as provisional pending the client's Amazon presentation.
-4. Closing CTA (CA) — "Build Around the Audience."
-**Assets needed:** none. **Copy gate:** per the old README, final offering copy
-is pending the client's Amazon presentation — keep the review-note until that's
-supplied.
+### 18. Amazon Advertising — T4 (approved representative) · **BUILT**
+**Hero:** bright, asymmetric split — "Reach People Across Amazon's Wider
+Ecosystem." Revised from a plain text hero to a two-column split: copy + CTA on
+one side, a contained image panel (not full-bleed) on the other — deliberately a
+different hero *shape* from Corporate Films' full-bleed dark hero.
+**Sections, as built:**
+1. Hero (W) — `hero-split`, image in a bordered panel, order flips to image-first
+   on mobile.
+2. "Three Ways to Reach an Audience" (P) — **staggered 3-card grid**, not a flat
+   icon grid: each card now carries an image (shopper on a tablet / workspace with
+   a laptop and coffee mug / product packaging on a sunlit doorstep), with the
+   middle and right cards vertically offset for a brighter, less mechanical rhythm.
+3. "Go Beyond a Basic Demographic" (W) — **single editorial image+text split**
+   (`split-feature`): one image beside the existing copy and the provisional-copy
+   review-note (copy preserved verbatim, restyled in place).
+4. Closing CTA (CA) — **image-panel CTA** (`cta-split`): text and button on one
+   side, a contained image panel on the other — distinct from Corporate Films'
+   full-bleed image CTA.
+**Assets needed:** hero image (person reviewing shopping on a phone, bright
+setting); 3 stagger-card images (shopper/tablet, workspace/laptop, packaging);
+1 split-feature image (team reviewing audience data); 1 closing-CTA image (team
+celebrating a launch). All honest placeholders per the §7 imagery brief — bright,
+natural light, genuine people, workspace detail, no generic stock.
+**Copy gate:** per the old README, final offering copy is pending the client's
+Amazon presentation — the review-note stays until that's supplied; nothing in
+the visual rebuild changed the underlying copy.
+**Differs from Corporate Films (built this same pass):** bright/contained-panel
+imagery vs. full-bleed dark; split-hero/staggered-cards/split-feature vs.
+alternating-rows/asymmetric-portfolio/timeline; image-panel CTA vs.
+image-background CTA.
 
 ---
 
@@ -442,11 +492,13 @@ Contact is the destination, not a page that hands off elsewhere.
 - **Careers** — depends on a verified openings list and a secure application
   flow before any listing goes live.
 
-## What happens after approval
+## Status and what happens next
 
-Per the design-source-hierarchy doc, implementation begins with six
-representative pages once this mapping is approved: **Creative Productions**
-(verify against refined rules), **Corporate Films**, **Amazon Advertising**,
-**Marketing Intelligence**, **Contact** (verify), plus one more to be agreed —
-with desktop and mobile previews delivered before the remaining pages proceed.
-`main`, `Pathwebsite`, and the live site stay untouched until then.
+**Built this pass:** Corporate Films, Amazon Advertising — both on
+`design/v3-visual-refinement`, with working browser previews and desktop
+(1440px)/mobile (390px) full-page screenshots. Per the checkpoint instruction,
+work stops here for review — the remaining representative pages (Creative
+Productions verify-pass, Marketing Intelligence, Contact verify-pass, plus
+whichever others get agreed) are not started until this pair is approved.
+
+`main`, `Pathwebsite`, and the live site stay untouched throughout.

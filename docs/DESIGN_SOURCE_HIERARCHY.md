@@ -1,11 +1,17 @@
 # Design Source Hierarchy — V3 Visual Refinement
 
-This document is the standing rulebook for how the two kinds of reference material
-are used on this rebuild. It applies to every page, including the 27 already built.
-It is binding for `docs/29_PAGE_DESIGN_MAPPING.md` and for any implementation that
+This document is the standing rulebook for how the reference material is used on
+this rebuild. It applies to every page, including the 27 already built. It is
+binding for `docs/29_PAGE_DESIGN_MAPPING.md` and for any implementation that
 follows its approval.
 
-## 1. The two reference types, and what each governs
+**Update (visual implementation phase):** a third reference tier was added below
+(§1c) for storytelling/compositional inspiration, plus a standing imagery/art-
+direction brief (§7) covering the kind of photography every page should imply.
+Both apply from this point forward, including to the two representative pages
+(Corporate Films, Amazon Advertising) built in this pass.
+
+## 1. The reference types, and what each governs
 
 ### Primary reference — Approved V3 Homepage
 
@@ -59,6 +65,27 @@ a lighter blue `#4BB4CE`, no charcoal sections), that spec is superseded for thi
 rebuild — it's noted here only so it's not mistaken for current direction.
 
 **If the two ever conflict, the approved V3 homepage wins on anything visual.**
+
+### 1c. Tertiary reference — Creative Productions V3 Revised HTML
+
+**File:** `reference/Pathway_Creative_Productions_V3_Revised_HTML.html` — **not yet
+available in this repository or uploaded to this session.** This section documents
+how it will be used once supplied; nothing below depended on reading it.
+
+This file is **additional creative inspiration only**, one tier below the six
+templates in authority. Use it for: storytelling structure, image integration
+technique, asymmetric compositions, visual rhythm (how sections vary in size,
+spacing and emphasis against each other), and more engaging/less mechanical
+section arrangements than a flat grid.
+
+Do **not** take its colors or typography if they differ from the approved
+homepage — same rule as the six templates, stated explicitly because this file
+is a "revised" design exploration and may carry its own palette or type choices
+that were never approved.
+
+Where it conflicts with the six templates on layout logic, the six templates
+(tied to an actual approved batch) still win — this file is inspiration for
+*how* to vary a composition, not a fourth authority that overrides the others.
 
 ## 2. How to combine them, per page
 
@@ -136,6 +163,43 @@ the remaining pages proceed.
 
 `main`, the original `Pathwebsite` repository, and the live website stay untouched
 until that approval is given.
+
+**Checkpoint added this pass:** after the design-source hierarchy and the 29-page
+mapping are approved, implementation proceeds two representative pages at a time
+(this pass: Corporate Films + Amazon Advertising), not all six at once — each pair
+stops for review before the next proceeds.
+
+## 7. Imagery and art-direction brief
+
+This governs every new image placeholder and, later, every approved image asset
+across the site — not just the two pages in this pass.
+
+**Tone:** positivity, creativity, progress, human connection. Film-production
+pages lean photorealistic/cinematic; Digital Marketing pages combine
+photorealistic and conceptual visuals where appropriate (e.g. a conceptual
+audience/data visual alongside a real person).
+
+**What every image should carry, where the subject calls for people:**
+
+- Authentic Indian and predominantly South Indian people.
+- Natural sunlight, greenery, welcoming environments.
+- Creative discussions, collaboration, teamwork.
+- Workspace details where appropriate — coffee mugs, desks, everyday texture.
+- Physical action, dynamic movement, purposeful activity (not posed stillness).
+- Genuine smiles, laughter, achievement, accomplishment.
+- Natural expressions, believable interactions, realistic environments.
+
+**Avoid:** generic stock photography, the same camera/production-gear shot reused
+across pages, artificial-looking (AI-generic) people, excessive darkness, sterile
+corporate visuals, isolated product shots, staged line-ups.
+
+**Provenance and approval:** final image assets come from a separate ChatGPT-led
+concept/generation pipeline (see `docs/IMAGE_ART_DIRECTION.md` for the asset-record
+schema and per-page visual priorities) and are approved by the client per asset —
+no image is approved by virtue of appearing in a prototype. Until assets arrive,
+every image slot on this rebuild is a clearly labelled placeholder describing what
+the image should show (subject, lighting, mood) — never a stand-in stock photo and
+never a fabricated "finished" image.
 
 ## Final rule
 

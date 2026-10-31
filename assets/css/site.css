@@ -86,6 +86,98 @@
 .review-note{border:1px solid var(--line);background:var(--paper);padding:16px 20px;font-size:12px;line-height:1.7;color:var(--muted);margin-top:18px;max-width:640px}
 .bg-charcoal .review-note,.bg-charcoal-alt .review-note{background:rgba(255,255,255,.04);border-color:var(--on-dark-line);color:var(--on-dark-muted)}
 
+/* =======================================================================
+   Distinctive editorial components — added for the V3 Visual Refinement
+   pass (design/v3-visual-refinement). These give individual pages their
+   own art-directed composition instead of the hero/grid/CTA default above.
+   Still built only from approved tokens (type, blue, white/paper/charcoal)
+   and the same honest-placeholder pattern as everything else.
+   ======================================================================= */
+
+/* ---- Editorial alternating image/text rows (asymmetric storytelling) ---- */
+.editorial-row{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:34px 0;border-top:1px solid var(--line)}
+.editorial-row:first-child{border-top:0;padding-top:4px}
+.editorial-row.reverse .editorial-row-media{order:2}
+.editorial-row.reverse .editorial-row-text{order:1}
+.editorial-row-media{aspect-ratio:4/3;position:relative;overflow:hidden;border:1px solid var(--line)}
+.editorial-row-text .num{font-size:11px;color:var(--blue-text);font-weight:700;letter-spacing:.14em}
+.editorial-row-text h3{font-family:var(--serif);font-size:27px;font-weight:400;margin:14px 0 8px;letter-spacing:-.015em}
+.editorial-row-text p{font-size:14px;line-height:1.7;color:var(--muted);max-width:380px;margin:0}
+.bg-charcoal .editorial-row,.bg-charcoal-alt .editorial-row{border-color:var(--on-dark-line)}
+.bg-charcoal .editorial-row-text h3,.bg-charcoal-alt .editorial-row-text h3{color:#fff}
+.bg-charcoal .editorial-row-text p,.bg-charcoal-alt .editorial-row-text p{color:var(--on-dark-muted)}
+
+/* ---- Asymmetric feature grid: one large card + two stacked smaller ones ---- */
+.asym-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:26px;margin-top:32px}
+.asym-grid-stack{display:flex;flex-direction:column;gap:26px}
+.asym-card{border:1px solid var(--line);display:flex;flex-direction:column}
+.asym-card-media{aspect-ratio:16/10;position:relative;overflow:hidden}
+.asym-card.large .asym-card-media{aspect-ratio:16/11}
+.asym-card-body{padding:22px 24px}
+.asym-card-body .num{font-size:10px;letter-spacing:.14em;color:var(--blue-text)}
+.asym-card-body h3{font-family:var(--serif);font-size:23px;font-weight:400;margin:10px 0 8px;letter-spacing:-.015em}
+.asym-card.large .asym-card-body h3{font-size:28px}
+.asym-card-body p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+.bg-charcoal .asym-card,.bg-charcoal-alt .asym-card{border-color:var(--on-dark-line)}
+.bg-charcoal .asym-card-body h3,.bg-charcoal-alt .asym-card-body h3{color:#fff}
+.bg-charcoal .asym-card-body p,.bg-charcoal-alt .asym-card-body p{color:var(--on-dark-muted)}
+.bg-charcoal .asym-card-body .num,.bg-charcoal-alt .asym-card-body .num{color:#9ad4e4} /* 7.1:1 on charcoal — var(--blue-text) is tuned for light backgrounds only */
+
+/* ---- Staggered 3-card grid (brighter, more playful rhythm than asym-grid) ---- */
+.stagger-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:34px}
+.stagger-card{border:1px solid var(--line);display:flex;flex-direction:column}
+.stagger-card:nth-child(2){margin-top:34px}
+.stagger-card:nth-child(3){margin-top:-8px}
+.stagger-card-media{aspect-ratio:4/3;position:relative;overflow:hidden}
+.stagger-card-body{padding:20px 22px}
+.stagger-card-body .num{font-size:10px;letter-spacing:.14em;color:var(--blue-text)}
+.stagger-card-body h3{font-family:var(--serif);font-size:21px;font-weight:400;margin:10px 0 6px;letter-spacing:-.015em}
+.stagger-card-body p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}
+
+/* ---- Horizontal timeline with connecting line + alternating stills ---- */
+.timeline-row{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:50px;padding-top:32px}
+.timeline-row::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--line)}
+.timeline-row .tl-step{position:relative}
+.timeline-row .tl-step::before{content:'';position:absolute;top:-33px;left:0;width:9px;height:9px;border-radius:50%;background:var(--blue-text)}
+.timeline-row .tl-media{aspect-ratio:4/3;position:relative;overflow:hidden;border:1px solid var(--line);margin-bottom:16px}
+.timeline-row .tl-step:nth-child(2n) .tl-media{margin-top:30px}
+.timeline-row .num{font-size:11px;color:var(--blue-text);font-weight:700;letter-spacing:2px}
+.timeline-row h3{font-family:var(--serif);font-size:20px;font-weight:400;margin:10px 0 6px}
+.timeline-row p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}
+.bg-charcoal .timeline-row::before,.bg-charcoal-alt .timeline-row::before{background:var(--on-dark-line)}
+.bg-charcoal .timeline-row h3,.bg-charcoal-alt .timeline-row h3{color:#fff}
+.bg-charcoal .timeline-row p,.bg-charcoal-alt .timeline-row p{color:var(--on-dark-muted)}
+
+/* ---- Full-bleed image CTA band (distinct from the flat close-cta band) ---- */
+.img-cta{position:relative;min-height:380px;display:flex;align-items:center;overflow:hidden}
+.img-cta .placeholder-media{position:absolute;inset:0}
+.img-cta::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(14,18,20,.92) 0%,rgba(14,18,20,.6) 55%,rgba(14,18,20,.3) 100%)}
+.img-cta .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center;padding:64px 0}
+.img-cta h2{font-family:var(--serif);font-weight:400;letter-spacing:-.03em;font-size:clamp(32px,4vw,50px);line-height:1.12;margin:0;color:#fff;max-width:560px}
+.img-cta .blue-period{color:#5fc2db}
+.img-cta-side p{font-size:14px;line-height:1.7;color:var(--on-dark-muted);max-width:320px;margin-bottom:20px}
+
+/* ---- CTA with a contained image panel (brighter alternative to img-cta) ---- */
+.cta-split{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.cta-split-media{aspect-ratio:4/3;position:relative;overflow:hidden;border:1px solid var(--on-dark-line)}
+.cta-split h2{font-family:var(--serif);font-weight:400;letter-spacing:-.03em;font-size:clamp(30px,3.6vw,46px);line-height:1.12;margin:0 0 16px;color:#fff;max-width:420px}
+.cta-split .blue-period{color:#5fc2db}
+.cta-split-text p{font-size:14px;line-height:1.7;color:var(--on-dark-muted);max-width:360px;margin-bottom:20px}
+
+/* ---- Bright asymmetric split hero (image in a contained panel, not full-bleed) ---- */
+.hero-split{padding:92px 0 56px}
+.hero-split .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
+.hero-split h1{font-family:var(--serif);font-weight:400;letter-spacing:-.04em;font-size:clamp(32px,4.4vw,54px);line-height:1.1;margin:16px 0 18px}
+.hero-split h1 em{color:var(--blue-text);font-style:normal;font-weight:400}
+.hero-split p{font-size:16px;line-height:1.75;color:var(--muted);max-width:460px;margin:0 0 26px}
+.hero-split-media{aspect-ratio:4/5;position:relative;overflow:hidden;border:1px solid var(--line);align-self:stretch;min-height:380px}
+
+/* ---- Single editorial image+text split (one row, not repeated) ---- */
+.split-feature{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.split-feature-media{aspect-ratio:5/4;position:relative;overflow:hidden;border:1px solid var(--line)}
+.split-feature.reverse .split-feature-media{order:2}
+.split-feature.reverse .split-feature-text{order:1}
+
 @media(max-width:850px){
   .hero-dark{min-height:420px}
   .hero-dark .wrap{padding-top:86px;padding-bottom:44px}
@@ -95,8 +187,25 @@
   .media-grid,.media-grid--3{grid-template-columns:1fr;gap:26px}
   .link-list{grid-template-columns:1fr}
   .close-cta{grid-template-columns:1fr;gap:26px}
+
+  .editorial-row,.editorial-row.reverse{grid-template-columns:1fr;gap:22px}
+  .editorial-row.reverse .editorial-row-media{order:0}
+  .editorial-row.reverse .editorial-row-text{order:0}
+  .asym-grid{grid-template-columns:1fr;gap:20px}
+  .stagger-grid{grid-template-columns:1fr;gap:20px}
+  .stagger-card:nth-child(2),.stagger-card:nth-child(3){margin-top:0}
+  .timeline-row{grid-template-columns:1fr 1fr;row-gap:36px}
+  .timeline-row .tl-step:nth-child(2n) .tl-media{margin-top:0}
+  .img-cta .wrap{grid-template-columns:1fr;padding:48px 0;gap:24px}
+  .cta-split{grid-template-columns:1fr;gap:24px}
+  .hero-split .wrap{grid-template-columns:1fr;gap:26px}
+  .hero-split-media{min-height:280px;order:-1}
+  .split-feature,.split-feature.reverse{grid-template-columns:1fr;gap:22px}
+  .split-feature.reverse .split-feature-media{order:0}
+  .split-feature.reverse .split-feature-text{order:0}
 }
 @media(max-width:480px){
   .step-row--3,.step-row--4{grid-template-columns:1fr}
   .step-row .step{border-right:0;border-bottom:1px solid var(--line);margin-right:0;padding-bottom:18px}
+  .timeline-row{grid-template-columns:1fr}
 }
