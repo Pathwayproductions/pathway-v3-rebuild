@@ -36,3 +36,15 @@
     dismiss.addEventListener('click', function () { banner.classList.remove('show'); });
   }
 })();
+
+/* Video portfolio navigation; native swipe/keyboard scrolling also supported. */
+document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
+  const track=carousel.querySelector('.video-carousel__track');
+  const prev=carousel.querySelector('[data-video-prev]');
+  const next=carousel.querySelector('[data-video-next]');
+  if(!track||!prev||!next)return;
+  const move=direction=>{const card=track.querySelector('.video-card');if(!card)return;const gap=parseFloat(getComputedStyle(track).columnGap)||0;track.scrollBy({left:direction*(card.getBoundingClientRect().width+gap),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});};
+  prev.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
+  const update=()=>{prev.disabled=track.scrollLeft<3;next.disabled=track.scrollLeft+track.clientWidth>=track.scrollWidth-3;};
+  track.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
+});
