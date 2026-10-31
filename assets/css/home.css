@@ -1,0 +1,71 @@
+/* Homepage-only composition. Shared tokens/type/header/footer live in base.css.
+   Copy, structure, section order and the six-section colour sequence are
+   preserved exactly from reference/APPROVED_HOMEPAGE_V3.html. */
+
+.hero{position:relative;min-height:570px;display:flex;align-items:center;overflow:hidden}
+.hero-media{position:absolute;inset:0 0 0 42%;overflow:hidden}
+.hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero-media::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.7) 13%,transparent 48%);
+}
+.hero .wrap{position:relative;width:100%;padding-top:75px;padding-bottom:80px}
+.hero h1{font-size:clamp(44px,5.1vw,76px);line-height:1.07;margin:20px 0 15px;max-width:640px;font-family:var(--serif);font-weight:400;letter-spacing:-1.8px}
+.hero h1 em{color:var(--blue-text);font-style:normal;font-weight:400}
+.hero h2{font-size:clamp(22px,2.5vw,32px);line-height:1.23;font-weight:400;max-width:430px;margin:0 0 22px;font-family:var(--serif);letter-spacing:-1.8px}
+.hero p{font-size:15px;line-height:1.8;color:#4d565b;max-width:440px;margin:0 0 27px}
+
+.process{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:44px}
+.step{padding:26px 22px 10px 0;border-right:1px solid var(--line);margin-right:22px}
+.step:last-child{border:0}
+.num{font-size:12px;color:var(--blue-text);font-weight:700;letter-spacing:2px}
+.step h3{font-family:var(--serif);font-size:24px;font-weight:400;margin:20px 0 8px}
+.step p{font-size:13px;line-height:1.6;color:#51585c}
+
+.v3-capabilities-layout{display:grid;grid-template-columns:minmax(245px,.82fr) minmax(0,1.6fr);gap:clamp(38px,6vw,110px);align-items:start}
+.v3-capabilities-head{position:sticky;top:125px}
+.v3-capabilities-head h2{margin:18px 0 25px}
+.v3-capabilities-head p{font-size:15px;line-height:1.8;color:var(--on-dark-muted);max-width:355px}
+.v3-capabilities-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:clamp(22px,3vw,45px);row-gap:0}
+.v3-capability{position:relative;min-height:133px;padding:22px 28px 22px 0;border-top:1px solid var(--on-dark-line);color:#fff;display:flex;flex-direction:column;align-items:flex-start;gap:14px;transition:border-color .2s}
+.v3-capability:nth-last-child(-n+2){border-bottom:1px solid var(--on-dark-line)}
+.v3-capability:hover,.v3-capability:focus-visible{border-top-color:#8ccfe0}
+.v3-capability-num{font-family:var(--serif);font-size:18px;font-style:italic;color:#91d2e4}
+.v3-capability h3{font-family:var(--serif);font-size:clamp(19px,1.65vw,25px);line-height:1.23;font-weight:400;letter-spacing:-.01em;margin:0;color:#fff;max-width:245px}
+.v3-capability-arrow{position:absolute;right:3px;bottom:25px;font-size:22px;color:#9ad4e4;transition:transform .2s}
+.v3-capability:hover .v3-capability-arrow{transform:translate(3px,-3px)}
+
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:35px}
+.card{min-height:290px;padding:34px;border:1px solid #d7d7d3;background:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.card .tag{font-size:11px;letter-spacing:2px;color:var(--blue-text);font-weight:bold}
+.card h3{font-family:var(--serif);font-size:38px;font-weight:400;letter-spacing:-1px;line-height:1.1;margin:14px 0}
+.card p{max-width:410px;font-size:15px;color:#51585c}
+
+@media(max-width:850px){
+  .hero{min-height:750px;align-items:flex-start}
+  .hero-media{inset:390px 0 0 0}
+  .hero-media::after{background:linear-gradient(180deg,#fff,transparent 25%)}
+  .hero .wrap{padding-top:58px;padding-bottom:350px}
+  .hero h1{font-size:49px;max-width:550px}
+  .hero h2{font-size:24px}
+  .hero p{font-size:14px}
+  .cards{grid-template-columns:1fr;gap:20px}
+  .process{grid-template-columns:1fr 1fr}
+  .step{margin-right:12px}
+  .v3-capabilities-layout{grid-template-columns:1fr;gap:36px}
+  .v3-capabilities-head{position:static}
+  .v3-capabilities-head p{max-width:600px}
+}
+@media(max-width:480px){
+  .hero{min-height:780px}
+  .hero-media{top:440px}
+  .hero h1{font-size:42px}
+  .process{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid var(--line);margin-right:0}
+  .card{min-height:260px}
+  .v3-capabilities-grid{grid-template-columns:1fr}
+  .v3-capability{min-height:104px;padding:17px 36px 17px 0}
+  .v3-capability:nth-last-child(2){border-bottom:0}
+  .v3-capabilities{padding:58px 0}
+  .v3-capability-arrow{bottom:20px}
+}
