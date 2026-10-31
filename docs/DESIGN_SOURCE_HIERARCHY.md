@@ -11,6 +11,10 @@ direction brief (§7) covering the kind of photography every page should imply.
 Both apply from this point forward, including to the two representative pages
 (Corporate Films, Amazon Advertising) built in this pass.
 
+**Update (29-page build pass):** the tertiary reference file is now supplied —
+§1c below reflects what it actually contains, replacing the earlier placeholder
+text.
+
 ## 1. The reference types, and what each governs
 
 ### Primary reference — Approved V3 Homepage
@@ -68,20 +72,38 @@ rebuild — it's noted here only so it's not mistaken for current direction.
 
 ### 1c. Tertiary reference — Creative Productions V3 Revised HTML
 
-**File:** `reference/Pathway_Creative_Productions_V3_Revised_HTML.html` — **not yet
-available in this repository or uploaded to this session.** This section documents
-how it will be used once supplied; nothing below depended on reading it.
+**File:** `reference/Pathway_Creative_Productions_V3_Revised_HTML.html` — now
+supplied (as of the 29-page build pass) and reviewed. It is a single self-contained
+design-review mockup of a Creative Productions page (inline CSS + embedded base64
+JPEGs, no project files), titled "Creative Productions — Pathway | Design Review",
+with its own on-page note: "HTML design review. Suggested images are conceptual;
+project names are examples, not verified video playback links."
 
-This file is **additional creative inspiration only**, one tier below the six
-templates in authority. Use it for: storytelling structure, image integration
-technique, asymmetric compositions, visual rhythm (how sections vary in size,
-spacing and emphasis against each other), and more engaging/less mechanical
-section arrangements than a flat grid.
+**What it actually contains:** a full-bleed hero with a photographic background and
+a dark-to-transparent left-to-right gradient overlay; a 3-item icon intro grid
+(Concept & Story / Production / Post-Production, line-icon SVGs); a dark "Our Work"
+section with a header row (heading + "View Existing Portfolio" link) followed by a
+horizontal film showcase (`film-image`/`film-title`/`film-caption` per entry); a
+"feature" section pairing a large image with copy (`feature-img`/`feature-copy`);
+a "benefits" section; and a closing CTA band.
 
-Do **not** take its colors or typography if they differ from the approved
-homepage — same rule as the six templates, stated explicitly because this file
-is a "revised" design exploration and may carry its own palette or type choices
-that were never approved.
+**Its own palette/type (explicitly NOT used here):** Arial/Helvetica sans-serif
+throughout (no serif pairing), ink `#252a2e`, blue `#1479bd` (and a lighter
+`#4dbce9` used inline on dark sections), gray `#f1f3f5`, charcoal `#292d31`. The
+gray/charcoal values happen to be close to the approved V3 tokens, but the font
+stack and blue are different and are not adopted — same rule as the six templates,
+stated explicitly because this file is a "revised" design exploration and was
+never approved on its own terms.
+
+**How it was used in this pass:** as confirmation, not new direction — its
+full-bleed gradient hero, image+text feature split and horizontal showcase row are
+the same shapes already introduced for Corporate Films (full-bleed `.hero-dark`,
+`.split-feature`, `.editorial-row`) in the prior pass, so no new component was
+added solely because of this file. It did inform using `.split-feature` and a
+horizontal showcase-style treatment (via `.media-grid`/`.asym-grid`/`.editorial-row`
+depending on content) more deliberately on pages in the Production family and
+Digital Marketing family during this 29-page build, in place of defaulting every
+page to `.svc-grid`/`.step-row`.
 
 Where it conflicts with the six templates on layout logic, the six templates
 (tied to an actual approved batch) still win — this file is inspiration for
