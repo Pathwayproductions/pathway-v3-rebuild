@@ -49,16 +49,19 @@ document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
   track.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
 });
 
-/* Review-only hero treatment: reuse a page-local image where available.
-   Otherwise a shared temporary concept image is used until bespoke assets are approved. */
+/* Review-only hero treatment: reuse a genuine page-local image where one exists.
+   If a page has no real image of its own, the hero stays plain text — it must
+   never borrow another page's photo (that reads as one reused placeholder
+   camera across unrelated pages) and must never guess a relative path depth. */
 (function(){
   const hero=document.querySelector('main > .hero-light');
   if(!hero)return;
   const images=[...document.querySelectorAll('main img[src]')].filter(img=>!img.closest('.hero-light')&&!/ytimg\.com|youtube\.com/.test(img.getAttribute('src')||''));
   const chosen=images.find(img=>/concept-previews|assets\/images/.test(img.getAttribute('src')||''))||images[0];
-  const src=chosen?chosen.getAttribute('src'):'../assets/concept-previews/batch2/02-film-crew-studio.webp';
+  if(!chosen)return;
+  const src=chosen.getAttribute('src');
   if(!src)return;
   hero.style.setProperty('--review-hero-image','url("'+src.replace(/["\\]/g,'')+'")');
   hero.classList.add('hero-image-review');
-  hero.setAttribute('data-hero-status',chosen?'existing-page-asset':'temporary-shared-concept');
+  hero.setAttribute('data-hero-status','existing-page-asset');
 })();
