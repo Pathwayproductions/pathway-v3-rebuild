@@ -15,6 +15,23 @@
 .hero h2{font-size:clamp(22px,2.5vw,32px);line-height:1.23;font-weight:400;max-width:430px;margin:0 0 22px;font-family:var(--serif);letter-spacing:-1.8px}
 .hero p{font-size:15px;line-height:1.8;color:#4d565b;max-width:440px;margin:0 0 27px}
 
+/* ---- Trial variant: full-bleed photo behind the whole hero, text laid
+   directly over it with a dark reading scrim instead of the white-fade
+   split panel above. Toggle by adding "hero-full" alongside "hero" on
+   the section. ---- */
+.hero.hero-full .hero-media{inset:0}
+.hero.hero-full .hero-media::after{
+  background:linear-gradient(90deg,rgba(18,22,25,.66) 0%,rgba(18,22,25,.42) 30%,rgba(18,22,25,.12) 55%,transparent 75%);
+}
+.hero.hero-full .wrap{color:#fff}
+.hero.hero-full .eyebrow{color:#a6d9e7}
+.hero.hero-full h1{color:#fff}
+.hero.hero-full h1 em{color:#9ad4e4}
+.hero.hero-full h2{color:#fff}
+.hero.hero-full p{color:#d9dfe2}
+.hero.hero-full .outline{border-color:rgba(255,255,255,.6);color:#fff}
+.hero.hero-full .outline:hover{border-color:#fff}
+
 .process{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:44px}
 .step{padding:26px 22px 10px 0;border-right:1px solid var(--line);margin-right:22px}
 .step:last-child{border:0}
@@ -45,7 +62,10 @@
   .hero{min-height:750px;align-items:flex-start}
   .hero-media{inset:390px 0 0 0}
   .hero-media::after{background:linear-gradient(180deg,#fff,transparent 25%)}
+  .hero.hero-full .hero-media{inset:0}
+  .hero.hero-full .hero-media::after{background:linear-gradient(180deg,rgba(18,22,25,.18) 0%,rgba(18,22,25,.55) 55%,rgba(18,22,25,.78) 100%)}
   .hero .wrap{padding-top:58px;padding-bottom:350px}
+  .hero.hero-full .wrap{padding-bottom:58px}
   .hero h1{font-size:49px;max-width:550px}
   .hero h2{font-size:24px}
   .hero p{font-size:14px}
