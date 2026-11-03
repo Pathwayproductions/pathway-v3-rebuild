@@ -181,6 +181,10 @@
 .hero-split h1 em{color:var(--blue-text);font-style:normal;font-weight:400}
 .hero-split p{font-size:16px;line-height:1.75;color:var(--muted);max-width:460px;margin:0 0 26px}
 .hero-split-media{aspect-ratio:4/5;position:relative;overflow:hidden;border:1px solid var(--line);align-self:stretch;min-height:380px}
+/* Wide-photo variant of hero-split, for a landscape on-set image instead of
+   the 4:5 portrait panel (e.g. a laptop/desk shot) the default was built for. */
+.hero-split--wide .wrap{grid-template-columns:.92fr 1.08fr}
+.hero-split--wide .hero-split-media{aspect-ratio:16/9;min-height:320px}
 
 /* ---- Single editorial image+text split (one row, not repeated) ---- */
 .split-feature{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
