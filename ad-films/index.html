@@ -32,14 +32,22 @@
 </header>
 
 <main>
-  <section class="hero-light hero-image-review" style="--review-hero-image:url('../assets/images/ad-films-hero.webp');--review-hero-position:70% center;--review-hero-mobile-position:65% center;">
+  <section class="hero-photo">
+    <div class="hero-photo-media">
+      <picture>
+        <source srcset="../assets/images/ad-films-hero.webp" type="image/webp">
+        <img src="../assets/images/ad-films-hero.jpg"
+             alt="Director and crew reviewing a take on a production monitor on an ad film set, camera and lighting equipment visible"
+             style="object-position:70% center;"
+             fetchpriority="high" loading="eager">
+      </picture>
+    </div>
     <div class="wrap">
-      <span style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Director and crew reviewing a take on a production monitor on an ad film set, camera and lighting equipment visible</span>
       <div class="eyebrow">Ad Films</div>
       <h1>You Have a Lot to Say.<br><em>Your Audience Has Only a Moment.</em></h1>
       <p>Every brand has more to communicate than a short film can hold.</p>
       <div class="actions">
-        <a class="outline" href="#selected-films" style="border-color:#aab6bb;">View Selected Films ↗</a>
+        <a class="outline" href="#selected-films">View Selected Films ↗</a>
       </div>
     </div>
   </section>
