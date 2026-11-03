@@ -53,36 +53,41 @@ img{max-width:100%;display:block}
 .mobile{display:none;border:1px solid var(--line);padding:10px;background:#fff}
 
 /* ---------- Header dropdown (mega menu) ----------
-   Desktop: opens on hover (and on focus, for keyboard users tabbing through
-   the nav), closes when the pointer leaves the whole .navdrop (link + panel
-   together), so moving from the link down into the panel never drops it.
+   Click-to-open only, on every breakpoint — no hover trigger. A dedicated
+   chevron button toggles the panel open/closed; the main link text still
+   navigates normally to the section's landing page. Closes when another
+   dropdown opens, on outside click, or on Escape (handled in main.js).
    Panels are grouped into labelled categories (.navdrop-group); Creative
    Productions has 3 groups (default, 3 columns), Digital Marketing has 4
-   (.navdrop-panel--4col).
-   Touch/mobile: hover doesn't exist, so a dedicated chevron button toggles
-   the panel open/closed; the main link text still navigates normally. */
+   (.navdrop-panel--4col). Each group heading uses the brand-blue accent,
+   consistent weight/size/letter-spacing across every group, so it reads
+   clearly as a heading over the plain-ink links beneath it. */
 .navdrop{position:relative;display:flex;align-items:center;gap:2px}
-.navdrop-toggle{display:none;border:none;background:none;color:inherit;font-size:10px;padding:6px 2px;cursor:pointer;line-height:1;opacity:.7}
+.navdrop-toggle{display:inline-flex;align-items:center;justify-content:center;border:none;background:none;color:inherit;font-size:11px;padding:6px 4px;cursor:pointer;line-height:1;opacity:.7;transition:transform .15s ease}
+.navdrop-toggle:hover{opacity:1}
+.navdrop.open .navdrop-toggle{transform:rotate(180deg);opacity:1}
 .navdrop-panel{
   position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(4px);
   background:#fff;border:1px solid var(--line);border-radius:6px;
   box-shadow:0 18px 40px rgba(20,24,27,.14);
-  padding:24px 28px;margin-top:6px;
-  display:grid;grid-template-columns:repeat(3,178px);gap:0 32px;
+  padding:24px 28px 18px;margin-top:6px;
+  display:grid;grid-template-columns:repeat(3,178px);align-items:start;gap:0 32px;
   opacity:0;visibility:hidden;pointer-events:none;
   transition:opacity .15s ease,transform .15s ease;
   z-index:30;
 }
 .navdrop-panel--4col{grid-template-columns:repeat(4,160px);gap:0 26px}
 .navdrop-group{display:flex;flex-direction:column}
-.navdrop-group-title{font-size:10px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:#9199a0;margin:0 0 10px}
-.navdrop-panel a{display:block;padding:7px 0;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line)}
+.navdrop-group-title{font-family:var(--sans);font-size:11px;letter-spacing:1.4px;text-transform:uppercase;font-weight:700;color:var(--blue-text);margin:0 0 11px;padding-bottom:8px;border-bottom:1px solid rgba(15,111,143,.18)}
+.navdrop-panel a{display:block;padding:7px 0;font-size:13px;font-family:var(--sans);color:var(--ink);border-bottom:1px solid var(--line)}
 .navdrop-panel a:hover{color:var(--blue-text)}
 .navdrop-group a:last-child{border-bottom:none}
-.navdrop-panel .navdrop-all{grid-column:1/-1;margin-top:10px;padding-top:14px;border-top:1px solid var(--line);border-bottom:none;font-weight:600;color:var(--blue-text)}
-.navdrop:hover .navdrop-panel,
-.navdrop.open .navdrop-panel,
-.navdrop:focus-within .navdrop-panel{
+.navdrop-panel .navdrop-all{
+  grid-column:1/-1;margin-top:12px;padding-top:16px;border-top:1px solid var(--line);
+  border-bottom:none;font-weight:600;font-size:13px;color:var(--blue-text);
+  text-align:center;
+}
+.navdrop.open .navdrop-panel{
   opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);
 }
 
@@ -194,7 +199,9 @@ h1,h2,h3{margin:0}
   .split{grid-template-columns:1fr;gap:20px}
   .section{padding:60px 0}
 
-  /* Dropdown becomes a tap-to-expand accordion row inside the mobile menu. */
+  /* Dropdown becomes a tap-to-expand accordion row inside the mobile menu
+     (same click-driven .open toggle as desktop, just a different panel
+     layout: static, single column, left-rule instead of a floating card). */
   .navdrop{flex-direction:column;align-items:stretch;width:100%;gap:0}
   .navdrop>a{padding:9px 0}
   .navdrop-toggle{display:block;position:absolute;right:0;top:2px;font-size:16px;padding:10px 6px}
@@ -204,11 +211,11 @@ h1,h2,h3{margin:0}
     box-shadow:none;border:none;border-radius:0;margin:0 0 6px;padding:0 0 0 14px;
     border-left:2px solid var(--line);
   }
-  .navdrop.open .navdrop-panel{display:block}
+  .navdrop.open .navdrop-panel{display:block;transform:none}
   .navdrop-panel a{padding:10px 0}
   .navdrop-group-title{margin:16px 0 4px}
   .navdrop-group:first-child .navdrop-group-title{margin-top:2px}
-  .navdrop-toggle[aria-expanded="true"]{transform:rotate(180deg)}
+  .navdrop-panel .navdrop-all{text-align:left}
 }
 @media(max-width:480px){
   .brandname{font-size:19px}

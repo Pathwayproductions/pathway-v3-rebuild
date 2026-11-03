@@ -14,9 +14,9 @@
     });
   }
 
-  // Header dropdown (mega menu): hover/focus open it on desktop via CSS alone.
-  // This handles the parts CSS can't: tap-to-expand on touch/mobile, closing
-  // any other open menu first, and dismissing on outside click or Escape.
+  // Header dropdown (mega menu): click-to-open on every breakpoint, via the
+  // chevron toggle button. Also closes any other open menu first, and
+  // dismisses on outside click or Escape.
   var navdrops = document.querySelectorAll('.navdrop');
   navdrops.forEach(function (drop) {
     var btn = drop.querySelector('.navdrop-toggle');
