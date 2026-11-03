@@ -52,6 +52,33 @@ img{max-width:100%;display:block}
 .btn:hover{background:var(--blue-btn-hover);color:#fff}
 .mobile{display:none;border:1px solid var(--line);padding:10px;background:#fff}
 
+/* ---------- Header dropdown (mega menu) ----------
+   Desktop: opens on hover (and on focus, for keyboard users tabbing through
+   the nav), closes when the pointer leaves the whole .navdrop (link + panel
+   together), so moving from the link down into the panel never drops it.
+   Touch/mobile: hover doesn't exist, so a dedicated chevron button toggles
+   the panel open/closed; the main link text still navigates normally. */
+.navdrop{position:relative;display:flex;align-items:center;gap:2px}
+.navdrop-toggle{display:none;border:none;background:none;color:inherit;font-size:10px;padding:6px 2px;cursor:pointer;line-height:1;opacity:.7}
+.navdrop-panel{
+  position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(4px);
+  background:#fff;border:1px solid var(--line);border-radius:6px;
+  box-shadow:0 18px 40px rgba(20,24,27,.14);
+  padding:20px 26px;margin-top:6px;
+  display:grid;grid-template-columns:repeat(2,208px);gap:0 36px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .15s ease,transform .15s ease;
+  z-index:30;
+}
+.navdrop-panel a{display:block;padding:8px 0;font-size:13px;color:var(--ink);border-bottom:1px solid var(--line)}
+.navdrop-panel a:hover{color:var(--blue-text)}
+.navdrop-panel .navdrop-all{grid-column:1/-1;margin-top:6px;padding-top:14px;border-top:1px solid var(--line);border-bottom:none;font-weight:600;color:var(--blue-text)}
+.navdrop:hover .navdrop-panel,
+.navdrop.open .navdrop-panel,
+.navdrop:focus-within .navdrop-panel{
+  opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);
+}
+
 /* ---------- Type / eyebrow ---------- */
 .eyebrow{font-size:11px;letter-spacing:2.6px;text-transform:uppercase;font-weight:700;color:#5c6267} /* 6.18:1 on white */
 .rule{width:42px;height:3px;background:var(--blue);margin:0 0 23px}
@@ -107,9 +134,25 @@ h1,h2,h3{margin:0}
 .video-pending span{display:block;color:#8ba0a9;font-size:11px;margin-top:3px}
 
 /* ---------- Footer ---------- */
-.footer{padding:42px 0;border-top:1px solid var(--line)}
-.footrow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:#697074;font-size:13px}
+.footer{padding:56px 0 30px;border-top:1px solid var(--line)}
+.footrow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:#697074;font-size:13px;padding-top:28px;border-top:1px solid var(--line);margin-top:40px}
 .footrow a{margin-right:16px}
+
+/* Full sitemap — every page reachable from every page, grouped by section. */
+.footer-sitemap{display:grid;grid-template-columns:1.3fr 1.3fr 1fr;gap:40px}
+.footer-col h4{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:#5c6267;margin:0 0 16px}
+.footer-col h4 a{color:inherit}
+.footer-col h4 a:hover{color:var(--blue-text)}
+.footer-col a{display:block;font-size:13px;color:#51585c;padding:7px 0;text-align:left}
+.footer-col a:hover{color:var(--blue-text)}
+@media(max-width:850px){
+  .footer-sitemap{grid-template-columns:1fr 1fr;gap:28px}
+  .footer-col:nth-child(3){grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;margin-top:4px}
+}
+@media(max-width:480px){
+  .footer-sitemap{grid-template-columns:1fr}
+  .footer-col:nth-child(3){grid-column:auto;border-top:none;padding-top:0;margin-top:0}
+}
 
 /* ---------- Pending-route interception banner (internal review build only) ---------- */
 .pending-banner{
@@ -124,12 +167,26 @@ h1,h2,h3{margin:0}
 @media(max-width:850px){
   .wrap{padding:0 22px}
   .nav{min-height:72px}
-  .navlinks{display:none;position:absolute;top:72px;left:0;right:0;background:#fff;padding:22px;flex-direction:column;align-items:start;border-bottom:1px solid var(--line);z-index:19}
+  .navlinks{display:none;position:absolute;top:72px;left:0;right:0;background:#fff;padding:22px;flex-direction:column;align-items:start;border-bottom:1px solid var(--line);z-index:19;max-height:calc(100vh - 72px);overflow-y:auto}
   .navlinks.open{display:flex}
   .mobile{display:block}
   .nav>.outline{display:none}
   .split{grid-template-columns:1fr;gap:20px}
   .section{padding:60px 0}
+
+  /* Dropdown becomes a tap-to-expand accordion row inside the mobile menu. */
+  .navdrop{flex-direction:column;align-items:stretch;width:100%;gap:0}
+  .navdrop>a{padding:9px 0}
+  .navdrop-toggle{display:block;position:absolute;right:0;top:2px;font-size:16px;padding:10px 6px}
+  .navdrop-panel{
+    position:static;display:none;grid-template-columns:1fr;gap:0;
+    opacity:1;visibility:visible;pointer-events:auto;transform:none;
+    box-shadow:none;border:none;border-radius:0;margin:0 0 6px;padding:0 0 0 14px;
+    border-left:2px solid var(--line);
+  }
+  .navdrop.open .navdrop-panel{display:block}
+  .navdrop-panel a{padding:10px 0}
+  .navdrop-toggle[aria-expanded="true"]{transform:rotate(180deg)}
 }
 @media(max-width:480px){
   .brandname{font-size:19px}

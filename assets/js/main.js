@@ -14,6 +14,46 @@
     });
   }
 
+  // Header dropdown (mega menu): hover/focus open it on desktop via CSS alone.
+  // This handles the parts CSS can't: tap-to-expand on touch/mobile, closing
+  // any other open menu first, and dismissing on outside click or Escape.
+  var navdrops = document.querySelectorAll('.navdrop');
+  navdrops.forEach(function (drop) {
+    var btn = drop.querySelector('.navdrop-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var isOpen = drop.classList.contains('open');
+      navdrops.forEach(function (d) {
+        d.classList.remove('open');
+        var b = d.querySelector('.navdrop-toggle');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        drop.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+  document.addEventListener('click', function (e) {
+    navdrops.forEach(function (d) {
+      if (!d.contains(e.target)) {
+        d.classList.remove('open');
+        var b = d.querySelector('.navdrop-toggle');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      navdrops.forEach(function (d) {
+        d.classList.remove('open');
+        var b = d.querySelector('.navdrop-toggle');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
+
   // Internal-review-build pending-link interception.
   // Any link marked data-pending points to a page/asset that does not exist
   // yet in this milestone. Intercept the click and show a dismissible note
