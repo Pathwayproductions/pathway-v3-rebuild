@@ -43,11 +43,32 @@
 .hero-photo h1{font-family:var(--serif);font-weight:400;letter-spacing:-1.8px;font-size:clamp(40px,5vw,66px);line-height:1.08;margin:16px 0 18px;max-width:640px}
 .hero-photo h1 em{color:var(--blue-text);font-style:normal;font-weight:400}
 .hero-photo p{font-size:15px;line-height:1.8;color:var(--muted);max-width:440px;margin:0 0 26px}
+
+/* ---- Trial variant: full-bleed photo behind the whole hero, text laid
+   directly over it with a dark reading scrim instead of the white-fade
+   split panel above. Toggle by adding "hero-full" alongside "hero-photo"
+   on the section. ---- */
+.hero-photo.hero-full .hero-photo-media{inset:0}
+.hero-photo.hero-full .hero-photo-media::after{
+  background:linear-gradient(90deg,rgba(18,22,25,.66) 0%,rgba(18,22,25,.42) 30%,rgba(18,22,25,.12) 55%,transparent 75%);
+}
+.hero-photo.hero-full .wrap{color:#fff}
+.hero-photo.hero-full .eyebrow{color:#a6d9e7}
+.hero-photo.hero-full h1{color:#fff}
+.hero-photo.hero-full h1 em{color:#9ad4e4}
+.hero-photo.hero-full p{color:#d9dfe2}
+.hero-photo.hero-full .outline{border-color:rgba(255,255,255,.6);color:#fff}
+.hero-photo.hero-full .outline:hover{border-color:#fff}
+.hero-photo.hero-full .concept-tag{z-index:3}
+
 @media(max-width:850px){
   .hero-photo{min-height:750px;align-items:flex-start}
   .hero-photo-media{inset:390px 0 0 0}
   .hero-photo-media::after{background:linear-gradient(180deg,#fff,transparent 25%)}
+  .hero-photo.hero-full .hero-photo-media{inset:0}
+  .hero-photo.hero-full .hero-photo-media::after{background:linear-gradient(180deg,rgba(18,22,25,.18) 0%,rgba(18,22,25,.55) 55%,rgba(18,22,25,.78) 100%)}
   .hero-photo .wrap{padding-top:58px;padding-bottom:350px}
+  .hero-photo.hero-full .wrap{padding-bottom:58px}
   .hero-photo h1{font-size:44px;max-width:550px}
 }
 @media(max-width:480px){
