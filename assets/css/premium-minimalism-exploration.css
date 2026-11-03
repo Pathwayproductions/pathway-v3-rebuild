@@ -1,0 +1,75 @@
+/* Premium Minimalism — three-page exploration only.
+   Scope: homepage, creative productions, digital marketing.
+   Does not alter content, media IDs, routes or video carousel JS. */
+:root{--pm-ink:#252a2d;--pm-accent:#146d87;--pm-hair:#d9dfe1}
+body{color:var(--pm-ink)}
+.top{background:rgba(255,255,255,.97);border-bottom:1px solid var(--pm-hair)}
+.nav{min-height:82px}
+.navlinks{gap:clamp(14px,2vw,28px)}
+.navlinks a{transition:color .18s ease}
+.navlinks a.current{color:var(--pm-accent)}
+.brandname{letter-spacing:1.65px}
+.outline,.btn{border-radius:2px;padding:15px 23px}
+.btn{background:var(--pm-accent)}
+.btn:hover{background:#10566b}
+.section{padding-top:clamp(70px,7vw,112px);padding-bottom:clamp(70px,7vw,112px)}
+.section h2{letter-spacing:-.038em;line-height:1.12}
+.eyebrow{letter-spacing:.2em;font-size:10px}
+.rule{height:2px;width:32px}
+.actions{gap:13px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--pm-accent);outline-offset:4px}
+/* Home: left-centered copy with right-biased photograph, deliberately quiet typography */
+body.pm-home .hero{min-height:clamp(620px,58vw,760px);align-items:center;background:#fff}
+body.pm-home .hero-media{inset:0 0 0 46%}
+body.pm-home .hero-media::after{background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.94) 8%,rgba(255,255,255,.3) 38%,transparent 70%)}
+body.pm-home .hero-media img{object-position:60% center}
+body.pm-home .hero .wrap{padding-top:92px;padding-bottom:98px}
+body.pm-home .hero h1{font-size:clamp(46px,5.15vw,76px);line-height:1.055;max-width:650px;letter-spacing:-.048em;margin-top:24px}
+body.pm-home .hero h2{letter-spacing:-.035em;max-width:460px}
+body.pm-home .hero p{max-width:420px;line-height:1.85}
+body.pm-home .v3-capability{min-height:146px}
+body.pm-home .card{border-color:var(--pm-hair)}
+/* Creative Productions: cinematic, but image not allowed to overpower the copy */
+body.pm-creative .cp-hero{min-height:clamp(590px,58vw,740px);align-items:center}
+body.pm-creative .cp-hero::after{background:linear-gradient(90deg,rgba(11,19,22,.92) 0%,rgba(11,19,22,.8) 35%,rgba(11,19,22,.23) 75%),linear-gradient(0deg,rgba(11,19,22,.32),transparent 55%)}
+body.pm-creative .cp-hero .concept-media img{object-position:65% center}
+body.pm-creative .cp-hero .wrap{padding-top:105px;padding-bottom:105px}
+body.pm-creative .cp-hero h1{max-width:740px;font-size:clamp(44px,5.2vw,76px);line-height:1.08;letter-spacing:-.045em}
+body.pm-creative .cp-hero h1 em{color:#9ed5e0}
+body.pm-creative .cp-services{border-color:var(--pm-hair)}
+body.pm-creative .cp-service{padding:36px 32px;min-height:225px;border-color:var(--pm-hair)}
+body.pm-creative .cp-service h3{letter-spacing:-.035em}
+/* Digital Marketing: typographic editorial composition, no invented imagery */
+body.pm-digital .hero-light{min-height:580px;display:flex;align-items:center;background:#f7f8f8;color:var(--pm-ink);border-bottom:1px solid var(--pm-hair)}
+body.pm-digital .hero-light .wrap{width:100%;padding-top:70px;padding-bottom:75px}
+body.pm-digital .hero-light h1{font-size:clamp(43px,5vw,74px);max-width:900px;letter-spacing:-.05em;line-height:1.09;margin:25px 0}
+body.pm-digital .hero-light h1 em{color:var(--pm-accent)}
+body.pm-digital .hero-light p{max-width:540px;line-height:1.85}
+body.pm-digital .svc-grid{border-color:var(--pm-hair)}
+body.pm-digital .svc-card{padding:32px 27px;min-height:215px;border-color:var(--pm-hair)}
+body.pm-digital .svc-card h3{letter-spacing:-.025em}
+@media(max-width:850px){
+ .nav{min-height:72px}
+ body.pm-home .hero{min-height:760px;align-items:flex-start}
+ body.pm-home .hero-media{inset:400px 0 0 0}
+ body.pm-home .hero-media::after{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.1) 28%,transparent 65%)}
+ body.pm-home .hero .wrap{padding-top:58px;padding-bottom:365px}
+ body.pm-home .hero h1{font-size:clamp(40px,7vw,56px)}
+ body.pm-creative .cp-hero{min-height:620px;align-items:flex-end}
+ body.pm-creative .cp-hero::after{background:linear-gradient(0deg,rgba(11,19,22,.95),rgba(11,19,22,.68) 55%,rgba(11,19,22,.15))}
+ body.pm-creative .cp-hero .wrap{padding-top:150px;padding-bottom:54px}
+ body.pm-digital .hero-light{min-height:530px}
+ body.pm-digital .hero-light h1{font-size:clamp(38px,7vw,56px)}
+}
+@media(max-width:480px){
+ body.pm-home .hero{min-height:800px}
+ body.pm-home .hero-media{top:455px}
+ body.pm-home .hero h1{font-size:42px}
+ body.pm-creative .cp-hero h1{font-size:clamp(37px,10vw,48px)}
+ body.pm-creative .cp-service{padding:27px 22px}
+ body.pm-digital .hero-light{min-height:500px}
+ body.pm-digital .hero-light .wrap{padding-top:50px;padding-bottom:60px}
+ body.pm-digital .hero-light h1{font-size:clamp(36px,9vw,45px)}
+ body.pm-digital .svc-card{min-height:170px}
+}
+@media(prefers-reduced-motion:reduce){.navlinks a{transition:none}}
