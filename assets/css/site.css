@@ -30,6 +30,31 @@
 .hero-dark h1 em{color:#5fc2db;font-style:normal;font-weight:400}
 .hero-dark p{font-size:15px;line-height:1.75;color:#d6dee1;max-width:460px;margin:0 0 26px}
 
+/* ---- Photo-split hero (same treatment as the homepage hero): plain
+   left column for copy, real photo confined to a right-hand panel that
+   fades into the page via a white edge gradient — not a full-bleed
+   overlay, so text never sits on top of the image. ---- */
+.hero-photo{position:relative;min-height:570px;display:flex;align-items:center;overflow:hidden}
+.hero-photo-media{position:absolute;inset:0 0 0 42%;overflow:hidden}
+.hero-photo-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-photo-media::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.7) 13%,transparent 48%)}
+.hero-photo .wrap{position:relative;width:100%;padding-top:75px;padding-bottom:80px}
+.hero-photo h1{font-family:var(--serif);font-weight:400;letter-spacing:-1.8px;font-size:clamp(40px,5vw,66px);line-height:1.08;margin:16px 0 18px;max-width:640px}
+.hero-photo h1 em{color:var(--blue-text);font-style:normal;font-weight:400}
+.hero-photo p{font-size:15px;line-height:1.8;color:var(--muted);max-width:440px;margin:0 0 26px}
+@media(max-width:850px){
+  .hero-photo{min-height:750px;align-items:flex-start}
+  .hero-photo-media{inset:390px 0 0 0}
+  .hero-photo-media::after{background:linear-gradient(180deg,#fff,transparent 25%)}
+  .hero-photo .wrap{padding-top:58px;padding-bottom:350px}
+  .hero-photo h1{font-size:44px;max-width:550px}
+}
+@media(max-width:480px){
+  .hero-photo{min-height:780px}
+  .hero-photo-media{top:440px}
+  .hero-photo h1{font-size:38px}
+}
+
 /* ---- Light text hero (strategy/marketing/company pages) ---- */
 .hero-light{padding:96px 0 64px;border-bottom:1px solid var(--line)}
 .hero-light h1{font-family:var(--serif);font-weight:400;letter-spacing:-.04em;font-size:clamp(34px,4.6vw,58px);line-height:1.1;margin:16px 0 18px;max-width:720px}

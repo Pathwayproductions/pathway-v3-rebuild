@@ -1,0 +1,177 @@
+/* Premium Minimalism — three-page exploration only.
+   Scope: homepage, creative productions, digital marketing.
+   Does not alter content, media IDs, routes or video carousel JS. */
+:root{--pm-ink:#252a2d;--pm-accent:#146d87;--pm-hair:#d9dfe1}
+body{color:var(--pm-ink)}
+.top{background:rgba(255,255,255,.97);border-bottom:1px solid var(--pm-hair)}
+.nav{min-height:82px}
+.navlinks{gap:clamp(14px,2vw,28px)}
+.navlinks a{transition:color .18s ease}
+.navlinks a.current{color:var(--pm-accent)}
+.brandname{letter-spacing:1.65px}
+.outline,.btn{border-radius:2px;padding:15px 23px}
+.btn{background:var(--pm-accent)}
+.btn:hover{background:#10566b}
+.section{padding-top:clamp(70px,7vw,112px);padding-bottom:clamp(70px,7vw,112px)}
+.section h2{letter-spacing:-.038em;line-height:1.12}
+.eyebrow{letter-spacing:.2em;font-size:10px}
+.rule{height:2px;width:32px}
+.actions{gap:13px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--pm-accent);outline-offset:4px}
+/* Home: left-centered copy with right-biased photograph, deliberately quiet typography */
+body.pm-home .hero{min-height:clamp(620px,58vw,760px);align-items:center;background:#fff}
+body.pm-home .hero-media{inset:0 0 0 46%}
+body.pm-home .hero-media::after{background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.94) 8%,rgba(255,255,255,.3) 38%,transparent 70%)}
+body.pm-home .hero-media img{object-position:60% center}
+body.pm-home .hero .wrap{padding-top:92px;padding-bottom:98px}
+body.pm-home .hero h1{font-size:clamp(46px,5.15vw,76px);line-height:1.055;max-width:650px;letter-spacing:-.048em;margin-top:24px}
+body.pm-home .hero h2{letter-spacing:-.035em;max-width:460px}
+body.pm-home .hero p{max-width:420px;line-height:1.85}
+body.pm-home .v3-capability{min-height:146px}
+body.pm-home .card{border-color:var(--pm-hair)}
+/* Creative Productions: cinematic, but image not allowed to overpower the copy */
+body.pm-creative .cp-hero{min-height:clamp(590px,58vw,740px);align-items:center}
+body.pm-creative .cp-hero::after{background:linear-gradient(90deg,rgba(11,19,22,.92) 0%,rgba(11,19,22,.8) 35%,rgba(11,19,22,.23) 75%),linear-gradient(0deg,rgba(11,19,22,.32),transparent 55%)}
+body.pm-creative .cp-hero .concept-media img{object-position:65% center}
+body.pm-creative .cp-hero .wrap{padding-top:105px;padding-bottom:105px}
+body.pm-creative .cp-hero h1{max-width:740px;font-size:clamp(44px,5.2vw,76px);line-height:1.08;letter-spacing:-.045em}
+body.pm-creative .cp-hero h1 em{color:#9ed5e0}
+body.pm-creative .cp-services{border-color:var(--pm-hair)}
+body.pm-creative .cp-service{padding:36px 32px;min-height:225px;border-color:var(--pm-hair)}
+body.pm-creative .cp-service h3{letter-spacing:-.035em}
+/* Digital Marketing: typographic editorial composition, no invented imagery */
+body.pm-digital .hero-light{min-height:580px;display:flex;align-items:center;background:#f7f8f8;color:var(--pm-ink);border-bottom:1px solid var(--pm-hair)}
+body.pm-digital .hero-light .wrap{width:100%;padding-top:70px;padding-bottom:75px}
+body.pm-digital .hero-light h1{font-size:clamp(43px,5vw,74px);max-width:900px;letter-spacing:-.05em;line-height:1.09;margin:25px 0}
+body.pm-digital .hero-light h1 em{color:var(--pm-accent)}
+body.pm-digital .hero-light p{max-width:540px;line-height:1.85}
+body.pm-digital .svc-grid{border-color:var(--pm-hair)}
+body.pm-digital .svc-card{padding:32px 27px;min-height:215px;border-color:var(--pm-hair)}
+body.pm-digital .svc-card h3{letter-spacing:-.025em}
+@media(max-width:850px){
+ .nav{min-height:72px}
+ body.pm-home .hero{min-height:760px;align-items:flex-start}
+ body.pm-home .hero-media{inset:400px 0 0 0}
+ body.pm-home .hero-media::after{background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.1) 28%,transparent 65%)}
+ body.pm-home .hero .wrap{padding-top:58px;padding-bottom:365px}
+ body.pm-home .hero h1{font-size:clamp(40px,7vw,56px)}
+ body.pm-creative .cp-hero{min-height:620px;align-items:flex-end}
+ body.pm-creative .cp-hero::after{background:linear-gradient(0deg,rgba(11,19,22,.95),rgba(11,19,22,.68) 55%,rgba(11,19,22,.15))}
+ body.pm-creative .cp-hero .wrap{padding-top:150px;padding-bottom:54px}
+ body.pm-digital .hero-light{min-height:530px}
+ body.pm-digital .hero-light h1{font-size:clamp(38px,7vw,56px)}
+}
+@media(max-width:480px){
+ body.pm-home .hero{min-height:800px}
+ body.pm-home .hero-media{top:455px}
+ body.pm-home .hero h1{font-size:42px}
+ body.pm-creative .cp-hero h1{font-size:clamp(37px,10vw,48px)}
+ body.pm-creative .cp-service{padding:27px 22px}
+ body.pm-digital .hero-light{min-height:500px}
+ body.pm-digital .hero-light .wrap{padding-top:50px;padding-bottom:60px}
+ body.pm-digital .hero-light h1{font-size:clamp(36px,9vw,45px)}
+ body.pm-digital .svc-card{min-height:170px}
+}
+@media(prefers-reduced-motion:reduce){.navlinks a{transition:none}}
+
+/* V2 — unmistakable editorial redesign. Override V1 in the same branch.
+   Existing content, image URLs, video carousel markup and JS are untouched. */
+body.pm-home,body.pm-creative,body.pm-digital{--pm-cream:#f3f0e9;--pm-black:#171c1d;--pm-line:#c9cdcb;--pm-cyan:#116c83}
+body.pm-home .top,body.pm-creative .top,body.pm-digital .top{background:#f8f7f3;border-bottom:1px solid #c7cbc9}
+body.pm-home .nav,body.pm-creative .nav,body.pm-digital .nav{min-height:76px}
+body.pm-home .brandname,body.pm-creative .brandname,body.pm-digital .brandname{font-size:22px;letter-spacing:.09em}
+body.pm-home .nav>.outline,body.pm-creative .nav>.outline,body.pm-digital .nav>.outline{border-color:#1d272b;color:#1d272b}
+body.pm-home .eyebrow,body.pm-creative .eyebrow,body.pm-digital .eyebrow{letter-spacing:.24em}
+body.pm-home .section,body.pm-creative .section,body.pm-digital .section{padding-top:clamp(88px,9vw,150px);padding-bottom:clamp(88px,9vw,150px)}
+body.pm-home .section h2,body.pm-creative .section h2,body.pm-digital .section h2{font-size:clamp(42px,5vw,74px);line-height:1.04;letter-spacing:-.058em}
+body.pm-home .bg-paper,body.pm-creative .bg-paper,body.pm-digital .bg-paper{background:var(--pm-cream)}
+body.pm-home .bg-charcoal,body.pm-creative .bg-charcoal,body.pm-digital .bg-charcoal{background:var(--pm-black)}
+/* HOME: full-bleed photographic upper half, editorial white content panel below.
+   Distinctly different from previous conventional left-copy/right-image hero. */
+body.pm-home .hero{display:grid;grid-template-columns:1fr;align-items:stretch;min-height:0;background:var(--pm-cream);overflow:visible}
+body.pm-home .hero-media{position:relative;inset:auto;grid-row:1;height:clamp(320px,43vw,570px);width:100%;overflow:hidden;background:#29343a}
+body.pm-home .hero-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 43%}
+body.pm-home .hero-media::after{background:linear-gradient(0deg,rgba(15,22,24,.28),transparent 45%)}
+body.pm-home .hero>.wrap{grid-row:2;position:relative;width:100%;max-width:none;padding:clamp(55px,7vw,110px) max(42px,calc((100vw - 1166px)/2)) clamp(70px,8vw,125px);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);column-gap:clamp(45px,8vw,150px);align-items:start}
+body.pm-home .hero .rule{grid-column:1/-1;width:66px;height:2px;margin-bottom:20px}
+body.pm-home .hero .eyebrow{grid-column:1/-1;margin-bottom:25px;color:#526268}
+body.pm-home .hero h1{grid-column:1;grid-row:3/6;font-size:clamp(68px,8vw,132px);line-height:.91;letter-spacing:-.072em;max-width:none;margin:0;color:#1d2527}
+body.pm-home .hero h1 em{color:var(--pm-cyan)}
+body.pm-home .hero h2{grid-column:2;grid-row:3;font-size:clamp(25px,2.6vw,39px)!important;line-height:1.13;letter-spacing:-.045em;max-width:440px;margin:5px 0 26px}
+body.pm-home .hero p{grid-column:2;grid-row:4;font-size:15px;max-width:420px;line-height:1.8}
+body.pm-home .hero .actions{grid-column:2;grid-row:5;margin-top:12px}
+body.pm-home #approach .split{grid-template-columns:1.3fr .7fr;gap:12vw}
+body.pm-home #approach .process{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:90px}
+body.pm-home #approach .step{padding-top:35px}
+body.pm-home #capabilities .v3-capabilities-layout{grid-template-columns:1fr;gap:65px}
+body.pm-home #capabilities .v3-capabilities-head{position:static;max-width:920px}
+body.pm-home #capabilities .v3-capabilities-head p{max-width:520px}
+body.pm-home #capabilities .v3-capabilities-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 42px}
+body.pm-home #capabilities .v3-capability{min-height:170px;padding-top:28px}
+body.pm-home #services .cards{gap:0;margin-top:65px;border-top:1px solid var(--pm-line);border-bottom:1px solid var(--pm-line)}
+body.pm-home #services .card{border:0;border-right:1px solid var(--pm-line);min-height:440px;padding:50px 48px 45px 0}
+body.pm-home #services .card:last-child{border-right:0;padding-left:48px;padding-right:0}
+body.pm-home #services .card h3{font-size:clamp(46px,5vw,74px);line-height:.98;letter-spacing:-.055em}
+body.pm-home #work{background:#e4e9e8}
+/* CREATIVE: art-directed split hero, not a generic dark background banner */
+body.pm-creative .cp-hero{display:grid;grid-template-columns:51% 49%;min-height:690px;align-items:stretch;background:var(--pm-black);overflow:hidden}
+body.pm-creative .cp-hero .placeholder-media{position:relative;inset:auto;grid-column:2;grid-row:1;height:100%;min-height:690px}
+body.pm-creative .cp-hero .placeholder-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:57% center}
+body.pm-creative .cp-hero::after{display:none}
+body.pm-creative .cp-hero>.wrap{grid-column:1;grid-row:1;width:100%;max-width:none;margin:0;padding:clamp(70px,7vw,120px) clamp(35px,6vw,110px) clamp(70px,7vw,120px) max(42px,calc((100vw - 1166px)/2));display:flex;flex-direction:column;justify-content:center}
+body.pm-creative .cp-hero h1{font-size:clamp(52px,5.3vw,88px);line-height:.98;letter-spacing:-.065em;margin:26px 0 34px}
+body.pm-creative .cp-hero h1 em{color:#a4d4de}
+body.pm-creative .cp-hero p{font-size:17px;max-width:390px}
+body.pm-creative .cp-services{grid-template-columns:repeat(2,minmax(0,1fr));border:0;gap:1px;background:#cdd2d0}
+body.pm-creative .cp-service{border:0;background:var(--pm-cream);min-height:270px;padding:48px}
+body.pm-creative .cp-service h3{font-size:clamp(31px,3vw,45px)}
+body.pm-creative #showreel{background:#171c1d}
+/* DIGITAL: typographic hero with contrasting side panel */
+body.pm-digital .hero-light{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,31%);min-height:690px;padding:0;background:var(--pm-cream);border:0}
+body.pm-digital .hero-light>.wrap{grid-column:1;grid-row:1;max-width:none;width:100%;margin:0;padding:clamp(80px,8vw,135px) clamp(35px,6vw,100px) clamp(80px,8vw,135px) max(42px,calc((100vw - 1166px)/2));display:flex;flex-direction:column;justify-content:center}
+body.pm-digital .hero-light::after{content:"STRATEGY / CREATIVE / PERFORMANCE";grid-column:2;grid-row:1;display:flex;align-items:flex-end;justify-content:flex-start;padding:55px 32px;writing-mode:vertical-rl;transform:none;background:#172a30;color:#d1e2e4;letter-spacing:.26em;font-size:12px;font-weight:600}
+body.pm-digital .hero-light h1{font-size:clamp(55px,5.8vw,92px);line-height:.99;letter-spacing:-.067em;max-width:920px;margin:30px 0}
+body.pm-digital .hero-light p{font-size:17px;max-width:580px}
+body.pm-digital .svc-grid--4{grid-template-columns:repeat(2,minmax(0,1fr));border:0;gap:1px;background:#cdd2d0}
+body.pm-digital .svc-card{border:0;min-height:260px;background:#fff;padding:48px}
+body.pm-digital .svc-card h3{font-size:clamp(27px,2.8vw,39px)}
+@media(max-width:1050px){
+ body.pm-home .hero>.wrap{grid-template-columns:1fr 1fr;padding-left:32px;padding-right:32px;gap:30px}
+ body.pm-home .hero h1{font-size:clamp(58px,8vw,95px)}
+ body.pm-creative .cp-hero>.wrap,body.pm-digital .hero-light>.wrap{padding-left:32px;padding-right:32px}
+ body.pm-creative .cp-hero h1{font-size:clamp(46px,5.5vw,68px)}
+}
+@media(max-width:850px){
+ body.pm-home .hero-media{height:390px;inset:auto}
+ body.pm-home .hero>.wrap{display:flex;flex-direction:column;gap:0;padding:55px 22px 75px}
+ body.pm-home .hero .rule{margin-bottom:24px}
+ body.pm-home .hero .eyebrow{margin-bottom:24px}
+ body.pm-home .hero h1{font-size:clamp(56px,10vw,90px);margin-bottom:35px}
+ body.pm-home .hero h2{font-size:clamp(25px,5vw,36px)!important;margin-bottom:20px}
+ body.pm-home .hero p{max-width:570px}
+ body.pm-home #approach .split{grid-template-columns:1fr;gap:20px}
+ body.pm-home #approach .process{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:45px}
+ body.pm-home #capabilities .v3-capabilities-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ body.pm-home #services .cards{grid-template-columns:1fr}
+ body.pm-home #services .card,body.pm-home #services .card:last-child{min-height:320px;padding:40px 0;border-right:0;border-bottom:1px solid var(--pm-line)}
+ body.pm-creative .cp-hero{grid-template-columns:1fr;min-height:0}
+ body.pm-creative .cp-hero .placeholder-media{grid-column:1;grid-row:1;min-height:0;height:420px}
+ body.pm-creative .cp-hero>.wrap{grid-column:1;grid-row:2;padding:70px 22px 85px}
+ body.pm-creative .cp-hero h1{font-size:clamp(52px,9vw,80px)}
+ body.pm-digital .hero-light{grid-template-columns:1fr;min-height:0}
+ body.pm-digital .hero-light>.wrap{grid-column:1;grid-row:1;padding:85px 22px}
+ body.pm-digital .hero-light::after{grid-column:1;grid-row:2;writing-mode:horizontal-tb;min-height:110px;align-items:center;padding:25px 22px;font-size:11px}
+ body.pm-digital .hero-light h1{font-size:clamp(50px,8vw,76px)}
+}
+@media(max-width:480px){
+ body.pm-home .hero-media{height:275px}
+ body.pm-home .hero h1{font-size:clamp(49px,13vw,65px)}
+ body.pm-home #approach .process,body.pm-home #capabilities .v3-capabilities-grid{grid-template-columns:1fr}
+ body.pm-home #capabilities .v3-capability{min-height:125px}
+ body.pm-creative .cp-hero .placeholder-media{height:300px}
+ body.pm-creative .cp-hero h1{font-size:clamp(42px,11vw,55px)}
+ body.pm-creative .cp-services,body.pm-digital .svc-grid--4{grid-template-columns:1fr}
+ body.pm-creative .cp-service,body.pm-digital .svc-card{padding:35px 25px;min-height:200px}
+ body.pm-digital .hero-light h1{font-size:clamp(43px,11vw,60px)}
+ body.pm-digital .hero-light::after{font-size:10px;letter-spacing:.13em}
+}
