@@ -105,3 +105,33 @@ document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
   hero.classList.add('hero-image-review');
   hero.setAttribute('data-hero-status','existing-page-asset');
 })();
+
+/* Impact-in-Numbers count-up: fires once on first viewport entry, never
+   loops, and respects prefers-reduced-motion by setting the final value
+   immediately instead of animating. */
+(function(){
+  const stats=document.querySelectorAll('[data-count-to]');
+  if(!stats.length)return;
+  const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const animate=el=>{
+    const target=parseInt(el.getAttribute('data-count-to'),10)||0;
+    const suffix=el.getAttribute('data-suffix')||'';
+    if(reduceMotion){el.textContent=target.toLocaleString('en-IN')+suffix;return;}
+    const duration=1100;const start=performance.now();
+    const step=now=>{
+      const p=Math.min(1,(now-start)/duration);
+      const eased=1-Math.pow(1-p,3);
+      el.textContent=Math.round(target*eased).toLocaleString('en-IN')+suffix;
+      if(p<1)requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io=new IntersectionObserver((entries,obs)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      animate(entry.target);
+      obs.unobserve(entry.target);
+    });
+  },{threshold:.4});
+  stats.forEach(el=>io.observe(el));
+})();
