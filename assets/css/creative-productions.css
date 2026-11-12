@@ -58,19 +58,56 @@
 
 /* ---- Rack-focus reveal: the answer starts soft, like an out-of-focus
    shot, and racks sharp on click (camera language, not a UI accordion).
-   The button stays hidden unless JS enhances the page, so with no JS the
-   stat is simply visible, as it always was. ---- */
-.cp-insight-reveal-btn{display:none;align-items:center;gap:7px;margin-top:22px;background:none;border:none;padding:0;cursor:pointer;font-family:var(--sans);font-size:14px}
-.cp-insight-reveal-btn.is-enhanced{display:inline-flex}
-.cp-insight-reveal-btn [data-icon]{display:inline-block;transition:transform .3s ease}
-.cp-insight-reveal-btn:hover [data-icon]{transform:translateY(3px)}
-.cp-insight-reveal-btn:focus-visible{outline:2px solid var(--blue-text);outline-offset:5px;border-radius:2px}
-.cp-insight-answer{transition:filter .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1),opacity .5s ease}
-.cp-insight-answer[data-state="hidden"]{filter:blur(16px);transform:scale(1.045);opacity:.4;pointer-events:none}
-.cp-insight-answer[data-state="revealed"]{filter:blur(0);transform:scale(1);opacity:1;pointer-events:auto}
-.cp-insight-answer.cp-reduced-motion{transition:opacity .2s linear}
-.cp-insight-answer.cp-reduced-motion[data-state="hidden"]{filter:none;transform:none;opacity:.4}
-.cp-insight-answer.cp-reduced-motion[data-state="revealed"]{opacity:1}
+   The trigger sits on top of the blur itself (not off in the other
+   column) as a focus reticle — the same "tap to focus" gesture everyone
+   already knows from a phone camera, so it needs no caption explaining
+   what will happen. It stays hidden unless JS enhances the page, so with
+   no JS the stat is simply visible, as it always was.
+
+   The blurred content and the reticle are deliberately separate elements:
+   CSS filter blurs an entire subtree, so if the reticle lived inside the
+   blurred box it would blur away too (and a near-white badge blurred
+   against a white section all but disappears). Keeping it a sibling lets
+   it stay crisp and clickable while only the stat behind it goes soft. ---- */
+.cp-insight-answer{position:relative}
+.cp-insight-answer-blur{transition:filter .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1),opacity .5s ease}
+.cp-insight-answer-blur[data-state="hidden"]{filter:blur(7px);transform:scale(1.025);opacity:.68;pointer-events:none}
+.cp-insight-answer-blur[data-state="revealed"]{filter:blur(0);transform:scale(1);opacity:1;pointer-events:auto}
+.cp-insight-answer-blur.cp-reduced-motion{transition:opacity .2s linear}
+.cp-insight-answer-blur.cp-reduced-motion[data-state="hidden"]{filter:none;transform:none;opacity:.6}
+.cp-insight-answer-blur.cp-reduced-motion[data-state="revealed"]{opacity:1}
+
+.cp-insight-reticle{display:none}
+.cp-insight-reticle.is-enhanced{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:var(--blue-btn);border:none;border-radius:50%;
+  width:92px;height:92px;cursor:pointer;pointer-events:auto;
+  color:#fff;font:bold 9.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
+  box-shadow:0 10px 30px rgba(20,60,75,.28);
+  transition:opacity .35s ease,width .35s ease,height .35s ease,border-radius .35s ease,box-shadow .35s ease,background .2s ease;
+}
+.cp-insight-reticle svg{width:26px;height:26px;transition:width .35s ease,height .35s ease}
+.cp-insight-reticle:hover{background:var(--blue-btn-hover)}
+.cp-insight-reticle:focus-visible{outline:2px solid var(--blue-text);outline-offset:3px}
+
+@keyframes cpReticlePulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.08)}}
+.cp-insight-answer-blur[data-state="hidden"] ~ .cp-insight-reticle.is-enhanced{animation:cpReticlePulse 2.4s ease-in-out infinite}
+
+/* Once revealed: shrinks into a quiet marker in the corner, like a focus
+   lock indicator staying on screen — still there, still clickable to go
+   soft again, but no longer competing with the number and copy. */
+.cp-insight-answer-blur[data-state="revealed"] ~ .cp-insight-reticle.is-enhanced{
+  flex-direction:row;gap:5px;top:-6px;left:auto;right:0;transform:none;
+  width:auto;height:auto;padding:6px 11px;border-radius:20px;font-size:9.5px;
+  background:var(--ink);box-shadow:none;opacity:.5;
+}
+.cp-insight-answer-blur[data-state="revealed"] ~ .cp-insight-reticle.is-enhanced svg{width:13px;height:13px}
+.cp-insight-answer-blur[data-state="revealed"] ~ .cp-insight-reticle.is-enhanced:hover{opacity:1}
+
+@media(prefers-reduced-motion:reduce){
+  .cp-insight-answer-blur[data-state="hidden"] ~ .cp-insight-reticle.is-enhanced{animation:none}
+}
 
 /* ---- FAQ ---- */
 .cp-faq-list{border-top:1px solid var(--line);margin-top:30px;max-width:760px}

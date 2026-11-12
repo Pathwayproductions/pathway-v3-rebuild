@@ -109,9 +109,11 @@ document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
 /* Rack-focus stat reveal (industry-insight pilot). Progressive enhancement:
    the answer is plain, fully-visible HTML until this script runs, so a
    no-JS visitor just sees the real number — nothing is ever hidden from
-   them. Only once enhanced does the answer go soft and the "Pull Focus"
-   button appear, turning the reveal into a deliberate, repeatable click
-   rather than an auto-playing effect. */
+   them. Only once enhanced does the real number go soft (blurred, not
+   swapped for a placeholder — the point is to tease the actual shape)
+   and a focus-reticle button appear over it, turning the reveal into a
+   deliberate, repeatable click rather than an auto-playing effect. The
+   0-to-target count only plays during the click-triggered animation. */
 document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
   const answer=document.getElementById(btn.getAttribute('aria-controls'));
   if(!answer)return;
@@ -120,15 +122,15 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
   const suffix=num?(num.getAttribute('data-suffix')||''):'';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const label=btn.querySelector('[data-label]');
-  const icon=btn.querySelector('[data-icon]');
 
   if(reduced)answer.classList.add('cp-reduced-motion');
   answer.setAttribute('data-state','hidden');
   btn.classList.add('is-enhanced');
-  if(num&&!reduced)num.textContent='0'+suffix;
+  // The real value (e.g. "85%") stays in place, blurred — it's the tease.
 
   function countUp(){
     if(!num||target===null)return;
+    num.textContent='0'+suffix;
     const duration=650;
     let start=null;
     function step(ts){
@@ -146,12 +148,11 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
     revealed=!revealed;
     answer.setAttribute('data-state',revealed?'revealed':'hidden');
     btn.setAttribute('aria-expanded',String(revealed));
-    if(label)label.textContent=revealed?'In Focus':'Pull Focus';
-    if(icon)icon.textContent=revealed?'↑':'↓';
-    if(revealed){
-      if(reduced&&num)num.textContent=target+suffix; else countUp();
+    if(label)label.textContent=revealed?'In Focus':'Tap to Focus';
+    if(revealed&&num){
+      if(reduced)num.textContent=target+suffix; else countUp();
     }else if(num){
-      num.textContent=(reduced?target:0)+suffix;
+      num.textContent=target+suffix; // re-blurring: keep showing the real value
     }
   });
 });
