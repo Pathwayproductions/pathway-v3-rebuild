@@ -50,11 +50,9 @@
    strategy pilot, see creative-productions/ FAQ + insight rollout) ---- */
 .cp-insight-stat{margin-top:32px}
 .cp-insight-num{display:block;font-family:var(--serif);font-weight:700;font-size:clamp(56px,7vw,84px);color:var(--blue-text);letter-spacing:-.02em;line-height:1}
-.cp-insight-label{margin:12px 0 0;font-size:16px;color:var(--ink);line-height:1.5;max-width:380px}
-.cp-insight-copy{margin-top:26px;max-width:640px;font-size:15px;line-height:1.85;color:var(--ink)}
-.cp-insight-source{margin-top:14px;font-size:12px;color:var(--muted)}
-.cp-insight-source a{color:var(--blue-text)}
-.cp-insight-source + .link{display:inline-block;margin-top:22px}
+.cp-insight-label{margin:14px 0 0;font-size:17px;color:var(--ink);line-height:1.5;max-width:400px}
+.cp-insight-source{margin-top:22px;font-size:13px;color:var(--muted)}
+.cp-insight-source a{color:var(--blue-text);font-weight:bold}
 
 /* ---- FAQ ---- */
 .cp-faq-list{border-top:1px solid var(--line);margin-top:30px;max-width:760px}
