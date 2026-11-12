@@ -146,16 +146,7 @@
   .cp-insight-answer-blur[data-state="hidden"] ~ .cp-insight-reticle.is-enhanced .cp-insight-reticle-dial{animation:none}
 }
 
-/* ---- FAQ ---- */
-.cp-faq-list{border-top:1px solid var(--line);margin-top:30px;max-width:760px}
-.cp-faq-item{border-bottom:1px solid var(--line)}
-.cp-faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;font-family:var(--serif);font-size:19px;color:var(--ink)}
-.cp-faq-item summary::-webkit-details-marker{display:none}
-.cp-faq-item summary::after{content:'+';font:300 26px/1 var(--sans);color:var(--blue-text);flex-shrink:0;transition:transform .15s ease}
-.cp-faq-item[open] summary::after{transform:rotate(45deg)}
-.cp-faq-answer{padding:0 0 24px;max-width:620px}
-.cp-faq-answer p{font-size:14px;line-height:1.75;color:var(--muted);margin:0}
-.cp-faq-answer a{color:var(--blue-text)}
+/* FAQ now uses the shared .faq-list/.faq-item rules in site.css (see also .faq-group-label). */
 
 @media(max-width:850px){
   .cp-hero{min-height:480px}
@@ -164,6 +155,5 @@
   .cp-work-grid{grid-template-columns:1fr;gap:28px}
   .cp-link-list{grid-template-columns:1fr}
   .cp-final{grid-template-columns:1fr;gap:28px}
-  .cp-faq-item summary{font-size:17px}
   .cp-insight-split{grid-template-columns:1fr;gap:28px}
 }
