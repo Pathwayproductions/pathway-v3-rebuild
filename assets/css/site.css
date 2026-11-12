@@ -280,7 +280,7 @@
 
 /* -- Stamp (production services India): presses down and lands -- */
 .pi-fx--stamp{transition:transform .22s cubic-bezier(.3,1.7,.4,1),opacity .14s linear}
-.pi-fx--stamp[data-state="hidden"]{opacity:0;transform:scale(1.5) rotate(-6deg)}
+.pi-fx--stamp[data-state="hidden"]{opacity:0;transform:scale(1.08) rotate(-6deg)}
 .pi-fx--stamp[data-state="revealed"]{opacity:1;transform:scale(1) rotate(0deg)}
 
 /* Reduced motion: every variant above collapses to the same plain,
