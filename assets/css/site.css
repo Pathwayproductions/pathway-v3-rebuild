@@ -166,6 +166,132 @@
 .bg-charcoal .editorial-row-text h3,.bg-charcoal-alt .editorial-row-text h3{color:#fff}
 .bg-charcoal .editorial-row-text p,.bg-charcoal-alt .editorial-row-text p{color:var(--on-dark-muted)}
 
+/* ---- Production Insight: a sourced industry stat per service page, revealed
+   through a small device drawn from that service's own world (a clapperboard,
+   a VU meter, a render ring...). Chrome (the circular badge, blur mechanics,
+   shrink-to-corner behaviour) stays one system across pages; only the icon
+   and its reveal motion change per variant, picked up by the shared JS in
+   main.js purely from [data-reveal-trigger]/[aria-controls] markup — no
+   JS changes needed per page. Hidden unless JS enhances the page, so with
+   no JS the stat is simply visible, as it always was. ---- */
+.pi-insight-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.pi-insight-question h2{margin-top:12px}
+.pi-insight-question p{font-size:15px;line-height:1.7;color:var(--muted);max-width:420px;margin-top:14px}
+.pi-insight-answer{margin-top:24px;position:relative}
+.pi-insight-num-prefix{font-family:var(--serif);font-weight:700;font-size:clamp(56px,6vw,84px);color:var(--blue-text);letter-spacing:-.02em}
+.pi-insight-num{display:inline-block;font-family:var(--serif);font-weight:700;font-size:clamp(56px,6vw,84px);color:var(--blue-text);letter-spacing:-.02em;line-height:1}
+.pi-insight-label{margin:18px 0 0;font-size:16px;color:var(--ink);line-height:1.6;max-width:440px}
+.pi-insight-source{margin-top:24px;font-size:13px;color:var(--muted)}
+.pi-insight-source a{color:var(--blue-text);font-weight:bold}
+
+/* Lighter, unnumbered variant used where the insight is folded into an
+   existing review-note section rather than given its own numbered section. */
+.pi-insight-fold{margin-top:28px;padding-top:28px;border-top:1px solid var(--line)}
+.pi-insight-fold .pi-insight-split{gap:40px}
+.pi-insight-fold .eyebrow{margin-bottom:10px}
+
+.pi-insight-answer-blur{transition:filter .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1),opacity .5s ease}
+.pi-insight-answer-blur[data-state="hidden"]{filter:blur(7px);transform:scale(1.025);opacity:.68;pointer-events:none}
+.pi-insight-answer-blur[data-state="revealed"]{filter:blur(0);transform:scale(1);opacity:1;pointer-events:auto}
+.pi-insight-answer-blur.cp-reduced-motion{transition:opacity .2s linear}
+.pi-insight-answer-blur.cp-reduced-motion[data-state="hidden"]{filter:none;transform:none;opacity:.6}
+.pi-insight-answer-blur.cp-reduced-motion[data-state="revealed"]{opacity:1}
+
+.pi-reveal-btn{display:none}
+.pi-reveal-btn.is-enhanced{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  background:none;border:none;padding:0;cursor:pointer;pointer-events:auto;
+  color:var(--blue-text);font:bold 9.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
+  transition:opacity .35s ease;
+}
+.pi-reveal-device{
+  display:flex;align-items:center;justify-content:center;flex:none;
+  width:76px;height:76px;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,#74c8e2 0%,#269cc2 22%,#167e9f 55%,#0b4a5e 85%,#072f3a 100%);
+  box-shadow:inset -3px -4px 7px rgba(0,0,0,.35),inset 2px 2px 5px rgba(255,255,255,.3),0 10px 26px rgba(10,40,50,.35);
+  color:rgba(255,255,255,.92);transition:width .35s ease,height .35s ease,transform .2s ease;
+}
+.pi-reveal-device svg{width:58%;height:58%;overflow:visible}
+.pi-reveal-btn:hover .pi-reveal-device{transform:scale(1.045)}
+.pi-reveal-btn:focus-visible{outline:2px solid var(--blue-text);outline-offset:6px;border-radius:50%}
+
+@keyframes piDevicePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.pi-insight-answer-blur[data-state="hidden"] ~ .pi-reveal-btn.is-enhanced .pi-reveal-device{animation:piDevicePulse 2.4s ease-in-out infinite}
+
+.pi-insight-answer-blur[data-state="revealed"] ~ .pi-reveal-btn.is-enhanced{
+  flex-direction:row;gap:6px;top:-8px;left:auto;right:0;transform:none;
+  font-size:9px;color:var(--muted);opacity:.55;
+}
+.pi-insight-answer-blur[data-state="revealed"] ~ .pi-reveal-btn.is-enhanced .pi-reveal-device{width:22px;height:22px;box-shadow:none}
+.pi-insight-answer-blur[data-state="revealed"] ~ .pi-reveal-btn.is-enhanced:hover{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  .pi-insight-answer-blur[data-state="hidden"] ~ .pi-reveal-btn.is-enhanced .pi-reveal-device{animation:none}
+}
+
+/* -- Iris (ad-films): aperture blade opens -- */
+.pi-iris-blade{fill:currentColor;transform-box:fill-box;transform-origin:center;transform:scale(.4);transition:transform .45s cubic-bezier(.22,.61,.36,1)}
+.pi-reveal-btn--iris[aria-expanded="true"] .pi-iris-blade{transform:scale(1)}
+
+/* -- Waveform (corporate video): level bars rise -- */
+.pi-wave-bar{transform-box:fill-box;transform-origin:bottom;transform:scaleY(.22);transition:transform .35s ease;transition-delay:var(--d,0s)}
+.pi-reveal-btn--waveform[aria-expanded="true"] .pi-wave-bar{transform:scaleY(1)}
+
+/* -- Lightbulb (explainer videos): idea switches on -- */
+.pi-bulb-body{transition:fill-opacity .35s ease}
+.pi-reveal-btn--bulb[aria-expanded="true"] .pi-bulb-body{fill:currentColor;fill-opacity:.9}
+.pi-bulb-rays{transition:opacity .35s ease}
+.pi-reveal-btn--bulb[aria-expanded="true"] .pi-bulb-rays{opacity:1}
+
+/* -- Clapperboard (live-action): slate claps shut -- */
+.pi-clap-top{transform-box:fill-box;transform-origin:left center;transform:rotate(-16deg);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.pi-reveal-btn--clapper[aria-expanded="true"] .pi-clap-top{transform:rotate(0deg)}
+
+/* -- Flipbook (2D animation): page corner flips over -- */
+.pi-flip-page{transform-box:fill-box;transform-origin:center;transform:scaleX(1);transition:transform .4s cubic-bezier(.22,.61,.36,1)}
+.pi-reveal-btn--flipbook[aria-expanded="true"] .pi-flip-page{transform:scaleX(-1)}
+
+/* -- Render ring (AI video): progress ring fills -- */
+.pi-render-ring{transition:stroke-dashoffset .6s cubic-bezier(.22,.61,.36,1)}
+.pi-reveal-btn--render[aria-expanded="true"] .pi-render-ring{stroke-dashoffset:0}
+
+/* -- Countdown (film marketing): clock hand sweeps a full circle -- */
+.pi-countdown-hand{transform-box:fill-box;transform-origin:center;transform:rotate(0deg);transition:transform .7s cubic-bezier(.3,.9,.4,1)}
+.pi-reveal-btn--countdown[aria-expanded="true"] .pi-countdown-hand{transform:rotate(360deg)}
+
+/* -- Scrubber (OTT distribution): playhead slides across -- */
+.pi-scrub-fill{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.pi-scrub-dot{transform-box:fill-box;transform-origin:left center;transform:translateX(0);transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+.pi-reveal-btn--scrubber[aria-expanded="true"] .pi-scrub-fill{transform:scaleX(1)}
+.pi-reveal-btn--scrubber[aria-expanded="true"] .pi-scrub-dot{transform:translateX(22px)}
+
+/* -- TV tuning (TV commercial release): static resolves into a clean signal -- */
+.pi-tv-lines line{stroke-dasharray:2 3;opacity:.5;transition:stroke-dasharray .4s ease,opacity .4s ease}
+.pi-reveal-btn--tv[aria-expanded="true"] .pi-tv-lines line{stroke-dasharray:0 0;opacity:1}
+
+/* -- VU meter (music/album): needle swings into the red -- */
+.pi-vu-needle{transform-box:fill-box;transform-origin:bottom center;transform:rotate(-50deg);transition:transform .5s cubic-bezier(.3,1.5,.4,1)}
+.pi-reveal-btn--vu[aria-expanded="true"] .pi-vu-needle{transform:rotate(45deg)}
+
+/* -- Stamp (production services India): approval stamp lands -- */
+.pi-stamp-mark{transform-box:fill-box;transform-origin:center;transform:scale(1.3) rotate(-8deg);opacity:.5;transition:transform .3s cubic-bezier(.3,1.6,.4,1),opacity .3s ease}
+.pi-stamp-mark path{transition:stroke-dashoffset .35s ease .15s}
+.pi-reveal-btn--stamp[aria-expanded="true"] .pi-stamp-mark{transform:scale(1) rotate(0deg);opacity:1}
+.pi-reveal-btn--stamp[aria-expanded="true"] .pi-stamp-mark path{stroke-dashoffset:0}
+
+@media(max-width:800px){
+  .pi-insight-split{grid-template-columns:1fr;gap:28px}
+}
+
+/* ---- Section break: a single full-width image used as a visual pause
+   between two content sections, not paired with text. Wide aspect ratio,
+   object-fit:cover, an optional short caption below. ---- */
+.section-break{margin:0}
+.section-break-media{width:100%;aspect-ratio:21/9;overflow:hidden;border:1px solid var(--line)}
+.section-break-media img{display:block;width:100%;height:100%;object-fit:cover}
+.section-break-caption{margin-top:14px;font-size:14px;line-height:1.6;color:var(--muted);max-width:560px}
+@media(max-width:700px){.section-break-media{aspect-ratio:4/3}}
+
 /* ---- Diagram grid: two uncropped reference images side by side with a caption ---- */
 .diagram-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:32px}
 .diagram-card{border:1px solid var(--line)}

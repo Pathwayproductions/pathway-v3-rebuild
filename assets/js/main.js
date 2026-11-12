@@ -96,7 +96,7 @@ document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
 (function(){
   const hero=document.querySelector('main > .hero-light');
   if(!hero)return;
-  const images=[...document.querySelectorAll('main img[src]')].filter(img=>!img.closest('.hero-light')&&!/ytimg\.com|youtube\.com/.test(img.getAttribute('src')||''));
+  const images=[...document.querySelectorAll('main img[src]')].filter(img=>!img.closest('.hero-light')&&!img.hasAttribute('data-no-hero-pick')&&!/ytimg\.com|youtube\.com/.test(img.getAttribute('src')||''));
   const chosen=images.find(img=>/concept-previews|assets\/images/.test(img.getAttribute('src')||''))||images[0];
   if(!chosen)return;
   const src=chosen.getAttribute('src');
@@ -148,7 +148,7 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
     revealed=!revealed;
     answer.setAttribute('data-state',revealed?'revealed':'hidden');
     btn.setAttribute('aria-expanded',String(revealed));
-    if(label)label.textContent=revealed?'In Focus':'Tap to Focus';
+    if(label)label.textContent=revealed?(btn.dataset.labelOn||'In Focus'):(btn.dataset.labelOff||'Tap to Focus');
     if(revealed&&num){
       if(reduced)num.textContent=target+suffix; else countUp();
     }else if(num){
