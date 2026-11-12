@@ -56,6 +56,22 @@
 .cp-insight-source{margin-top:26px;font-size:13px;color:var(--muted)}
 .cp-insight-source a{color:var(--blue-text);font-weight:bold}
 
+/* ---- Rack-focus reveal: the answer starts soft, like an out-of-focus
+   shot, and racks sharp on click (camera language, not a UI accordion).
+   The button stays hidden unless JS enhances the page, so with no JS the
+   stat is simply visible, as it always was. ---- */
+.cp-insight-reveal-btn{display:none;align-items:center;gap:7px;margin-top:22px;background:none;border:none;padding:0;cursor:pointer;font-family:var(--sans);font-size:14px}
+.cp-insight-reveal-btn.is-enhanced{display:inline-flex}
+.cp-insight-reveal-btn [data-icon]{display:inline-block;transition:transform .3s ease}
+.cp-insight-reveal-btn:hover [data-icon]{transform:translateY(3px)}
+.cp-insight-reveal-btn:focus-visible{outline:2px solid var(--blue-text);outline-offset:5px;border-radius:2px}
+.cp-insight-answer{transition:filter .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1),opacity .5s ease}
+.cp-insight-answer[data-state="hidden"]{filter:blur(16px);transform:scale(1.045);opacity:.4;pointer-events:none}
+.cp-insight-answer[data-state="revealed"]{filter:blur(0);transform:scale(1);opacity:1;pointer-events:auto}
+.cp-insight-answer.cp-reduced-motion{transition:opacity .2s linear}
+.cp-insight-answer.cp-reduced-motion[data-state="hidden"]{filter:none;transform:none;opacity:.4}
+.cp-insight-answer.cp-reduced-motion[data-state="revealed"]{opacity:1}
+
 /* ---- FAQ ---- */
 .cp-faq-list{border-top:1px solid var(--line);margin-top:30px;max-width:760px}
 .cp-faq-item{border-bottom:1px solid var(--line)}

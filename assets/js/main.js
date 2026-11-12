@@ -105,3 +105,53 @@ document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
   hero.classList.add('hero-image-review');
   hero.setAttribute('data-hero-status','existing-page-asset');
 })();
+
+/* Rack-focus stat reveal (industry-insight pilot). Progressive enhancement:
+   the answer is plain, fully-visible HTML until this script runs, so a
+   no-JS visitor just sees the real number — nothing is ever hidden from
+   them. Only once enhanced does the answer go soft and the "Pull Focus"
+   button appear, turning the reveal into a deliberate, repeatable click
+   rather than an auto-playing effect. */
+document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
+  const answer=document.getElementById(btn.getAttribute('aria-controls'));
+  if(!answer)return;
+  const num=answer.querySelector('[data-count-to]');
+  const target=num?parseInt(num.getAttribute('data-count-to'),10):null;
+  const suffix=num?(num.getAttribute('data-suffix')||''):'';
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const label=btn.querySelector('[data-label]');
+  const icon=btn.querySelector('[data-icon]');
+
+  if(reduced)answer.classList.add('cp-reduced-motion');
+  answer.setAttribute('data-state','hidden');
+  btn.classList.add('is-enhanced');
+  if(num&&!reduced)num.textContent='0'+suffix;
+
+  function countUp(){
+    if(!num||target===null)return;
+    const duration=650;
+    let start=null;
+    function step(ts){
+      if(start===null)start=ts;
+      const progress=Math.min((ts-start)/duration,1);
+      const eased=1-Math.pow(1-progress,3);
+      num.textContent=Math.round(eased*target)+suffix;
+      if(progress<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  let revealed=false;
+  btn.addEventListener('click',()=>{
+    revealed=!revealed;
+    answer.setAttribute('data-state',revealed?'revealed':'hidden');
+    btn.setAttribute('aria-expanded',String(revealed));
+    if(label)label.textContent=revealed?'In Focus':'Pull Focus';
+    if(icon)icon.textContent=revealed?'↑':'↓';
+    if(revealed){
+      if(reduced&&num)num.textContent=target+suffix; else countUp();
+    }else if(num){
+      num.textContent=(reduced?target:0)+suffix;
+    }
+  });
+});
