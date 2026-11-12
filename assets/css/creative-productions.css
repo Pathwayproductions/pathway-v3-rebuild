@@ -16,11 +16,34 @@
 .cp-hero h1 em{color:var(--blue);font-style:normal;font-weight:400}
 .cp-hero p{font-size:16px;line-height:1.75;color:#d6dee1;max-width:460px;margin:0 0 28px}
 
+/* ---- Hero title: a one-time, page-load title-card reveal. Each word
+   racks into focus left to right (blur + drift + fade), the same camera
+   language as the focus-reticle below, rather than a generic fade-up.
+   Pure CSS so it always fires, no JS dependency for the hero's first
+   impression. ---- */
+.cp-title-anim .cp-tw{
+  display:inline-block;
+  opacity:0;filter:blur(10px);transform:translateX(-18px);
+  animation:cpTitleIn .7s cubic-bezier(.22,.61,.36,1) forwards;
+  animation-delay:calc(var(--i,0) * 75ms + .2s);
+}
+@keyframes cpTitleIn{to{opacity:1;filter:blur(0);transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){
+  .cp-title-anim .cp-tw{opacity:1;filter:none;transform:none;animation:none}
+}
+
 /* ---- 2x2 service grid ---- */
 .cp-services{display:grid;grid-template-columns:repeat(2,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line);margin-top:35px}
-.cp-service{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 28px;min-height:200px;display:flex;flex-direction:column;background:#fff}
-.cp-service .cp-service-top{display:flex;align-items:center;justify-content:space-between;color:var(--blue);margin-bottom:22px}
-.cp-service .cp-service-top svg{width:30px;height:30px;stroke-width:1.4}
+.cp-service{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 28px;min-height:172px;display:flex;flex-direction:column;background:#fff}
+.cp-service .cp-service-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+/* Icon sits in a thin ring badge — the same reticle/circle device used
+   for the focus dial above, so the two sections read as one system
+   rather than two unrelated icon styles. */
+.cp-service-icon{
+  display:flex;align-items:center;justify-content:center;flex:none;
+  width:52px;height:52px;border-radius:50%;border:1px solid var(--line);color:var(--blue);
+}
+.cp-service .cp-service-icon svg{width:26px;height:26px;stroke-width:1.5}
 .cp-service .cp-service-top span{font-size:11px;letter-spacing:.14em;color:#5c6267} /* 6.18:1 on white */
 .cp-service h3{font-family:var(--serif);font-size:28px;font-weight:400;letter-spacing:-.02em;margin:0 0 10px}
 .cp-service p{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 18px;max-width:280px}
@@ -37,8 +60,11 @@
 
 /* ---- Beyond production: link list ---- */
 .cp-link-list{border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr;column-gap:38px;margin-top:30px}
-.cp-link-list a{border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-family:var(--serif);font-size:23px;padding:20px 0;color:var(--ink)}
+.cp-link-list a{border-bottom:1px solid var(--line);display:flex;align-items:center;gap:18px;font-family:var(--serif);font-size:23px;padding:18px 0;color:var(--ink)}
+.cp-link-list a span:first-of-type{flex:1}
 .cp-link-list a span:last-child{color:var(--blue);font:16px var(--sans)}
+.cp-link-list-icon{display:flex;align-items:center;justify-content:center;flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--line);color:var(--blue)}
+.cp-link-list-icon svg{width:21px;height:21px;stroke-width:1.5}
 
 /* ---- Final CTA ---- */
 .cp-final{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:end}
@@ -77,36 +103,47 @@
 .cp-insight-answer-blur.cp-reduced-motion[data-state="hidden"]{filter:none;transform:none;opacity:.6}
 .cp-insight-answer-blur.cp-reduced-motion[data-state="revealed"]{opacity:1}
 
+/* The dial itself: a physical DSLR manual-focus ring, not a flat UI
+   circle — knurled ridges (drawn as 28 radial ticks in the SVG) around a
+   metal-toned face, with a radial-gradient standing in for the curved
+   highlight a real lens barrel catches, so fingers read "roll this"
+   rather than "press this". */
 .cp-insight-reticle{display:none}
 .cp-insight-reticle.is-enhanced{
-  display:flex;flex-direction:column;align-items:center;gap:6px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  background:var(--blue-btn);border:none;border-radius:50%;
-  width:92px;height:92px;cursor:pointer;pointer-events:auto;
-  color:#fff;font:bold 9.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
-  box-shadow:0 10px 30px rgba(20,60,75,.28);
-  transition:opacity .35s ease,width .35s ease,height .35s ease,border-radius .35s ease,box-shadow .35s ease,background .2s ease;
+  background:none;border:none;padding:0;cursor:pointer;pointer-events:auto;
+  color:var(--blue-text);font:bold 9.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
+  transition:opacity .35s ease;
 }
-.cp-insight-reticle svg{width:26px;height:26px;transition:width .35s ease,height .35s ease}
-.cp-insight-reticle:hover{background:var(--blue-btn-hover)}
-.cp-insight-reticle:focus-visible{outline:2px solid var(--blue-text);outline-offset:3px}
+.cp-insight-reticle-dial{
+  display:flex;width:82px;height:82px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 34% 28%,#74c8e2 0%,#269cc2 22%,#167e9f 55%,#0b4a5e 85%,#072f3a 100%);
+  box-shadow:inset -3px -4px 7px rgba(0,0,0,.35),inset 2px 2px 5px rgba(255,255,255,.3),0 10px 26px rgba(10,40,50,.35);
+  color:rgba(255,255,255,.9);
+  transition:width .35s ease,height .35s ease,box-shadow .35s ease,transform .2s ease;
+}
+.cp-insight-reticle-dial svg{width:100%;height:100%}
+.cp-insight-reticle:hover .cp-insight-reticle-dial{transform:scale(1.045)}
+.cp-insight-reticle:focus-visible{outline:2px solid var(--blue-text);outline-offset:6px;border-radius:50%}
 
-@keyframes cpReticlePulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.08)}}
-.cp-insight-answer-blur[data-state="hidden"] ~ .cp-insight-reticle.is-enhanced{animation:cpReticlePulse 2.4s ease-in-out infinite}
+@keyframes cpDialPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.cp-insight-answer-blur[data-state="hidden"] ~ .cp-insight-reticle.is-enhanced .cp-insight-reticle-dial{animation:cpDialPulse 2.4s ease-in-out infinite}
 
 /* Once revealed: shrinks into a quiet marker in the corner, like a focus
    lock indicator staying on screen — still there, still clickable to go
    soft again, but no longer competing with the number and copy. */
 .cp-insight-answer-blur[data-state="revealed"] ~ .cp-insight-reticle.is-enhanced{
-  flex-direction:row;gap:5px;top:-6px;left:auto;right:0;transform:none;
-  width:auto;height:auto;padding:6px 11px;border-radius:20px;font-size:9.5px;
-  background:var(--ink);box-shadow:none;opacity:.5;
+  flex-direction:row;gap:6px;top:-8px;left:auto;right:0;transform:none;
+  font-size:9px;color:var(--muted);opacity:.55;
 }
-.cp-insight-answer-blur[data-state="revealed"] ~ .cp-insight-reticle.is-enhanced svg{width:13px;height:13px}
+.cp-insight-answer-blur[data-state="revealed"] ~ .cp-insight-reticle.is-enhanced .cp-insight-reticle-dial{
+  width:22px;height:22px;box-shadow:none;
+}
 .cp-insight-answer-blur[data-state="revealed"] ~ .cp-insight-reticle.is-enhanced:hover{opacity:1}
 
 @media(prefers-reduced-motion:reduce){
-  .cp-insight-answer-blur[data-state="hidden"] ~ .cp-insight-reticle.is-enhanced{animation:none}
+  .cp-insight-answer-blur[data-state="hidden"] ~ .cp-insight-reticle.is-enhanced .cp-insight-reticle-dial{animation:none}
 }
 
 /* ---- FAQ ---- */
