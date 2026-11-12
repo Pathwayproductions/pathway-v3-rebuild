@@ -190,11 +190,81 @@
 .pi-insight-fold .pi-insight-split{gap:40px}
 .pi-insight-fold .eyebrow{margin-bottom:10px}
 
-.pi-insight-answer-blur{transition:filter .6s cubic-bezier(.22,.61,.36,1),transform .6s cubic-bezier(.22,.61,.36,1),opacity .5s ease}
-.pi-insight-answer-blur[data-state="hidden"]{filter:blur(7px);transform:scale(1.025);opacity:.68;pointer-events:none}
-.pi-insight-answer-blur[data-state="revealed"]{filter:blur(0);transform:scale(1);opacity:1;pointer-events:auto}
-.pi-insight-answer-blur.cp-reduced-motion{transition:opacity .2s linear}
-.pi-insight-answer-blur.cp-reduced-motion[data-state="hidden"]{filter:none;transform:none;opacity:.6}
+.pi-insight-answer-blur{pointer-events:none}
+.pi-insight-answer-blur[data-state="revealed"]{pointer-events:auto}
+
+/* Each variant's text reveal is built from the same device it's paired
+   with, not a single shared blur pulled across every page: an iris wipes
+   open in a circle, a render ring sweeps down like a fill, a clapperboard
+   cuts instantly, a TV glitches into signal, and so on. Reduced-motion
+   (below) overrides every one of these to a plain, instant-enough fade. */
+
+/* -- Iris (ad-films): circular aperture wipe -- */
+.pi-fx--iris{transition:clip-path .55s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--iris[data-state="hidden"]{clip-path:circle(4% at 42% 38%)}
+.pi-fx--iris[data-state="revealed"]{clip-path:circle(150% at 42% 38%)}
+
+/* -- Waveform (corporate video): levels wipe in left to right -- */
+.pi-fx--waveform{transition:clip-path .5s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--waveform[data-state="hidden"]{clip-path:inset(0 100% 0 0)}
+.pi-fx--waveform[data-state="revealed"]{clip-path:inset(0 0 0 0)}
+
+/* -- Lightbulb (explainer videos): dims, then switches on -- */
+.pi-fx--bulb{transition:opacity .5s ease,filter .5s ease}
+.pi-fx--bulb[data-state="hidden"]{opacity:.35;filter:brightness(.55) saturate(.7)}
+.pi-fx--bulb[data-state="revealed"]{opacity:1;filter:brightness(1) saturate(1)}
+
+/* -- Clapperboard (live-action): hard cut on the clap, no fade -- */
+.pi-fx--clapper{transition:transform .2s cubic-bezier(.3,1.6,.4,1),opacity .12s linear}
+.pi-fx--clapper[data-state="hidden"]{opacity:0;transform:scale(.93)}
+.pi-fx--clapper[data-state="revealed"]{opacity:1;transform:scale(1)}
+
+/* -- Flipbook (2D animation): the page turns over to reveal it -- */
+.pi-fx--flipbook{transition:transform .5s cubic-bezier(.22,.61,.36,1),opacity .3s ease;transform-origin:left center;perspective:700px}
+.pi-fx--flipbook[data-state="hidden"]{transform:rotateY(-38deg);opacity:.4}
+.pi-fx--flipbook[data-state="revealed"]{transform:rotateY(0deg);opacity:1}
+
+/* -- Render ring (AI video): sweeps in top to bottom, like a render fill -- */
+.pi-fx--render{transition:clip-path .6s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--render[data-state="hidden"]{clip-path:inset(100% 0 0 0)}
+.pi-fx--render[data-state="revealed"]{clip-path:inset(0 0 0 0)}
+
+/* -- Countdown (film marketing): pops to size as the clock hits zero -- */
+.pi-fx--countdown{transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .22s ease}
+.pi-fx--countdown[data-state="hidden"]{opacity:0;transform:scale(1.45)}
+.pi-fx--countdown[data-state="revealed"]{opacity:1;transform:scale(1)}
+
+/* -- Scrubber (OTT distribution): slides in like scrubbing forward -- */
+.pi-fx--scrubber{transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
+.pi-fx--scrubber[data-state="hidden"]{opacity:0;transform:translateX(-26px)}
+.pi-fx--scrubber[data-state="revealed"]{opacity:1;transform:translateX(0)}
+
+/* -- TV tuning (TV commercial release): static settles into signal -- */
+@keyframes piTvSettle{
+  0%{opacity:.15;transform:translateX(-3px)}
+  25%{opacity:.55;transform:translateX(3px)}
+  45%{opacity:.3;transform:translateX(-1px)}
+  65%{opacity:.85;transform:translateX(1px)}
+  85%{opacity:.6;transform:translateX(0)}
+  100%{opacity:1;transform:translateX(0)}
+}
+.pi-fx--tv[data-state="hidden"]{opacity:.2}
+.pi-fx--tv[data-state="revealed"]{animation:piTvSettle .55s steps(2,end) forwards}
+
+/* -- VU meter (music/album): levels rise from the baseline -- */
+.pi-fx--vu{transition:clip-path .55s cubic-bezier(.3,1.5,.4,1)}
+.pi-fx--vu[data-state="hidden"]{clip-path:inset(0 0 100% 0)}
+.pi-fx--vu[data-state="revealed"]{clip-path:inset(0 0 0% 0)}
+
+/* -- Stamp (production services India): presses down and lands -- */
+.pi-fx--stamp{transition:transform .22s cubic-bezier(.3,1.7,.4,1),opacity .14s linear}
+.pi-fx--stamp[data-state="hidden"]{opacity:0;transform:scale(1.5) rotate(-6deg)}
+.pi-fx--stamp[data-state="revealed"]{opacity:1;transform:scale(1) rotate(0deg)}
+
+/* Reduced motion: every variant above collapses to the same plain,
+   near-instant fade, regardless of its metaphor. */
+.pi-insight-answer-blur.cp-reduced-motion{transition:opacity .2s linear !important;clip-path:none !important;transform:none !important;filter:none !important;animation:none !important}
+.pi-insight-answer-blur.cp-reduced-motion[data-state="hidden"]{opacity:.6}
 .pi-insight-answer-blur.cp-reduced-motion[data-state="revealed"]{opacity:1}
 
 .pi-reveal-btn{display:none}
