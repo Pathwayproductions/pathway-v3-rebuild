@@ -166,15 +166,20 @@
 .bg-charcoal .editorial-row-text h3,.bg-charcoal-alt .editorial-row-text h3{color:#fff}
 .bg-charcoal .editorial-row-text p,.bg-charcoal-alt .editorial-row-text p{color:var(--on-dark-muted)}
 
-/* ---- Production Insight: a sourced industry stat per service page, revealed
-   through a small device drawn from that service's own world (a clapperboard,
-   a VU meter, a render ring...). Chrome (the circular badge, blur mechanics,
-   shrink-to-corner behaviour) stays one system across pages; only the icon
-   and its reveal motion change per variant, picked up by the shared JS in
-   main.js purely from [data-reveal-trigger]/[aria-controls] markup — no
-   JS changes needed per page. Hidden unless JS enhances the page, so with
-   no JS the stat is simply visible, as it always was. ---- */
+/* ---- Production Insight: a sourced industry stat per service page. The
+   reveal button sits beside the question (not over the stat), and each
+   page's own device — a clapperboard, a VU meter, a render ring — both
+   looks and MOVES like that real object; the stat's own reveal motion is
+   built to match the same physical action, not a shared effect reskinned
+   per page. Chrome (the circular badge, idle pulse) is one system across
+   pages; the icon's motion, the text's reveal motion, and whether the
+   number counts up at all are each picked per variant to fit its object.
+   Driven by the shared JS in main.js purely from markup — no per-page JS.
+   Hidden unless JS enhances the page, so with no JS the stat is simply
+   visible, as it always was. ---- */
 .pi-insight-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.pi-insight-question{display:flex;align-items:flex-start;gap:20px}
+.pi-insight-question-text{flex:1;min-width:0}
 .pi-insight-question h2{margin-top:12px}
 .pi-insight-question p{font-size:15px;line-height:1.7;color:var(--muted);max-width:420px;margin-top:14px}
 .pi-insight-answer{margin-top:24px;position:relative}
@@ -201,11 +206,13 @@
 
 /* -- Iris (ad-films): circular aperture wipe -- */
 .pi-fx--iris{transition:clip-path .55s cubic-bezier(.22,.61,.36,1)}
-.pi-fx--iris[data-state="hidden"]{clip-path:circle(4% at 42% 38%)}
+.pi-fx--iris[data-state="hidden"]{clip-path:circle(0% at 42% 38%)}
 .pi-fx--iris[data-state="revealed"]{clip-path:circle(150% at 42% 38%)}
 
-/* -- Waveform (corporate video): levels wipe in left to right -- */
-.pi-fx--waveform{transition:clip-path .5s cubic-bezier(.22,.61,.36,1)}
+/* -- Waveform (corporate video): bars render in left to right, one at a
+   time, the way a level meter fills in -- not a smooth wipe, a stepped
+   one, so it reads as discrete bars rather than a dissolve. -- */
+.pi-fx--waveform{transition:clip-path .6s steps(7,end)}
 .pi-fx--waveform[data-state="hidden"]{clip-path:inset(0 100% 0 0)}
 .pi-fx--waveform[data-state="revealed"]{clip-path:inset(0 0 0 0)}
 
@@ -214,10 +221,25 @@
 .pi-fx--bulb[data-state="hidden"]{opacity:.35;filter:brightness(.55) saturate(.7)}
 .pi-fx--bulb[data-state="revealed"]{opacity:1;filter:brightness(1) saturate(1)}
 
-/* -- Clapperboard (live-action): hard cut on the clap, no fade -- */
-.pi-fx--clapper{transition:transform .2s cubic-bezier(.3,1.6,.4,1),opacity .12s linear}
-.pi-fx--clapper[data-state="hidden"]{opacity:0;transform:scale(.93)}
-.pi-fx--clapper[data-state="revealed"]{opacity:1;transform:scale(1)}
+/* -- Clapperboard (live-action): the stat is one slate that claps shut.
+   The real content (below) just snaps to visible/invisible, near-instant
+   — the actual motion is two decorative duplicate layers, clipped to the
+   top and bottom half of the same block, that swing in from above and
+   below and land together, exactly like a slate's two halves meeting.
+   They're aria-hidden/inert; the real content underneath stays the one
+   thing assistive tech and no-JS visitors ever see. -- */
+.pi-fx--clapper{transition:opacity .08s linear}
+.pi-fx--clapper[data-state="hidden"]{opacity:0}
+.pi-fx--clapper[data-state="revealed"]{opacity:1}
+
+.pi-clap-stage{position:relative}
+.pi-clap-half{position:absolute;inset:0;pointer-events:none;opacity:0;transition:transform .3s cubic-bezier(.3,1.6,.4,1),opacity .1s linear}
+.pi-clap-half--top{clip-path:inset(0 0 50% 0);transform-origin:top center}
+.pi-clap-half--bottom{clip-path:inset(50% 0 0 0);transform-origin:bottom center}
+.pi-insight-answer-blur.pi-fx--clapper[data-state="hidden"] ~ .pi-clap-half--top{transform:translateY(-46px)}
+.pi-insight-answer-blur.pi-fx--clapper[data-state="hidden"] ~ .pi-clap-half--bottom{transform:translateY(46px)}
+.pi-insight-answer-blur.pi-fx--clapper[data-state="revealed"] ~ .pi-clap-half{opacity:1;transform:translateY(0)}
+.cp-reduced-motion ~ .pi-clap-half{display:none}
 
 /* -- Flipbook (2D animation): the page turns over to reveal it -- */
 .pi-fx--flipbook{transition:transform .5s cubic-bezier(.22,.61,.36,1),opacity .3s ease;transform-origin:left center;perspective:700px}
@@ -230,14 +252,14 @@
 .pi-fx--render[data-state="revealed"]{clip-path:inset(0 0 0 0)}
 
 /* -- Countdown (film marketing): pops to size as the clock hits zero -- */
-.pi-fx--countdown{transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .22s ease}
-.pi-fx--countdown[data-state="hidden"]{opacity:0;transform:scale(1.45)}
-.pi-fx--countdown[data-state="revealed"]{opacity:1;transform:scale(1)}
+/* (countdown text-reveal rule now lives further down, next to its hand) */
 
-/* -- Scrubber (OTT distribution): slides in like scrubbing forward -- */
-.pi-fx--scrubber{transition:transform .45s cubic-bezier(.22,.61,.36,1),opacity .3s ease}
-.pi-fx--scrubber[data-state="hidden"]{opacity:0;transform:translateX(-26px)}
-.pi-fx--scrubber[data-state="revealed"]{opacity:1;transform:translateX(0)}
+/* -- Scrubber (OTT distribution): the playhead passes over it left to
+   right and the text appears as the playhead clears it -- a progressive
+   wipe synced to the dot crossing, not a slide-in. -- */
+.pi-fx--scrubber{transition:clip-path .5s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--scrubber[data-state="hidden"]{clip-path:inset(0 100% 0 0)}
+.pi-fx--scrubber[data-state="revealed"]{clip-path:inset(0 0 0 0)}
 
 /* -- TV tuning (TV commercial release): static settles into signal -- */
 @keyframes piTvSettle{
@@ -269,34 +291,32 @@
 
 .pi-reveal-btn{display:none}
 .pi-reveal-btn.is-enhanced{
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  background:none;border:none;padding:0;cursor:pointer;pointer-events:auto;
-  color:var(--blue-text);font:bold 9.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
+  display:flex;flex-direction:column;align-items:center;gap:8px;flex:none;
+  background:none;border:none;padding:0;margin-top:2px;cursor:pointer;
+  color:var(--blue-text);font:bold 8.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
   transition:opacity .35s ease;
 }
 .pi-reveal-device{
   display:flex;align-items:center;justify-content:center;flex:none;
-  width:76px;height:76px;border-radius:50%;
+  width:60px;height:60px;border-radius:50%;
   background:radial-gradient(circle at 34% 28%,#74c8e2 0%,#269cc2 22%,#167e9f 55%,#0b4a5e 85%,#072f3a 100%);
   box-shadow:inset -3px -4px 7px rgba(0,0,0,.35),inset 2px 2px 5px rgba(255,255,255,.3),0 10px 26px rgba(10,40,50,.35);
-  color:rgba(255,255,255,.92);transition:width .35s ease,height .35s ease,transform .2s ease;
+  color:rgba(255,255,255,.92);transition:transform .2s ease,filter .3s ease;
 }
 .pi-reveal-device svg{width:58%;height:58%;overflow:visible}
 .pi-reveal-btn:hover .pi-reveal-device{transform:scale(1.045)}
 .pi-reveal-btn:focus-visible{outline:2px solid var(--blue-text);outline-offset:6px;border-radius:50%}
 
 @keyframes piDevicePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-.pi-insight-answer-blur[data-state="hidden"] ~ .pi-reveal-btn.is-enhanced .pi-reveal-device{animation:piDevicePulse 2.4s ease-in-out infinite}
-
-.pi-insight-answer-blur[data-state="revealed"] ~ .pi-reveal-btn.is-enhanced{
-  flex-direction:row;gap:6px;top:-8px;left:auto;right:0;transform:none;
-  font-size:9px;color:var(--muted);opacity:.55;
-}
-.pi-insight-answer-blur[data-state="revealed"] ~ .pi-reveal-btn.is-enhanced .pi-reveal-device{width:22px;height:22px;box-shadow:none}
-.pi-insight-answer-blur[data-state="revealed"] ~ .pi-reveal-btn.is-enhanced:hover{opacity:1}
+.pi-reveal-btn.is-enhanced[aria-expanded="false"] .pi-reveal-device{animation:piDevicePulse 2.4s ease-in-out infinite}
+.pi-reveal-btn.is-enhanced[aria-expanded="true"] .pi-reveal-device{filter:brightness(.85) saturate(.85)}
+.pi-reveal-btn.is-enhanced[aria-expanded="true"]{opacity:.7}
+.pi-reveal-btn.is-enhanced[aria-expanded="true"]:hover{opacity:1}
 @media(prefers-reduced-motion:reduce){
-  .pi-insight-answer-blur[data-state="hidden"] ~ .pi-reveal-btn.is-enhanced .pi-reveal-device{animation:none}
+  .pi-reveal-btn.is-enhanced[aria-expanded="false"] .pi-reveal-device{animation:none}
+}
+@media(max-width:800px){
+  .pi-reveal-device{width:48px;height:48px}
 }
 
 /* -- Iris (ad-films): aperture blade opens -- */
@@ -325,9 +345,15 @@
 .pi-render-ring{transition:stroke-dashoffset .6s cubic-bezier(.22,.61,.36,1)}
 .pi-reveal-btn--render[aria-expanded="true"] .pi-render-ring{stroke-dashoffset:0}
 
-/* -- Countdown (film marketing): clock hand sweeps a full circle -- */
+/* -- Countdown (film marketing): clock hand sweeps a full circle, and the
+   number flips over like the hinged leaf of a split-flap countdown clock
+   as the hand completes its sweep -- not a zoom, a hinge-flip. -- */
 .pi-countdown-hand{transform-box:fill-box;transform-origin:center;transform:rotate(0deg);transition:transform .7s cubic-bezier(.3,.9,.4,1)}
 .pi-reveal-btn--countdown[aria-expanded="true"] .pi-countdown-hand{transform:rotate(360deg)}
+
+.pi-fx--countdown{transition:transform .5s cubic-bezier(.3,.9,.4,1),opacity .3s ease;transform-origin:center bottom;perspective:600px}
+.pi-fx--countdown[data-state="hidden"]{transform:rotateX(-90deg);opacity:0}
+.pi-fx--countdown[data-state="revealed"]{transform:rotateX(0deg);opacity:1}
 
 /* -- Scrubber (OTT distribution): playhead slides across -- */
 .pi-scrub-fill{transform-box:fill-box;transform-origin:left center;transform:scaleX(0);transition:transform .5s cubic-bezier(.22,.61,.36,1)}

@@ -106,18 +106,23 @@ document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
   hero.setAttribute('data-hero-status','existing-page-asset');
 })();
 
-/* Rack-focus stat reveal (industry-insight pilot). Progressive enhancement:
-   the answer is plain, fully-visible HTML until this script runs, so a
-   no-JS visitor just sees the real number — nothing is ever hidden from
-   them. Only once enhanced does the real number go soft (blurred, not
-   swapped for a placeholder — the point is to tease the actual shape)
-   and a focus-reticle button appear over it, turning the reveal into a
-   deliberate, repeatable click rather than an auto-playing effect. The
-   0-to-target count only plays during the click-triggered animation. */
+/* Industry-insight stat reveal. Progressive enhancement: the answer is
+   plain, fully-visible HTML until this script runs, so a no-JS visitor
+   just sees the real number — nothing is ever hidden from them. Only
+   once enhanced does the content hide behind its own per-page CSS
+   transition (assigned via a pi-fx--* class, not here) and a button
+   beside the question appear to trigger it.
+
+   The 0-to-target count-up is OPT-IN per page (data-count-animate on the
+   answer element), not automatic: it only plays where counting up is
+   itself the real-world mechanism (a meter's level climbing, a render
+   filling in). Everywhere else the number is simply whatever it always
+   was, and the page's own CSS motion is the entire reveal. */
 document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
   const answer=document.getElementById(btn.getAttribute('aria-controls'));
   if(!answer)return;
-  const num=answer.querySelector('[data-count-to]');
+  const countAnimate=answer.hasAttribute('data-count-animate');
+  const num=countAnimate?answer.querySelector('[data-count-to]'):null;
   const target=num?parseInt(num.getAttribute('data-count-to'),10):null;
   const suffix=num?(num.getAttribute('data-suffix')||''):'';
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -126,7 +131,6 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
   if(reduced)answer.classList.add('cp-reduced-motion');
   answer.setAttribute('data-state','hidden');
   btn.classList.add('is-enhanced');
-  // The real value (e.g. "85%") stays in place, blurred — it's the tease.
 
   function countUp(){
     if(!num||target===null)return;
@@ -149,10 +153,12 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
     answer.setAttribute('data-state',revealed?'revealed':'hidden');
     btn.setAttribute('aria-expanded',String(revealed));
     if(label)label.textContent=revealed?(btn.dataset.labelOn||'In Focus'):(btn.dataset.labelOff||'Tap to Focus');
-    if(revealed&&num){
-      if(reduced)num.textContent=target+suffix; else countUp();
-    }else if(num){
-      num.textContent=target+suffix; // re-blurring: keep showing the real value
+    if(countAnimate&&num){
+      if(revealed){
+        if(reduced)num.textContent=target+suffix; else countUp();
+      }else{
+        num.textContent=target+suffix; // resetting: keep showing the real value
+      }
     }
   });
 });
