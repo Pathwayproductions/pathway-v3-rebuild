@@ -18,6 +18,7 @@
 <meta property="og:image" content="https://pathwayproductions.in/assets/images/pathway-logo.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/site.css">
 <link rel="stylesheet" href="assets/css/home.css">
 <script type="application/ld+json">
 {
@@ -152,7 +153,7 @@
       <div class="process">
         <div class="step"><span class="num">01</span><h3>Understand</h3><p>Listen to the brand, its context and its audience.</p></div>
         <div class="step"><span class="num">02</span><h3>Shape</h3><p>Find the insight and the idea worth expressing.</p></div>
-        <div class="step"><span class="num">03</span><h3>Craft</h3><p>Develop every detail with intention.</p></div>
+        <div class="step step--feature"><span class="num">03</span><h3>Craft</h3><p>Develop every detail with intention.</p></div>
         <div class="step"><span class="num">04</span><h3>Amplify</h3><p>Choose the channels and formats that fit.</p></div>
         <div class="step"><span class="num">05</span><h3>Connect</h3><p>Reach audiences and learn from response.</p></div>
       </div>
@@ -219,15 +220,50 @@
     </div>
   </section>
 
-  <section class="section bg-paper" id="work">
-    <div class="wrap split">
-      <div>
-        <div class="eyebrow">03 / Our work</div>
-        <h2>Work shaped by<br><em>purpose.</em></h2>
+  <section class="section bg-charcoal" id="work">
+    <div class="wrap">
+      <div class="split">
+        <div>
+          <div class="eyebrow">03 / By the numbers</div>
+          <h2>Fifteen years.<br><em>One growing story.</em></h2>
+        </div>
+        <div>
+          <p>Every campaign, every frame and every qualified lead adds up to something bigger than any single project. Here's the shape of it so far.</p>
+        </div>
       </div>
-      <div>
-        <p>Every project calls for a different response. We begin with the idea and build the execution around what the story and audience truly need.</p>
-        <a class="link" href="https://pathwayproductions.in/" rel="noopener" target="_blank">Visit Pathway's current website ↗</a>
+      <div class="curtain-trigger-wrap">
+        <button type="button" class="pi-reveal-btn pi-reveal-btn--curtain" data-reveal-trigger aria-expanded="false" aria-controls="stats-curtain" data-label-on="Curtain's Up" data-label-off="Raise the Curtain">
+          <span class="pi-reveal-device" aria-hidden="true">
+            <svg viewBox="0 0 32 32" aria-hidden="true">
+              <line class="pi-rope-line" x1="16" y1="3" x2="16" y2="17" stroke="currentColor" stroke-width="1.8"/>
+              <circle class="pi-rope-tassel" cx="16" cy="22" r="4.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <line x1="16" y1="26.5" x2="16" y2="29" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span data-label>Raise the Curtain</span>
+        </button>
+      </div>
+      <div class="stage-curtain" id="stats-curtain" data-count-animate>
+        <div class="stage-curtain-panel stage-curtain-panel--left" aria-hidden="true"></div>
+        <div class="stage-curtain-panel stage-curtain-panel--right" aria-hidden="true"></div>
+        <div class="stage-curtain-stats">
+          <div class="stage-stat" style="--d:0">
+            <span class="stage-stat-num" data-count-to="15" data-suffix="+">15+</span>
+            <span class="stage-stat-label">Years of Experience</span>
+          </div>
+          <div class="stage-stat" style="--d:1">
+            <span class="stage-stat-num" data-count-to="50" data-suffix="+">50+</span>
+            <span class="stage-stat-label">Clients Served</span>
+          </div>
+          <div class="stage-stat" style="--d:2">
+            <span class="stage-stat-num" data-count-to="500" data-suffix="+">500+</span>
+            <span class="stage-stat-label">Videos Produced</span>
+          </div>
+          <div class="stage-stat" style="--d:3">
+            <span class="stage-stat-num" data-count-to="10000" data-suffix="+">10,000+</span>
+            <span class="stage-stat-label">Qualified Leads Generated</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -237,10 +273,22 @@
       <div>
         <div class="eyebrow">04 / Start a conversation</div>
         <h2 class="serif" style="font-size:clamp(34px,4vw,52px);font-weight:400;margin:16px 0;">A good story starts<br>with a conversation.</h2>
-      </div>
-      <div>
         <p>Tell us what you're working towards. We'll help you explore the right creative or marketing approach.</p>
         <a class="btn" href="mailto:hello@pathwayproductions.in">Get in Touch ↗</a>
+      </div>
+      <div class="client-marquee-block">
+        <h3 class="client-marquee-heading">Relationships built<br>through conversation.</h3>
+        <div class="client-marquee" aria-label="Clients we've worked with">
+          <div class="client-marquee-track">
+            <span class="client-wordmark">SSM Arts &amp; Science College</span>
+            <span class="client-wordmark">Garden City University</span>
+            <span class="client-wordmark">PVR INOX</span>
+            <span class="client-wordmark" aria-hidden="true">SSM Arts &amp; Science College</span>
+            <span class="client-wordmark" aria-hidden="true">Garden City University</span>
+            <span class="client-wordmark" aria-hidden="true">PVR INOX</span>
+          </div>
+        </div>
+        <p class="client-marquee-caption">Shown as text marks for now — final logo files will replace these.</p>
       </div>
     </div>
   </section>

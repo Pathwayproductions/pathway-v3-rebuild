@@ -454,6 +454,88 @@
   .pi-insight-split{grid-template-columns:1fr;gap:28px}
 }
 
+/* ====================================================================
+   Curtain reveal (homepage "By the Numbers"): one trigger opens all
+   four stats at once, rather than four separate reveal buttons — the
+   agency's own numbers are one story, not four unrelated facts, so a
+   single "raise the curtain" moment suits it better than repeating the
+   per-stat reveal pattern four times. Same progressive-enhancement
+   contract as the rest of the system: with no JS, data-state is never
+   set, so the curtain panels sit off-stage and the numbers are plain,
+   fully visible text. Only once main.js runs does it close the
+   curtain and wait for a click. ---- */
+.curtain-trigger-wrap{display:flex;justify-content:center;margin:38px 0 0}
+
+.pi-reveal-btn--curtain .pi-rope-line{transition:transform .3s cubic-bezier(.3,1.6,.4,1);transform-origin:top center}
+.pi-reveal-btn--curtain .pi-rope-tassel{transform-box:fill-box;transform-origin:center;transition:transform .3s cubic-bezier(.3,1.6,.4,1)}
+.pi-reveal-btn--curtain[aria-expanded="true"] .pi-rope-line{transform:scaleY(1.16)}
+.pi-reveal-btn--curtain[aria-expanded="true"] .pi-rope-tassel{transform:translateY(4px)}
+
+.stage-curtain{position:relative;margin-top:30px;min-height:240px;overflow:hidden;background:#0d1113;border:1px solid var(--on-dark-line)}
+.stage-curtain-panel{
+  position:absolute;top:0;bottom:0;width:50%;z-index:2;
+  background:repeating-linear-gradient(90deg,#171d20 0 16px,#1d2427 16px 32px);
+  box-shadow:inset 0 0 70px rgba(0,0,0,.55);
+  transition:transform .8s cubic-bezier(.65,0,.35,1);
+}
+.stage-curtain-panel--left{left:0;transform:translateX(-100%);border-right:1px solid rgba(154,212,228,.25)}
+.stage-curtain-panel--right{right:0;transform:translateX(100%);border-left:1px solid rgba(154,212,228,.25)}
+.stage-curtain[data-state="hidden"] .stage-curtain-panel--left{transform:translateX(0)}
+.stage-curtain[data-state="hidden"] .stage-curtain-panel--right{transform:translateX(0)}
+
+.stage-curtain-stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--on-dark-line)}
+.stage-stat{
+  background:#12181b;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:38px 18px;min-height:240px;
+  opacity:1;transform:none;
+}
+.stage-curtain[data-state="hidden"] .stage-stat{opacity:.15;transform:translateY(10px) scale(.96)}
+.stage-curtain[data-state="revealed"] .stage-stat{
+  opacity:1;transform:translateY(0) scale(1);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,.61,.36,1);
+  transition-delay:calc(.45s + var(--d,0) * 110ms);
+}
+.stage-stat-num{display:block;font-family:var(--serif);font-weight:700;font-size:clamp(32px,3.6vw,46px);color:#9ad4e4;letter-spacing:-.02em;line-height:1}
+.stage-stat-label{margin-top:12px;font-size:13px;color:var(--on-dark-muted);line-height:1.5;max-width:165px}
+
+.stage-curtain.cp-reduced-motion .stage-curtain-panel,
+.stage-curtain.cp-reduced-motion .stage-stat{transition:opacity .2s linear !important;transform:none !important}
+.stage-curtain.cp-reduced-motion[data-state="hidden"] .stage-curtain-panel{transform:none !important;opacity:1}
+.stage-curtain.cp-reduced-motion[data-state="revealed"] .stage-curtain-panel{opacity:0}
+.stage-curtain.cp-reduced-motion[data-state="hidden"] .stage-stat{opacity:.15}
+.stage-curtain.cp-reduced-motion[data-state="revealed"] .stage-stat{opacity:1}
+
+@media(max-width:800px){
+  .stage-curtain-stats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .stage-curtain-stats{grid-template-columns:1fr}
+  .stage-stat{min-height:170px;padding:28px 18px}
+}
+
+/* ---- Client marquee (homepage "Start a conversation"): a continuous
+   CSS-only scroll of client names, paired with a heading that frames
+   them as relationships rather than a logo wall. Pure CSS so it never
+   depends on JS, and it never truly hides anything — the track is a
+   doubled list scrolling through a fixed viewport, not content that
+   appears/disappears. Pauses on hover/focus so a name can be read. ---- */
+.client-marquee-block{display:flex;flex-direction:column;justify-content:center;min-width:0}
+.client-marquee-heading{font-family:var(--serif);font-weight:400;font-size:clamp(19px,1.9vw,23px);line-height:1.3;color:#fff;margin:0 0 24px}
+.client-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.client-marquee-track{display:flex;align-items:center;gap:52px;width:max-content;animation:clientMarquee 20s linear infinite}
+.client-marquee:hover .client-marquee-track,.client-marquee:focus-within .client-marquee-track{animation-play-state:paused}
+.client-wordmark{font-family:var(--serif);font-size:21px;font-weight:400;color:var(--on-dark-muted);white-space:nowrap;opacity:.8;transition:opacity .2s ease,color .2s ease}
+.client-wordmark:hover{opacity:1;color:#fff}
+.client-marquee-caption{margin:16px 0 0;font-size:11.5px;color:rgba(203,209,212,.65)}
+@keyframes clientMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){
+  .client-marquee-track{animation:none;flex-wrap:wrap;width:auto}
+  .client-marquee-track [aria-hidden="true"]{display:none}
+}
+@media(max-width:850px){
+  .client-marquee-block{margin-top:8px}
+}
+
 /* ---- Section break: a single full-width image used as a visual pause
    between two content sections, not paired with text. Wide aspect ratio,
    object-fit:cover, an optional short caption below. ---- */

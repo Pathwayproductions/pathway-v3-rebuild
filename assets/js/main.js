@@ -122,9 +122,12 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
   const answer=document.getElementById(btn.getAttribute('aria-controls'));
   if(!answer)return;
   const countAnimate=answer.hasAttribute('data-count-animate');
-  const num=countAnimate?answer.querySelector('[data-count-to]'):null;
-  const target=num?parseInt(num.getAttribute('data-count-to'),10):null;
-  const suffix=num?(num.getAttribute('data-suffix')||''):'';
+  // Most insight cards count up a single figure; the curtain-reveal stats
+  // block counts up several at once, so this collects every [data-count-to]
+  // under the answer rather than just the first — a single-number page
+  // keeps working exactly as before since the loop below is a no-op past
+  // its one element.
+  const nums=countAnimate?Array.from(answer.querySelectorAll('[data-count-to]')):[];
   const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   const label=btn.querySelector('[data-label]');
 
@@ -132,8 +135,15 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
   answer.setAttribute('data-state','hidden');
   btn.classList.add('is-enhanced');
 
-  function countUp(){
-    if(!num||target===null)return;
+  function setFinal(num){
+    const target=parseInt(num.getAttribute('data-count-to'),10);
+    const suffix=num.getAttribute('data-suffix')||'';
+    num.textContent=target.toLocaleString('en-US')+suffix;
+  }
+
+  function countUpOne(num){
+    const target=parseInt(num.getAttribute('data-count-to'),10);
+    const suffix=num.getAttribute('data-suffix')||'';
     num.textContent='0'+suffix;
     const duration=650;
     let start=null;
@@ -141,7 +151,7 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
       if(start===null)start=ts;
       const progress=Math.min((ts-start)/duration,1);
       const eased=1-Math.pow(1-progress,3);
-      num.textContent=Math.round(eased*target)+suffix;
+      num.textContent=Math.round(eased*target).toLocaleString('en-US')+suffix;
       if(progress<1)requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
@@ -153,11 +163,11 @@ document.querySelectorAll('[data-reveal-trigger]').forEach(btn=>{
     answer.setAttribute('data-state',revealed?'revealed':'hidden');
     btn.setAttribute('aria-expanded',String(revealed));
     if(label)label.textContent=revealed?(btn.dataset.labelOn||'In Focus'):(btn.dataset.labelOff||'Tap to Focus');
-    if(countAnimate&&num){
+    if(countAnimate&&nums.length){
       if(revealed){
-        if(reduced)num.textContent=target+suffix; else countUp();
+        nums.forEach(num=>reduced?setFinal(num):countUpOne(num));
       }else{
-        num.textContent=target+suffix; // resetting: keep showing the real value
+        nums.forEach(setFinal); // resetting: keep showing the real value
       }
     }
   });

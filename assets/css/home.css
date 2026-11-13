@@ -32,12 +32,31 @@
 .hero.hero-full .outline{border-color:rgba(255,255,255,.6);color:#fff}
 .hero.hero-full .outline:hover{border-color:#fff}
 
-.process{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:44px}
+.process{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);margin-top:44px;align-items:stretch}
 .step{padding:26px 22px 10px 0;border-right:1px solid var(--line);margin-right:22px}
 .step:last-child{border:0}
 .num{font-size:12px;color:var(--blue-text);font-weight:700;letter-spacing:2px}
 .step h3{font-family:var(--serif);font-size:24px;font-weight:400;margin:20px 0 8px}
 .step p{font-size:13px;line-height:1.6;color:#51585c}
+
+/* ---- The middle step ("Craft") gets a deliberate break from the row:
+   a raised, filled card rather than a sixth identical column. It's the
+   step where the actual making happens — the pivot of the five — so
+   giving it visual weight isn't arbitrary striping, it's pointing at
+   the part of the process that's hardest and matters most. Desktop
+   only; on the stacked mobile layout every step reads top-to-bottom
+   anyway; so the card interrupts a row, not a column. ---- */
+@media(min-width:851px){
+  .step--feature{
+    position:relative;background:var(--ink);color:#fff;
+    margin:-18px 22px -1px 0;padding:44px 22px 28px 20px;
+    border-right-color:transparent;z-index:1;
+    box-shadow:0 22px 48px rgba(18,24,27,.22);
+  }
+  .step--feature .num{color:#9ad4e4}
+  .step--feature h3{color:#fff}
+  .step--feature p{color:var(--on-dark-muted)}
+}
 
 .v3-capabilities-layout{display:grid;grid-template-columns:minmax(245px,.82fr) minmax(0,1.6fr);gap:clamp(38px,6vw,110px);align-items:start}
 .v3-capabilities-head{position:sticky;top:125px}
