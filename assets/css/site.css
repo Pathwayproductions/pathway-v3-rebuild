@@ -167,7 +167,11 @@
 .bg-charcoal .editorial-row-text p,.bg-charcoal-alt .editorial-row-text p{color:var(--on-dark-muted)}
 
 /* ---- Production Insight: a sourced industry stat per service page. The
-   reveal button sits beside the question (not over the stat), and each
+   reveal button sits in flow directly under the question text — not
+   beside it at the top, and not over the stat — so it lands exactly where
+   a reader's eye already is once they finish the question/intro copy,
+   left-aligned with that same text. Clicking it then reads as continuing
+   down the page, not jumping back to a trigger they skipped past. Each
    page's own device — a clapperboard, a VU meter, a render ring — both
    looks and MOVES like that real object; the stat's own reveal motion is
    built to match the same physical action, not a shared effect reskinned
@@ -178,8 +182,8 @@
    Hidden unless JS enhances the page, so with no JS the stat is simply
    visible, as it always was. ---- */
 .pi-insight-split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
-.pi-insight-question{display:flex;align-items:flex-start;gap:20px}
-.pi-insight-question-text{flex:1;min-width:0}
+.pi-insight-question{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.pi-insight-question-text{min-width:0}
 .pi-insight-question h2{margin-top:12px}
 .pi-insight-question p{font-size:15px;line-height:1.7;color:var(--muted);max-width:420px;margin-top:14px}
 .pi-insight-answer{margin-top:24px;position:relative}
@@ -292,7 +296,7 @@
 .pi-reveal-btn{display:none}
 .pi-reveal-btn.is-enhanced{
   display:flex;flex-direction:column;align-items:center;gap:8px;flex:none;
-  background:none;border:none;padding:0;margin-top:2px;cursor:pointer;
+  background:none;border:none;padding:0;cursor:pointer;
   color:var(--blue-text);font:bold 8.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
   transition:opacity .35s ease;
 }
