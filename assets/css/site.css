@@ -382,6 +382,74 @@
 .pi-reveal-btn--stamp[aria-expanded="true"] .pi-stamp-mark{transform:scale(1) rotate(0deg);opacity:1}
 .pi-reveal-btn--stamp[aria-expanded="true"] .pi-stamp-mark path{stroke-dashoffset:0}
 
+/* ====================================================================
+   Digital Marketing insight stats: eight more variants, one per DM
+   service page, each paired with a device from that discipline's own
+   world (a lens, a bid gauge, a cart) rather than reusing a creative
+   one. Same shared markup/JS as the production-insight set above. ---- */
+
+/* -- Lens (SEO & AI search): zooms from a distance into sharp focus,
+   then catches a glint once the result is in view -- */
+.pi-fx--lens{transition:transform .5s cubic-bezier(.22,.61,.36,1),opacity .4s ease}
+.pi-fx--lens[data-state="hidden"]{transform:scale(.6) rotate(-3deg);opacity:.35}
+.pi-fx--lens[data-state="revealed"]{transform:scale(1) rotate(0deg);opacity:1}
+.pi-lens-glint{transition:opacity .3s ease .25s}
+.pi-reveal-btn--lens[aria-expanded="true"] .pi-lens-glint{opacity:1}
+
+/* -- Bid gauge (PPC): the needle swings up as the auction is won -- */
+.pi-fx--gauge{transition:clip-path .5s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--gauge[data-state="hidden"]{clip-path:inset(0 0 100% 0)}
+.pi-fx--gauge[data-state="revealed"]{clip-path:inset(0 0 0% 0)}
+.pi-gauge-needle{transform-box:fill-box;transform-origin:bottom center;transform:rotate(-50deg);transition:transform .5s cubic-bezier(.3,1.5,.4,1)}
+.pi-reveal-btn--gauge[aria-expanded="true"] .pi-gauge-needle{transform:rotate(50deg)}
+
+/* -- Heart (social media): a like lands and the heart fills solid -- */
+.pi-fx--heart{transition:opacity .3s ease,transform .3s cubic-bezier(.3,1.6,.4,1)}
+.pi-fx--heart[data-state="hidden"]{opacity:.4;transform:scale(.97)}
+.pi-fx--heart[data-state="revealed"]{opacity:1;transform:scale(1)}
+.pi-heart-shape{transform-box:fill-box;transform-origin:center;transition:fill-opacity .3s ease,transform .3s cubic-bezier(.3,1.7,.4,1)}
+.pi-reveal-btn--heart[aria-expanded="true"] .pi-heart-shape{fill:currentColor;fill-opacity:1;transform:scale(1.1)}
+
+/* -- Funnel (qualified leads): the field narrows down to the one that
+   qualifies, which drops through -- */
+.pi-fx--funnel{transition:clip-path .55s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--funnel[data-state="hidden"]{clip-path:polygon(50% 0,50% 0,50% 0,50% 0)}
+.pi-fx--funnel[data-state="revealed"]{clip-path:polygon(0 0,100% 0,100% 100%,0 100%)}
+@keyframes piFunnelDrop{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(11px)}}
+.pi-funnel-drop{opacity:0}
+.pi-reveal-btn--funnel[aria-expanded="true"] .pi-funnel-drop{animation:piFunnelDrop .6s ease forwards}
+
+/* -- Load bar (web development): the page finishes loading -- */
+.pi-fx--loadbar{transition:clip-path .5s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--loadbar[data-state="hidden"]{clip-path:inset(0 100% 0 0)}
+.pi-fx--loadbar[data-state="revealed"]{clip-path:inset(0 0 0 0)}
+.pi-loadbar-fill{transition:width .5s cubic-bezier(.22,.61,.36,1)}
+.pi-reveal-btn--loadbar[aria-expanded="true"] .pi-loadbar-fill{width:18px}
+
+/* -- Cart (e-commerce): tips from a hurried, half-abandoned angle to
+   sitting upright, the way it looks once checkout actually completes -- */
+.pi-fx--cart{transition:opacity .3s ease,transform .35s cubic-bezier(.3,1.5,.4,1)}
+.pi-fx--cart[data-state="hidden"]{opacity:.45;transform:translateX(-6px)}
+.pi-fx--cart[data-state="revealed"]{opacity:1;transform:translateX(0)}
+.pi-cart-body{transform-box:fill-box;transform-origin:bottom center;transform:rotate(-14deg) translateX(-1px);transition:transform .4s cubic-bezier(.3,1.6,.4,1)}
+.pi-reveal-btn--cart[aria-expanded="true"] .pi-cart-body{transform:rotate(0deg) translateX(0)}
+
+/* -- Search bar (Amazon advertising): the query resolves and the match
+   is confirmed, rather than just appearing -- */
+.pi-fx--searchbar{transition:clip-path .5s cubic-bezier(.22,.61,.36,1)}
+.pi-fx--searchbar[data-state="hidden"]{clip-path:inset(0 100% 0 0)}
+.pi-fx--searchbar[data-state="revealed"]{clip-path:inset(0 0 0 0)}
+.pi-search-check{transition:stroke-dashoffset .35s ease .15s}
+.pi-reveal-btn--searchbar[aria-expanded="true"] .pi-search-check{stroke-dashoffset:0}
+
+/* -- Puzzle (managed services): two separate pieces slide together and
+   overlap, the way scattered channels come under one plan -- */
+.pi-fx--puzzle{transition:opacity .35s ease,transform .4s cubic-bezier(.3,1.5,.4,1)}
+.pi-fx--puzzle[data-state="hidden"]{opacity:.4;transform:scale(.96)}
+.pi-fx--puzzle[data-state="revealed"]{opacity:1;transform:scale(1)}
+.pi-puzzle-piece{transform-box:fill-box;transform-origin:center;transform:translate(5px,-5px);opacity:.55;transition:transform .4s cubic-bezier(.3,1.6,.4,1),opacity .3s ease}
+.pi-reveal-btn--puzzle[aria-expanded="true"] .pi-puzzle-piece{transform:translate(0,0);opacity:1}
+
 @media(max-width:800px){
   .pi-insight-split{grid-template-columns:1fr;gap:28px}
 }
