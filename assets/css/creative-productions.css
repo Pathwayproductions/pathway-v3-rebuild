@@ -91,11 +91,13 @@
 
    The reticle sits in normal flow at the end of the question column,
    directly under the question text — not centered over the blur, and
-   not at the top of the column before any reading happens. That way it
-   lands exactly where a reader's eye already is once they finish the
-   question, left-aligned with that same text, so tapping it reads as a
-   continuation of reading rather than a jump back to a trigger they
-   skipped past. Its own state (pulsing while hidden, quieting down once
+   not at the top of the column before any reading happens. Right-aligned,
+   not left: reading ends at the right edge of the last line, not back at
+   the left margin where a new line would start, so the reticle sits
+   there instead, closer to where a reader's eye already is once they
+   finish the question, so tapping it reads as a continuation of reading
+   rather than a jump back to a trigger they skipped past. Its own state
+   (pulsing while hidden, quieting down once
    revealed) is driven off the button's own aria-expanded, not off the
    blur element — so it works wherever the button sits in the DOM,
    independent of the answer column it's no longer visually attached to. ---- */
@@ -113,8 +115,8 @@
    rather than "press this". */
 .cp-insight-reticle{display:none}
 .cp-insight-reticle.is-enhanced{
-  display:flex;flex-direction:column;align-items:flex-start;gap:8px;
-  margin-top:22px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  margin-top:22px;margin-left:auto;
   background:none;border:none;padding:0;cursor:pointer;
   color:var(--blue-text);font:bold 9.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
   transition:opacity .35s ease;
