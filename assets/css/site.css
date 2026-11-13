@@ -166,6 +166,27 @@
 .bg-charcoal .editorial-row-text h3,.bg-charcoal-alt .editorial-row-text h3{color:#fff}
 .bg-charcoal .editorial-row-text p,.bg-charcoal-alt .editorial-row-text p{color:var(--on-dark-muted)}
 
+/* ---- Editorial rows as a row of cards: same content, laid out as three
+   stacked image-over-text cards side by side instead of alternating
+   image/text columns. Opt-in via .editorial-rows--cards on the wrapper
+   so the alternating layout used elsewhere (2D Animation) is untouched. ---- */
+.editorial-rows--cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.editorial-rows--cards .editorial-row{
+  display:flex;flex-direction:column;gap:0;padding:0;border:1px solid var(--line);border-top:1px solid var(--line);
+  border-radius:10px;overflow:hidden;background:#fff;align-items:stretch;
+  transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.editorial-rows--cards .editorial-row:first-child{padding-top:0}
+.editorial-rows--cards .editorial-row:hover{border-color:#b7c6cc;box-shadow:0 16px 34px rgba(18,24,27,.08);transform:translateY(-3px)}
+.editorial-rows--cards .editorial-row.reverse .editorial-row-media,
+.editorial-rows--cards .editorial-row.reverse .editorial-row-text{order:0}
+.editorial-rows--cards .editorial-row-media{aspect-ratio:4/3;border:0;border-bottom:1px solid var(--line)}
+.editorial-rows--cards .editorial-row-text{padding:22px 24px 26px}
+.editorial-rows--cards .editorial-row-text p{max-width:none}
+@media(max-width:850px){
+  .editorial-rows--cards{grid-template-columns:1fr}
+}
+
 /* ---- Production Insight: a sourced industry stat per service page. The
    reveal button sits in flow directly under the question text — not
    beside it at the top, and not over the stat — so it lands near where a
