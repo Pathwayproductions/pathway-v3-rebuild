@@ -464,14 +464,14 @@
    set, so the curtain panels sit off-stage and the numbers are plain,
    fully visible text. Only once main.js runs does it close the
    curtain and wait for a click. ---- */
-.curtain-trigger-wrap{display:flex;justify-content:center;margin:38px 0 0}
+.curtain-trigger-wrap{display:flex;justify-content:center;margin:14px 0 0}
 
 .pi-reveal-btn--curtain .pi-rope-line{transition:transform .3s cubic-bezier(.3,1.6,.4,1);transform-origin:top center}
 .pi-reveal-btn--curtain .pi-rope-tassel{transform-box:fill-box;transform-origin:center;transition:transform .3s cubic-bezier(.3,1.6,.4,1)}
 .pi-reveal-btn--curtain[aria-expanded="true"] .pi-rope-line{transform:scaleY(1.16)}
 .pi-reveal-btn--curtain[aria-expanded="true"] .pi-rope-tassel{transform:translateY(4px)}
 
-.stage-curtain{position:relative;margin-top:30px;min-height:240px;overflow:hidden;background:#0d1113;border:1px solid var(--on-dark-line)}
+.stage-curtain{position:relative;margin-top:16px;min-height:190px;overflow:hidden;background:#0d1113;border:1px solid var(--on-dark-line)}
 .stage-curtain-panel{
   position:absolute;top:0;bottom:0;width:50%;z-index:2;
   background:repeating-linear-gradient(90deg,#171d20 0 16px,#1d2427 16px 32px);
@@ -486,7 +486,7 @@
 .stage-curtain-stats{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--on-dark-line)}
 .stage-stat{
   background:#12181b;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  text-align:center;padding:38px 18px;min-height:240px;
+  text-align:center;padding:30px 18px;min-height:190px;
   opacity:1;transform:none;
 }
 .stage-curtain[data-state="hidden"] .stage-stat{opacity:.15;transform:translateY(10px) scale(.96)}
@@ -519,8 +519,9 @@
    depends on JS, and it never truly hides anything — the track is a
    doubled list scrolling through a fixed viewport, not content that
    appears/disappears. Pauses on hover/focus so a name can be read. ---- */
+#contact .split{align-items:center}
 .client-marquee-block{display:flex;flex-direction:column;justify-content:center;min-width:0}
-.client-marquee-heading{font-family:var(--serif);font-weight:400;font-size:clamp(19px,1.9vw,23px);line-height:1.3;color:#fff;margin:0 0 24px}
+.client-marquee-heading{font-family:var(--serif);font-weight:400;font-size:clamp(19px,1.9vw,23px);line-height:1.3;color:#fff;margin:0 0 22px}
 .client-marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .client-marquee-track{display:flex;align-items:center;gap:52px;width:max-content;animation:clientMarquee 20s linear infinite}
 .client-marquee:hover .client-marquee-track,.client-marquee:focus-within .client-marquee-track{animation-play-state:paused}
