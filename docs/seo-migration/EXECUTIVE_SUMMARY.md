@@ -4,6 +4,8 @@ Audit date: 2026-10-31. Read-only — nothing on the live site or the GitHub
 repo's existing content was changed; all 9 new files below are additions
 under `docs/seo-migration/`.
 
+> **Tooling update (2026-11-13):** Reporting now uses **AgencyAnalytics** instead of Porter Metrics going forward. Pathway Productions LLP is already set up there with Google Ads, Meta Ads, Bing Ads, GA4, Google My Business, HubSpot, Microsoft Clarity, Facebook, Instagram, YouTube and LinkedIn connected. The Porter account-slot and 30-day-history limits referenced below are historical and no longer apply. One gap carries over regardless of tool: no Google Search Console property for pathwayproductions.in appears connected in AgencyAnalytics either — still needs to be connected for real query/impression/position data.
+
 ## 1. Executive summary (top findings)
 
 1. **41 blog posts have no destination in the new build.** The new site's `/blogs/` is an index page only — no article template exists yet. 14 of those posts were published since June 2026 and are actively earning fresh search visibility today. This is the largest single risk found.

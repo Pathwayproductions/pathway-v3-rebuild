@@ -6,6 +6,10 @@ Collection method: logged into `/wp-admin/` as an Editor-level account
 public sitemap/robots.txt, and live-page extraction via browser automation
 (no WAF/CAPTCHA blocks hit). Semrush (connected in this project) supplied
 independent off-page data where Porter/GA4/GSC access was blocked (see
+below). **Tooling update (2026-11-13): reporting now uses AgencyAnalytics
+instead of Porter Metrics going forward** — see `EXECUTIVE_SUMMARY.md` for
+what that resolves and what gap (Google Search Console) still carries over.
+Otherwise, see
 `OFF_PAGE_SEO_REPORT.md`).
 
 ## 1. Platform & plugin stack

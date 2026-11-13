@@ -4,6 +4,8 @@ Written for whoever implements SEO on `build/29-page-full-site`. Depends on
 decisions in `SEO_PRESERVATION_CHECKLIST.md` being made first — several
 items below have a placeholder pending that decision.
 
+> **Tooling update (2026-11-13):** The note below about installing GA4 "in Porter" is superseded — reporting now uses **AgencyAnalytics** instead of Porter Metrics going forward, and GA4 for Pathway Productions LLP is already connected there.
+
 ## 1. Redirects (server/platform-level 301s — not canonical tags)
 
 Implement a 301 redirect map covering every row marked "redirect" or

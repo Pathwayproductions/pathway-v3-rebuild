@@ -4,6 +4,8 @@ Prioritized. Items 1-4 are flagged **URGENT** because they involve real,
 currently-earning search equity that a straight swap to the 29-page build
 would silently drop.
 
+> **Tooling update (2026-11-13):** Items 16-17 below referenced Porter Metrics account-slot and plan-history limits. Reporting now uses **AgencyAnalytics** instead of Porter going forward, which already has GA4, Google Ads, Meta Ads, Bing Ads, Google My Business, HubSpot, Clarity, Facebook, Instagram, YouTube and LinkedIn connected for this client — so item 17 is resolved. Item 16 (connecting a Google Search Console property for pathwayproductions.in) is still open: GSC isn't in AgencyAnalytics' connected providers for this client either.
+
 ## URGENT — decide before launch
 
 - [ ] **1. Decide what happens to all 41 existing blog posts.** The new build's `/blogs/` is an index page only — no individual article template or post pages exist yet. 14 of the 41 posts were published since June 2026 (12 in October 2026 alone) with strong Rank Math SEO scores (72-86/100) and are actively earning fresh search visibility right now. Options: (a) build an article template and migrate all 41 posts with 301s from old to new URLs, (b) migrate only the newest/highest-performing posts and 301 the rest to `/blogs/` or a relevant service page, (c) some other plan. **This is the single largest SEO risk in the whole migration and needs Arun's decision first**, because it determines engineering scope.

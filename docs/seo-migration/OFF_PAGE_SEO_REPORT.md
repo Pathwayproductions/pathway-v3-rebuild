@@ -2,6 +2,8 @@
 
 Collected 2026-10-31. Sources: Semrush (connected to this project — real data), Porter Metrics (connected, but access blocked for this specific site — see below). Google Search Console and GA4 data for pathwayproductions.in itself were **not obtainable** this pass; this is stated plainly below rather than estimated.
 
+> **Tooling update (2026-11-13):** Reporting now uses **AgencyAnalytics** instead of Porter Metrics going forward. Pathway Productions LLP is already set up there with Google Ads, Meta Ads, Bing Ads, GA4, Google My Business, HubSpot, Microsoft Clarity, Facebook, Instagram, YouTube and LinkedIn connected — the Porter account-slot cap and 30-day history limit described below no longer apply to future audits. Google Search Console still isn't in AgencyAnalytics' connected providers for this client either, so that specific gap is unchanged; it still needs a direct GSC connection.
+
 ## 1. What could NOT be pulled, and why (read this first)
 
 - **Google Search Console — pathwayproductions.in has no connected property.** The Porter Metrics workspace tied to this account has GSC access for two *other* brands (`http://www.wowtam.com/` and `https://courses.gardencity.university/` / `sc-domain:gardencity.university`) but **not** for pathwayproductions.in, even though Rank Math on the WordPress side confirms GSC is linked there directly. **Action needed**: connect the pathwayproductions.in Search Console property to Porter (or grant a direct GSC API connection) to get real clicks/impressions/query/position data for the next version of this audit.
