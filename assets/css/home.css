@@ -130,16 +130,36 @@
   .card-icon svg{width:21px;height:21px}
 }
 
-/* ---- Section 05: now a single-column CTA — the client names that used
-   to share this section have their own section above it. ---- */
-.contact-cta{max-width:600px}
+/* ---- Section 05: the contact copy and the embedded HubSpot form sit
+   side by side, same two-column shape as the other sections. The form
+   itself renders as a white card floating on the charcoal section so it
+   can reuse the light-surface input styling from footer-form.css as-is,
+   rather than needing a separate dark-mode skin. ---- */
+.contact-alt-email{font-size:13px;color:var(--on-dark-muted);margin:0}
+.contact-alt-email a{color:#9ad4e4;font-weight:600}
+.contact-alt-email a:hover{color:#fff}
+.contact-form-panel{
+  background:#fff;border-radius:14px;padding:30px 32px;
+  box-shadow:0 22px 48px rgba(10,20,25,.32);
+  align-self:start;
+}
+@media(max-width:850px){
+  .contact-form-panel{padding:26px 24px}
+}
 
-/* ---- Clients section: same reveal-button mechanism as the "by the
-   numbers" curtain above it, but the content underneath arrives with a
-   different, more celebratory motion — names dropping in with a little
-   life in them, rather than a curtain parting — since what's revealed
-   here is people, not a count. ---- */
-.clients-reveal-trigger-wrap{display:flex;justify-content:center;margin:40px 0 0}
+/* ---- Clients section: a short line and a centered reveal button — no
+   big heading, since the names themselves are the content and today
+   there are only three of them. The reveal grid is a wrapping flex row
+   rather than a fixed-count layout, so it holds up once the real client
+   logos replace these text marks and there are a lot more than three to
+   show. Same reveal-button mechanism as the "by the numbers" curtain
+   above it, but the content underneath arrives with a different, more
+   celebratory motion — names dropping in with a little life in them,
+   rather than a curtain parting — since what's revealed here is people,
+   not a count. ---- */
+.clients-intro{max-width:420px;margin:0 auto;text-align:center}
+.clients-intro p{font-size:15px;color:var(--on-dark-muted);margin:10px 0 0}
+.clients-reveal-trigger-wrap{display:flex;justify-content:center;margin:34px 0 0}
 .pi-reveal-btn--burst .pi-burst-ray{
   stroke-dasharray:12;stroke-dashoffset:12;opacity:.45;
   transition:stroke-dashoffset .4s cubic-bezier(.22,1.6,.36,1),opacity .3s ease;
@@ -172,21 +192,36 @@
 .clients-reveal.cp-reduced-motion[data-state="hidden"] .client-wordmark{opacity:.15;transform:none}
 
 /* ---- Footer, homepage trial only: four equal columns instead of the
-   site-wide three (which run 9/12/7 links deep and read as mismatched),
-   trimmed to each area's main links, with a fourth "Get in Touch" column
-   carrying the phone numbers and social links that used to sit above the
-   form. Scoped to --home so the other 34 pages' shared footer markup and
+   site-wide three (which ran 9/12/7 links deep and read as mismatched).
+   Every link site-wide is still here — nothing dropped — just regrouped:
+   Digital Marketing's long list splits into its execution services and
+   its strategy/consulting services, so no single column runs away from
+   the others. Below the four columns, a fifth row ("Get in Touch") carries
+   the phone numbers and social links as a horizontal strip instead of a
+   column, which is also where the font-size mismatch from the column
+   version got fixed (the phone links now match the sitemap links' size).
+   Scoped to --home so the other 34 pages' shared footer markup and
    layout are untouched. ---- */
 .footer-sitemap--home{grid-template-columns:repeat(4,1fr)}
-.footer-col--touch .footer-contact-phones{margin-top:0}
+.footer-col--touch-row{
+  grid-column:1/-1;border-top:1px solid var(--line);
+  padding-top:24px;margin-top:6px;
+}
+.footer-contact-row-inner{display:flex;flex-wrap:wrap;align-items:center;gap:22px 32px;margin-top:4px}
+.footer-contact-row-inner .footer-contact-phones{
+  flex-direction:row;flex-wrap:wrap;gap:4px 22px;margin:0;
+}
+.footer-contact-row-inner .footer-contact-phones a{
+  font-size:13px;font-weight:400;color:#51585c;
+}
+.footer-contact-row-inner .footer-contact-phones a:hover{color:var(--blue-text)}
+.footer-contact-row-inner .footer-social{margin:0}
 @media(max-width:850px){
   .footer-sitemap--home{grid-template-columns:1fr 1fr}
-  .footer-sitemap--home .footer-col:nth-child(3){grid-column:auto;border-top:none;padding-top:0;margin-top:0}
-  .footer-sitemap--home .footer-col--touch{grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;margin-top:4px}
 }
 @media(max-width:480px){
   .footer-sitemap--home{grid-template-columns:1fr}
-  .footer-sitemap--home .footer-col--touch{grid-column:auto;border-top:none;padding-top:0;margin-top:0}
+  .footer-contact-row-inner{gap:16px}
 }
 
 @media(max-width:850px){

@@ -74,32 +74,37 @@
   max-width: 480px;
 }
 
-/* --- HubSpot form markup overrides --- */
-.footer-contact-form .hs-form {
+/* --- HubSpot form markup overrides ---
+   Also applied to .contact-form-panel: the same embed (same portal/form
+   GUID, same hbspt.forms.create call) gets placed inline inside the home
+   page's "Start a conversation" section rather than the footer there — a
+   different home page only, so both selectors share this one skin rather
+   than duplicating it. */
+:is(.footer-contact-form, .contact-form-panel) .hs-form {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 14px;
 }
-.footer-contact-form .hs-form-field {
+:is(.footer-contact-form, .contact-form-panel) .hs-form-field {
   flex: 1 1 100%;
   margin: 0;
 }
-.footer-contact-form .hs-form-field.hs-firstname,
-.footer-contact-form .hs-form-field.hs-lastname {
+:is(.footer-contact-form, .contact-form-panel) .hs-form-field.hs-firstname,
+:is(.footer-contact-form, .contact-form-panel) .hs-form-field.hs-lastname {
   flex: 1 1 calc(50% - 7px);
 }
-.footer-contact-form label {
+:is(.footer-contact-form, .contact-form-panel) label {
   display: block;
   font-size: 12px;
   font-weight: 600;
   color: var(--muted);
   margin: 0 0 4px;
 }
-.footer-contact-form input[type="text"],
-.footer-contact-form input[type="email"],
-.footer-contact-form input[type="tel"],
-.footer-contact-form textarea,
-.footer-contact-form select {
+:is(.footer-contact-form, .contact-form-panel) input[type="text"],
+:is(.footer-contact-form, .contact-form-panel) input[type="email"],
+:is(.footer-contact-form, .contact-form-panel) input[type="tel"],
+:is(.footer-contact-form, .contact-form-panel) textarea,
+:is(.footer-contact-form, .contact-form-panel) select {
   width: 100%;
   box-sizing: border-box;
   border: 1px solid var(--line);
@@ -110,26 +115,26 @@
   color: var(--ink);
   background: #fff;
 }
-.footer-contact-form textarea { resize: vertical; min-height: 56px; }
-.footer-contact-form .hs-error-msgs {
+:is(.footer-contact-form, .contact-form-panel) textarea { resize: vertical; min-height: 56px; }
+:is(.footer-contact-form, .contact-form-panel) .hs-error-msgs {
   list-style: none;
   margin: 4px 0 0;
   padding: 0;
   font-size: 12px;
   color: #b3261e;
 }
-.footer-contact-form .hs-form-booleancheckbox-display {
+:is(.footer-contact-form, .contact-form-panel) .hs-form-booleancheckbox-display {
   font-size: 12px;
   color: var(--muted);
   display: flex;
   align-items: flex-start;
   gap: 6px;
 }
-.footer-contact-form .actions {
+:is(.footer-contact-form, .contact-form-panel) .actions {
   flex: 1 1 100%;
   margin: 2px 0 0;
 }
-.footer-contact-form .hs-button {
+:is(.footer-contact-form, .contact-form-panel) .hs-button {
   border: none;
   border-radius: 8px;
   background: var(--blue-btn);
@@ -140,8 +145,8 @@
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.footer-contact-form .hs-button:hover { background: var(--blue-btn-hover); }
-.footer-contact-form .submitted-message {
+:is(.footer-contact-form, .contact-form-panel) .hs-button:hover { background: var(--blue-btn-hover); }
+:is(.footer-contact-form, .contact-form-panel) .submitted-message {
   font-size: 14px;
   color: var(--ink);
 }
