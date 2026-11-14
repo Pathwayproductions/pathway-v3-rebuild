@@ -97,6 +97,20 @@
 .bg-charcoal .svc-grid,.bg-charcoal-alt .svc-grid{border-color:var(--on-dark-line)}
 .svc-card .svc-link{margin-top:auto;padding-top:14px;font-size:12px}
 
+/* ---- Generic "break the monotony" highlight for one card in an
+   otherwise-uniform svc-grid row. Opt-in via .svc-card--feature so the
+   many plain svc-grids across the site (explore-next, etc.) are
+   untouched. Icons/number labels inside these cards are set with inline
+   styles per card, so callers also need to swap those by hand. ---- */
+.svc-card--feature{
+  background:linear-gradient(135deg,#1f8fb3 0%,#0d5f7a 100%);color:#fff;
+  border-color:transparent;position:relative;z-index:1;
+  box-shadow:0 14px 32px rgba(10,40,50,.3);
+}
+.svc-card--feature h3,.svc-card--feature h4{color:#fff}
+.svc-card--feature p{color:rgba(255,255,255,.85)}
+.svc-card--feature .svc-link,.svc-card--feature .link{color:#fff}
+
 /* ---- Step / process row (3 or 4 columns) ---- */
 .step-row{display:grid;border-top:1px solid var(--line);margin-top:30px}
 .step-row--2{grid-template-columns:repeat(2,1fr)}
@@ -112,6 +126,29 @@
 .bg-charcoal .step-row h3,.bg-charcoal-alt .step-row h3{color:#fff}
 .bg-charcoal .step-row p,.bg-charcoal-alt .step-row p{color:var(--on-dark-muted)}
 .bg-charcoal .step-row .num,.bg-charcoal-alt .step-row .num{color:#9ad4e4}
+
+/* ---- Same "break the monotony" move for step-row: one step gets a
+   filled, raised card instead of repeating the plain outlined column.
+   Declared after the base .step-row rules above (same specificity, so
+   source order decides) so the feature colours actually win. Border-
+   color is neutralised unconditionally since step-row borders switch
+   from right-hand to bottom-hand once the grid collapses on mobile. ---- */
+.step-row .step--feature{
+  background:linear-gradient(135deg,#1f8fb3 0%,#0d5f7a 100%);color:#fff;
+  border-color:transparent;padding-left:18px;padding-right:18px;border-radius:4px;
+}
+.step-row .step--feature .num{color:rgba(255,255,255,.75)}
+.step-row .step--feature h3{color:#fff}
+.step-row .step--feature p{color:rgba(255,255,255,.88)}
+@media(min-width:851px){
+  .step-row .step--feature{
+    position:relative;margin:-18px 20px -1px 0;padding-top:40px;padding-bottom:26px;z-index:1;
+    box-shadow:0 20px 40px rgba(10,40,50,.3);
+  }
+}
+@media(max-width:850px){
+  .step-row .step--feature{padding-top:18px;padding-bottom:18px;margin-bottom:6px}
+}
 
 /* ---- Media / project tile grid (reuses honest-placeholder pattern) ---- */
 .media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:30px}
@@ -324,6 +361,11 @@
   color:var(--blue-text);font:bold 8.5px var(--sans);letter-spacing:.05em;text-transform:uppercase;
   transition:opacity .35s ease;
 }
+/* The blue label text is tuned for light surfaces (5.1:1+ on white/paper)
+   and all but disappears on the charcoal sections — the curtain button
+   is the first reveal trigger to sit on one, so give dark backgrounds
+   their own accessible label colour. */
+.bg-charcoal .pi-reveal-btn.is-enhanced,.bg-charcoal-alt .pi-reveal-btn.is-enhanced{color:#fff}
 .pi-reveal-device{
   display:flex;align-items:center;justify-content:center;flex:none;
   width:60px;height:60px;border-radius:50%;
