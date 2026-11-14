@@ -65,7 +65,8 @@
       '<div id="pw-consent__inner">' +
       '<p id="pw-consent__text">We use cookies to run this site and, with your permission, ' +
       "to measure traffic and personalize ads (Google Analytics, Google Ads). " +
-      '<strong>Essential cookies are always on.</strong> You can change this anytime.</p>' +
+      '<strong>Essential cookies are always on.</strong> You can change this anytime. ' +
+      '<a href="/privacy-policy/" style="color:inherit;text-decoration:underline;">Privacy &amp; Cookie Policy</a></p>' +
       '<div id="pw-consent__actions">' +
       '<button type="button" id="pw-consent__reject">Reject non-essential</button>' +
       '<button type="button" id="pw-consent__accept">Accept all</button>' +
