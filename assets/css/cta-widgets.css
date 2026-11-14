@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Pathway Productions — Lead-capture widgets (WhatsApp, sticky form, chat)
+   See docs/CTA_WIDGETS.md for the behaviour this implements and why.
+   ========================================================================== */
+
+:root {
+  --ctaw-blue: #269CC2;
+  --ctaw-ink: #292D31;
+  --ctaw-charcoal: #292D31;
+  --ctaw-muted: #666D70;
+  --ctaw-white: #FFFFFF;
+  --ctaw-light-gray: #F1F3F5;
+  --ctaw-shadow: 0 10px 30px rgba(41, 45, 49, 0.18);
+  --ctaw-radius: 14px;
+}
+
+/* ---- WhatsApp floating button ------------------------------------------ */
+.ctaw-whatsapp {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--ctaw-shadow);
+  text-decoration: none;
+  transition: transform 0.15s ease, opacity 0.25s ease;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+}
+.ctaw-whatsapp.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.ctaw-whatsapp:hover { transform: scale(1.06); }
+.ctaw-whatsapp svg { width: 30px; height: 30px; fill: #fff; }
+
+/* When the sticky bar is expanded, or HubSpot chat is open, nudge the
+   WhatsApp button up/aside so nothing overlaps on small screens. */
+.ctaw-whatsapp.ctaw-yield-bar { bottom: 92px; }
+@media (max-width: 480px) {
+  .ctaw-whatsapp { right: 14px; bottom: 14px; width: 50px; height: 50px; }
+  .ctaw-whatsapp.ctaw-yield-bar { bottom: 84px; }
+}
+
+/* ---- Sticky mini contact-form bar --------------------------------------- */
+.ctaw-sticky {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 950;
+  width: 320px;
+  max-width: calc(100vw - 40px);
+  background: var(--ctaw-white);
+  border-radius: var(--ctaw-radius);
+  box-shadow: var(--ctaw-shadow);
+  overflow: hidden;
+  font-family: inherit;
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  visibility: hidden;
+}
+.ctaw-sticky.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+/* WEB-003: yield to HubSpot chat — collapse out of the way while the chat
+   widget is open, instead of both competing for the visitor's attention. */
+.ctaw-sticky.ctaw-yield-chat {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.ctaw-sticky-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  cursor: pointer;
+  background: var(--ctaw-charcoal);
+  color: var(--ctaw-white);
+}
+.ctaw-sticky-bar-label {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.ctaw-sticky-bar-icon {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  transition: transform 0.25s ease;
+}
+.ctaw-sticky.is-open .ctaw-sticky-bar-icon { transform: rotate(180deg); }
+
+.ctaw-sticky-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.ctaw-sticky.is-open .ctaw-sticky-body { max-height: 420px; }
+
+.ctaw-sticky-form {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ctaw-sticky-form input,
+.ctaw-sticky-form select,
+.ctaw-sticky-form textarea {
+  width: 100%;
+  border: 1px solid #D7DBDD;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ctaw-ink);
+  background: var(--ctaw-white);
+}
+.ctaw-sticky-form textarea { resize: vertical; min-height: 60px; }
+.ctaw-sticky-form button {
+  margin-top: 2px;
+  border: none;
+  border-radius: 8px;
+  background: var(--ctaw-blue);
+  color: var(--ctaw-white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 14px;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.ctaw-sticky-form button:hover { opacity: 0.9; }
+.ctaw-sticky-form button:disabled { opacity: 0.6; cursor: not-allowed; }
+.ctaw-sticky-status {
+  font-size: 13px;
+  color: var(--ctaw-muted);
+  min-height: 16px;
+}
+.ctaw-sticky-status.is-error { color: #B3261E; }
+.ctaw-sticky-status.is-success { color: #1E7A3C; }
+.ctaw-sticky-close {
+  background: none;
+  border: none;
+  color: var(--ctaw-white);
+  opacity: 0.8;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  flex: none;
+}
+.ctaw-sticky-close:hover { opacity: 1; }
+
+@media (max-width: 480px) {
+  .ctaw-sticky { left: 12px; width: calc(100vw - 24px); bottom: 12px; }
+}
