@@ -220,24 +220,26 @@
    home-clients-reveal.js adds .clients-collapsed on load (JS-only, so a
    no-JS visitor always sees this section normally) and measures the real
    scrollHeight to animate open/closed, since max-height:none can't be
-   transitioned directly. Padding is listed explicitly as a fixed value
-   (see note below) rather than left to .section's own rule. ---- */
+   transitioned directly.
+
+   The section's own vertical padding deliberately lives one level down, on
+   its .wrap, rather than on #clients itself (overriding .section's usual
+   padding:85px 0). A border-box element can never be squeezed shorter than
+   its own padding — max-height:0 on #clients would still leave a 170px-tall
+   empty strip (85px top + 85px bottom) showing the page background behind
+   it, which is exactly the white gap this was built to avoid. Padding on
+   the child isn't subject to that floor: when #clients collapses to 0 it
+   clips the wrap, padding included, right along with the content. ---- */
 #clients{
-  padding:85px 0;overflow:hidden;
+  padding:0;overflow:hidden;
   transition:max-height .6s cubic-bezier(.22,.61,.36,1),opacity .4s ease;
 }
-/* padding is never animated — with max-height:0 and overflow:hidden the
-   whole border box (padding included) is already clipped to nothing, so
-   there's no need to also transition padding down to 0. Doing that too
-   caused a real bug: reading scrollHeight to find the open target landed
-   mid-way through the padding's own transition, before it had animated
-   back in, so the measured height came up short by exactly the padding
-   and the bottom of the section's content (the client names) got cut off. */
+#clients>.wrap{padding-top:85px;padding-bottom:85px}
 #clients.clients-collapsed{max-height:0;opacity:0;pointer-events:none}
 #clients.clients-expanding,#clients.clients-collapsing{opacity:1}
 #clients.clients-open{opacity:1}
 @media(max-width:850px){
-  #clients{padding:60px 0}
+  #clients>.wrap{padding-top:60px;padding-bottom:60px}
 }
 
 /* ---- Footer, homepage trial only: four equal columns instead of the

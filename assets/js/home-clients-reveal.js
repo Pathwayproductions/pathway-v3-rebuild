@@ -31,34 +31,82 @@
   clientsSection.setAttribute('aria-hidden', 'true');
   clientsSection.inert = true;
 
-  // Reveal the "Meet Our Clients" button only once the curtain reports
-  // itself open — watched via its data-state attribute rather than
-  // hooking the curtain button's own click handler, so this stays
-  // decoupled from main.js.
-  var unlocked = false;
-  function checkUnlock() {
-    if (unlocked || curtainAnswer.getAttribute('data-state') !== 'revealed') return;
-    unlocked = true;
-    // Let the curtain's own open animation and count-up settle first,
-    // so the button arrives after the milestones have actually landed.
-    setTimeout(function () {
-      unlockRow.classList.add('is-unlocked');
-      unlockRow.inert = false;
-    }, reduced ? 0 : 850);
-  }
-  checkUnlock();
-  new MutationObserver(checkUnlock).observe(curtainAnswer, {
-    attributes: true,
-    attributeFilter: ['data-state']
-  });
-
   var expanded = false;
+  var unlockTimer = null;
 
   function setLabel() {
     if (!label) return;
     label.textContent = expanded
       ? (openBtn.dataset.labelOn || 'Take a Bow')
       : (openBtn.dataset.labelOff || 'Meet Our Clients');
+  }
+
+  // Instantly resets everything to closed, no transition — used when the
+  // curtain itself closes and takes "Meet Our Clients" away with it while
+  // the clients section happens to be open. A direct click on the button
+  // still gets the full animated close in the click handler below; this is
+  // only for the secondary case where the button disappears out from under
+  // an open section.
+  function snapClosed() {
+    clientsSection.removeEventListener('transitionend', onOpenEnd);
+    clientsSection.removeEventListener('transitionend', onCloseEnd);
+    clientsSection.classList.remove('clients-open', 'clients-expanding', 'clients-collapsing');
+    clientsSection.classList.add('clients-collapsed');
+    clientsSection.style.maxHeight = '';
+    clientsSection.setAttribute('aria-hidden', 'true');
+    clientsSection.inert = true;
+    clientsGrid.setAttribute('data-state', 'hidden');
+    expanded = false;
+    openBtn.setAttribute('aria-expanded', 'false');
+    setLabel();
+  }
+
+  // The "Meet Our Clients" button tracks the curtain both ways — it
+  // appears once the curtain reports itself open, and disappears again the
+  // moment the curtain closes, watched via data-state rather than hooking
+  // the curtain button's own click handler, so this stays decoupled from
+  // main.js. If the clients section happened to be open when the curtain
+  // closes, it closes right along with the button that controls it.
+  function syncUnlock() {
+    var isUp = curtainAnswer.getAttribute('data-state') === 'revealed';
+    if (isUp) {
+      if (unlockRow.classList.contains('is-unlocked') || unlockTimer) return;
+      // Let the curtain's own open animation and count-up settle first,
+      // so the button arrives after the milestones have actually landed.
+      unlockTimer = setTimeout(function () {
+        unlockRow.classList.add('is-unlocked');
+        unlockRow.inert = false;
+        unlockTimer = null;
+      }, reduced ? 0 : 850);
+    } else {
+      if (unlockTimer) { clearTimeout(unlockTimer); unlockTimer = null; }
+      unlockRow.classList.remove('is-unlocked');
+      unlockRow.inert = true;
+      if (expanded) snapClosed();
+    }
+  }
+  syncUnlock();
+  new MutationObserver(syncUnlock).observe(curtainAnswer, {
+    attributes: true,
+    attributeFilter: ['data-state']
+  });
+
+  function onOpenEnd(e) {
+    if (e.target !== clientsSection || e.propertyName !== 'max-height') return;
+    clientsSection.removeEventListener('transitionend', onOpenEnd);
+    clientsSection.style.maxHeight = 'none';
+    clientsSection.classList.remove('clients-expanding');
+    clientsSection.classList.add('clients-open');
+    clientsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function onCloseEnd(e) {
+    if (e.target !== clientsSection || e.propertyName !== 'max-height') return;
+    clientsSection.removeEventListener('transitionend', onCloseEnd);
+    clientsSection.classList.remove('clients-collapsing');
+    clientsSection.classList.add('clients-collapsed');
+    clientsSection.setAttribute('aria-hidden', 'true');
+    clientsSection.inert = true;
   }
 
   openBtn.addEventListener('click', function () {
@@ -92,14 +140,7 @@
       clientsSection.classList.add('clients-expanding');
       void clientsSection.offsetHeight; // force reflow before expanding
       clientsSection.style.maxHeight = openTarget + 'px';
-      clientsSection.addEventListener('transitionend', function onOpen(e) {
-        if (e.target !== clientsSection || e.propertyName !== 'max-height') return;
-        clientsSection.removeEventListener('transitionend', onOpen);
-        clientsSection.style.maxHeight = 'none';
-        clientsSection.classList.remove('clients-expanding');
-        clientsSection.classList.add('clients-open');
-        clientsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      clientsSection.addEventListener('transitionend', onOpenEnd);
     } else {
       clientsGrid.setAttribute('data-state', 'hidden');
       clientsSection.classList.remove('clients-open');
@@ -115,14 +156,7 @@
       void clientsSection.offsetHeight; // force reflow before collapsing
       clientsSection.classList.add('clients-collapsing');
       clientsSection.style.maxHeight = '0px';
-      clientsSection.addEventListener('transitionend', function onClose(e) {
-        if (e.target !== clientsSection || e.propertyName !== 'max-height') return;
-        clientsSection.removeEventListener('transitionend', onClose);
-        clientsSection.classList.remove('clients-collapsing');
-        clientsSection.classList.add('clients-collapsed');
-        clientsSection.setAttribute('aria-hidden', 'true');
-        clientsSection.inert = true;
-      });
+      clientsSection.addEventListener('transitionend', onCloseEnd);
     }
   });
 })();
