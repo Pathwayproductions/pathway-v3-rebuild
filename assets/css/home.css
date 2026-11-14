@@ -96,10 +96,10 @@
   position:relative;overflow:hidden;min-height:300px;padding:38px;
   border:1px solid #e3e3df;border-radius:14px;background:#fff;
   display:flex;flex-direction:column;justify-content:space-between;
-  box-shadow:0 1px 2px rgba(18,24,27,.04);
+  box-shadow:0 14px 32px rgba(18,24,27,.1);
   transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease;
 }
-.card:hover{box-shadow:0 26px 50px rgba(18,24,27,.12);transform:translateY(-4px);border-color:#e3e3df}
+.card:hover{box-shadow:0 26px 50px rgba(18,24,27,.16);transform:translateY(-4px);border-color:#e3e3df}
 .card-icon{
   position:absolute;top:30px;right:30px;width:50px;height:50px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
@@ -110,9 +110,83 @@
 .card h3{font-family:var(--serif);font-size:38px;font-weight:400;letter-spacing:-1px;line-height:1.1;margin:14px 0}
 .card p{max-width:330px;font-size:15px;color:#51585c}
 
+/* ---- Second pillar (Digital Marketing) gets the filled, dark treatment
+   used elsewhere on the page for the "pivot" element in a pair/row (the
+   step--feature card, the v3-capability--feature cell) — so the two
+   specialisms read as distinct rather than duplicate boxes. ---- */
+.card--dark{
+  background:var(--ink);border-color:transparent;
+  box-shadow:0 22px 48px rgba(10,20,25,.32);
+}
+.card--dark:hover{box-shadow:0 30px 60px rgba(10,20,25,.4);border-color:transparent}
+.card--dark .card-icon{background:rgba(255,255,255,.1);color:#9ad4e4}
+.card--dark .tag{color:#9ad4e4}
+.card--dark h3{color:#fff}
+.card--dark p{color:var(--on-dark-muted)}
+.card--dark .link{color:#9ad4e4}
+
 @media(max-width:850px){
   .card-icon{top:26px;right:26px;width:44px;height:44px}
   .card-icon svg{width:21px;height:21px}
+}
+
+/* ---- Section 05: now a single-column CTA — the client names that used
+   to share this section have their own section above it. ---- */
+.contact-cta{max-width:600px}
+
+/* ---- Clients section: same reveal-button mechanism as the "by the
+   numbers" curtain above it, but the content underneath arrives with a
+   different, more celebratory motion — names dropping in with a little
+   life in them, rather than a curtain parting — since what's revealed
+   here is people, not a count. ---- */
+.clients-reveal-trigger-wrap{display:flex;justify-content:center;margin:40px 0 0}
+.pi-reveal-btn--burst .pi-burst-ray{
+  stroke-dasharray:12;stroke-dashoffset:12;opacity:.45;
+  transition:stroke-dashoffset .4s cubic-bezier(.22,1.6,.36,1),opacity .3s ease;
+}
+.pi-reveal-btn--burst .pi-burst-rays line:nth-child(2){transition-delay:.03s}
+.pi-reveal-btn--burst .pi-burst-rays line:nth-child(3){transition-delay:.06s}
+.pi-reveal-btn--burst .pi-burst-rays line:nth-child(4){transition-delay:.09s}
+.pi-reveal-btn--burst .pi-burst-rays line:nth-child(5){transition-delay:.12s}
+.pi-reveal-btn--burst .pi-burst-rays line:nth-child(6){transition-delay:.15s}
+.pi-reveal-btn--burst[aria-expanded="true"] .pi-burst-ray{stroke-dashoffset:0;opacity:1}
+
+.clients-reveal{position:relative;margin-top:10px;min-height:70px}
+.clients-reveal-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 56px;padding:46px 10px 10px}
+.clients-reveal .client-marquee-caption{text-align:center}
+.clients-reveal[data-state] .client-wordmark{
+  display:inline-block;
+  transition:opacity .5s cubic-bezier(.17,.89,.32,1.49),transform .5s cubic-bezier(.17,.89,.32,1.49);
+  transition-delay:calc(var(--d,0) * 110ms);
+}
+.clients-reveal[data-state="hidden"] .client-wordmark{opacity:0;transform:translateY(-22px) rotate(-3deg) scale(.9)}
+.clients-reveal[data-state="revealed"] .client-wordmark{opacity:1;transform:translateY(0) rotate(0) scale(1)}
+.clients-reveal[data-state="hidden"] .client-marquee-caption,
+.clients-reveal[data-state="revealed"] .client-marquee-caption{
+  transition:opacity .4s ease .35s;
+}
+.clients-reveal[data-state="hidden"] .client-marquee-caption{opacity:0}
+.clients-reveal[data-state="revealed"] .client-marquee-caption{opacity:1}
+.clients-reveal.cp-reduced-motion .client-wordmark,
+.clients-reveal.cp-reduced-motion .client-marquee-caption{transition:opacity .2s linear !important;transform:none !important}
+.clients-reveal.cp-reduced-motion[data-state="hidden"] .client-wordmark{opacity:.15;transform:none}
+
+/* ---- Footer, homepage trial only: four equal columns instead of the
+   site-wide three (which run 9/12/7 links deep and read as mismatched),
+   trimmed to each area's main links, with a fourth "Get in Touch" column
+   carrying the phone numbers and social links that used to sit above the
+   form. Scoped to --home so the other 34 pages' shared footer markup and
+   layout are untouched. ---- */
+.footer-sitemap--home{grid-template-columns:repeat(4,1fr)}
+.footer-col--touch .footer-contact-phones{margin-top:0}
+@media(max-width:850px){
+  .footer-sitemap--home{grid-template-columns:1fr 1fr}
+  .footer-sitemap--home .footer-col:nth-child(3){grid-column:auto;border-top:none;padding-top:0;margin-top:0}
+  .footer-sitemap--home .footer-col--touch{grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;margin-top:4px}
+}
+@media(max-width:480px){
+  .footer-sitemap--home{grid-template-columns:1fr}
+  .footer-sitemap--home .footer-col--touch{grid-column:auto;border-top:none;padding-top:0;margin-top:0}
 }
 
 @media(max-width:850px){
