@@ -159,7 +159,30 @@
    not a count. ---- */
 .clients-intro{max-width:420px;margin:0 auto;text-align:center}
 .clients-intro p{font-size:15px;color:var(--on-dark-muted);margin:10px 0 0}
-.clients-reveal-trigger-wrap{display:flex;justify-content:center;margin:34px 0 0}
+
+/* ---- "Meet Our Clients" unlock row: lives under the stats grid, inside
+   the "By the numbers" section, and stays collapsed to nothing (the
+   button itself is also invisible until home-clients-reveal.js enhances
+   it — same display:none-until-enhanced rule every reveal trigger on
+   this site follows) until the curtain is raised. Grid-aligned to the
+   stats row above it and parked under column 2 — "Clients Served" — on
+   purpose, so the button reads as following on from that specific
+   number rather than the row in general. ---- */
+.clients-unlock-row{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  max-height:0;opacity:0;overflow:hidden;visibility:hidden;
+  transition:opacity .5s ease,max-height .6s ease,visibility 0s linear 0s;
+}
+.clients-unlock-row.is-unlocked{max-height:200px;opacity:1;visibility:visible}
+.clients-unlock-wrap{grid-column:2;display:flex;justify-content:center;padding-top:26px}
+@media(max-width:800px){
+  .clients-unlock-row{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .clients-unlock-row{grid-template-columns:1fr}
+  .clients-unlock-wrap{grid-column:1}
+}
+
 .pi-reveal-btn--burst .pi-burst-ray{
   stroke-dasharray:12;stroke-dashoffset:12;opacity:.45;
   transition:stroke-dashoffset .4s cubic-bezier(.22,1.6,.36,1),opacity .3s ease;
@@ -190,6 +213,32 @@
 .clients-reveal.cp-reduced-motion .client-wordmark,
 .clients-reveal.cp-reduced-motion .client-marquee-caption{transition:opacity .2s linear !important;transform:none !important}
 .clients-reveal.cp-reduced-motion[data-state="hidden"] .client-wordmark{opacity:.15;transform:none}
+
+/* ---- The "Our clients" section itself: collapsed to zero height until
+   "Meet Our Clients" is clicked, so it isn't just faded out — it isn't
+   there at all, and the contact section below moves up to fill the gap.
+   home-clients-reveal.js adds .clients-collapsed on load (JS-only, so a
+   no-JS visitor always sees this section normally) and measures the real
+   scrollHeight to animate open/closed, since max-height:none can't be
+   transitioned directly. Padding is listed explicitly as a fixed value
+   (see note below) rather than left to .section's own rule. ---- */
+#clients{
+  padding:85px 0;overflow:hidden;
+  transition:max-height .6s cubic-bezier(.22,.61,.36,1),opacity .4s ease;
+}
+/* padding is never animated — with max-height:0 and overflow:hidden the
+   whole border box (padding included) is already clipped to nothing, so
+   there's no need to also transition padding down to 0. Doing that too
+   caused a real bug: reading scrollHeight to find the open target landed
+   mid-way through the padding's own transition, before it had animated
+   back in, so the measured height came up short by exactly the padding
+   and the bottom of the section's content (the client names) got cut off. */
+#clients.clients-collapsed{max-height:0;opacity:0;pointer-events:none}
+#clients.clients-expanding,#clients.clients-collapsing{opacity:1}
+#clients.clients-open{opacity:1}
+@media(max-width:850px){
+  #clients{padding:60px 0}
+}
 
 /* ---- Footer, homepage trial only: four equal columns instead of the
    site-wide three (which ran 9/12/7 links deep and read as mismatched).
