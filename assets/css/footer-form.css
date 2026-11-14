@@ -1,0 +1,117 @@
+/* ==========================================================================
+   Pathway Productions — Footer "Get in touch" form
+   HubSpot's embedded form (hbspt.forms.create) renders its own markup with
+   its own class names (.hs-form, .hs-input, .hs-button, etc). These rules
+   restyle that markup in place to match the site's design tokens instead
+   of HubSpot's unstyled defaults — no layout of our own to maintain, just
+   the visual skin.
+   ========================================================================== */
+
+.footer-contact {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 48px;
+  padding-bottom: 40px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line);
+}
+
+.footer-contact-text {
+  flex: 0 0 280px;
+}
+.footer-contact-text h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 8px;
+}
+.footer-contact-text p {
+  font-size: 14px;
+  color: var(--muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer-contact-form {
+  flex: 1 1 420px;
+  max-width: 480px;
+}
+
+/* --- HubSpot form markup overrides --- */
+.footer-contact-form .hs-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 14px;
+}
+.footer-contact-form .hs-form-field {
+  flex: 1 1 100%;
+  margin: 0;
+}
+.footer-contact-form .hs-form-field.hs-firstname,
+.footer-contact-form .hs-form-field.hs-lastname {
+  flex: 1 1 calc(50% - 7px);
+}
+.footer-contact-form label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  margin: 0 0 4px;
+}
+.footer-contact-form input[type="text"],
+.footer-contact-form input[type="email"],
+.footer-contact-form input[type="tel"],
+.footer-contact-form textarea,
+.footer-contact-form select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ink);
+  background: #fff;
+}
+.footer-contact-form textarea { resize: vertical; min-height: 56px; }
+.footer-contact-form .hs-error-msgs {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  font-size: 12px;
+  color: #b3261e;
+}
+.footer-contact-form .hs-form-booleancheckbox-display {
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.footer-contact-form .actions {
+  flex: 1 1 100%;
+  margin: 2px 0 0;
+}
+.footer-contact-form .hs-button {
+  border: none;
+  border-radius: 8px;
+  background: var(--blue-btn);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.footer-contact-form .hs-button:hover { background: var(--blue-btn-hover); }
+.footer-contact-form .submitted-message {
+  font-size: 14px;
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .footer-contact { flex-direction: column; gap: 24px; }
+  .footer-contact-text { flex: none; }
+  .footer-contact-form { flex: none; max-width: none; width: 100%; }
+}
