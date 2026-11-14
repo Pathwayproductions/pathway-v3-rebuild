@@ -33,6 +33,42 @@
   line-height: 1.5;
 }
 
+/* --- Phone numbers + social icons, inside the "Get in touch" column --- */
+.footer-contact-phones {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 18px 0 0;
+}
+.footer-contact-phones a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.footer-contact-phones a:hover { color: var(--blue-text); }
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0 0;
+}
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.footer-social a:hover {
+  color: var(--blue-text);
+  border-color: var(--blue-text);
+}
+.footer-social svg { width: 16px; height: 16px; fill: currentColor; }
+
 .footer-contact-form {
   flex: 1 1 420px;
   max-width: 480px;
