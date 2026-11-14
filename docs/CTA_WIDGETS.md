@@ -50,17 +50,24 @@ relative-path depth to `assets/`:
   rather than hardcoded again — avoids reintroducing the live site's
   duplicate-tag problem.
 
-## Open gap — needs a HubSpot form ID
+## HubSpot form — wired to the existing "Contact Us" form
 
-The sticky form currently has nowhere to submit to. `GLOBAL.hubspotFormId`
-in `cta-widgets.js` is `null` on purpose: the widget renders normally, but
-submission shows "This form isn't connected yet — please call or WhatsApp
-us instead." rather than failing silently or inventing an endpoint.
+`GLOBAL.hubspotFormId` is set to `37061c22-4d48-4a76-80de-fc8b6425c50d`,
+the portal's existing "Contact Us" form (reused rather than creating a new
+one), submitted via the portal's `na2` region API host
+(`api-na2.hsforms.com` — matches the `js-na2.hsforms.net` the form's own
+embed snippet loads from; the default `api.hsforms.com` host would not
+necessarily accept submissions for a regional portal).
 
-To wire it up: create (or reuse) a HubSpot form with fields `firstname`,
-`phone`, `email`, `message`, and a `service_required` property (mapped to
-the same "Service Required" picklist), then drop its form GUID into
-`GLOBAL.hubspotFormId`. The portal ID (`3873487`) is already set.
+**Assumption to verify:** the sticky form posts fields named `firstname`,
+`phone`, `email`, `message`, and `service_required`. These are standard
+HubSpot internal property names, but they've only been confirmed against
+the embed snippet Arun provided, not against this specific form's actual
+field list in HubSpot — if "Contact Us" uses different internal names (or
+doesn't have a `service_required` field), those values may not land on
+the submitted contact/deal. Worth a live test submission once this is
+deployed, checking the resulting HubSpot contact record for all five
+fields before trusting the pipeline.
 
 ## Not yet done
 

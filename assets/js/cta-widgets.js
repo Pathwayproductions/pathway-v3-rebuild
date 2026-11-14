@@ -27,11 +27,14 @@
 
   var GLOBAL = {
     hubspotPortalId: '3873487',
-    // HubSpot form GUID the sticky form submits to. Left null until a form
-    // is created in HubSpot for this purpose — see docs/CTA_WIDGETS.md.
-    // The widget still renders with the field null; submission is disabled
-    // with a clear on-screen message instead of failing silently.
-    hubspotFormId: null,
+    // HubSpot form GUID the sticky form submits to — the portal's existing
+    // "Contact Us" form, reused rather than creating a new one. See
+    // docs/CTA_WIDGETS.md for the field-name assumption this relies on.
+    hubspotFormId: '37061c22-4d48-4a76-80de-fc8b6425c50d',
+    // The portal's forms are served from the na2 region (js-na2.hsforms.net
+    // in the form's own embed snippet) — the submission endpoint has to
+    // match that region, not the default global one.
+    hubspotRegion: 'na2',
     whatsappNumber: '918056994433',
     whatsappMessage: "Hi, I'd like to know more about your services."
   };
@@ -177,7 +180,8 @@
     statusEl.textContent = 'Sending…';
     statusEl.className = 'ctaw-sticky-status';
 
-    var endpoint = 'https://api.hsforms.com/submissions/v3/integration/submit/' +
+    var apiHost = cfg.hubspotRegion ? 'api-' + cfg.hubspotRegion + '.hsforms.com' : 'api.hsforms.com';
+    var endpoint = 'https://' + apiHost + '/submissions/v3/integration/submit/' +
       encodeURIComponent(cfg.hubspotPortalId) + '/' + encodeURIComponent(cfg.hubspotFormId);
 
     fetch(endpoint, {
