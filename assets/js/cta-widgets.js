@@ -207,7 +207,12 @@
 
   function init() {
     var waBtn = buildWhatsApp();
-    if (waBtn) document.body.appendChild(waBtn);
+    if (waBtn) {
+      document.body.appendChild(waBtn);
+      // WhatsApp is a small, expected, always-there control — unlike the
+      // sticky form it has no reveal delay, it's just visible right away.
+      requestAnimationFrame(function () { waBtn.classList.add('is-visible'); });
+    }
 
     var sticky = buildStickyBar();
     document.body.appendChild(sticky);
