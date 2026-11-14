@@ -221,7 +221,16 @@
 </script>
 
 <main>
-  <section class="hero-light">
+  <section class="hero-photo hero-full">
+    <div class="hero-photo-media">
+      <picture>
+        <source srcset="../../assets/images/2d-animation/animation-review-session.webp" type="image/webp">
+        <img src="../../assets/images/2d-animation/animation-review-session.jpg"
+             alt="Director and animator reviewing a 2D animated character sequence on screen, with storyboard panels on the wall behind them"
+             style="object-position:center 42%;"
+             fetchpriority="high" loading="eager">
+      </picture>
+    </div>
     <div class="wrap">
       <div class="eyebrow">2D ANIMATION</div>
       <h1>Big Ideas.<br><em>Beautifully Simplified.</em></h1>
@@ -235,44 +244,57 @@
     <div class="wrap">
       <div class="eyebrow">01 / What We Create</div>
       <h2>Three Animated Formats.</h2>
-      
-      <div class="step-row step-row--3">
-        <div class="step"><span class="num">01</span><h3>Animated Explainers</h3><p>Visual narratives that simplify technical, educational or business topics.</p></div>
-        <div class="step"><span class="num">02</span><h3>Whiteboard Animation</h3><p>Step-by-step visual explanation with a hand-drawn or illustrated storytelling approach.</p></div>
-        <div class="step"><span class="num">03</span><h3>Motion Graphics</h3><p>Animated typography, charts, diagrams and brand elements for campaigns, presentations and digital communication.</p></div>
+
+      <div class="svc-grid svc-grid--3">
+        <article class="svc-card"><div><h3>Animated Explainers</h3><p>Visual narratives that simplify technical, educational or business topics.</p></div></article>
+        <article class="svc-card svc-card--feature"><div><h3>Whiteboard Animation</h3><p>Step-by-step visual explanation with a hand-drawn or illustrated storytelling approach.</p></div></article>
+        <article class="svc-card"><div><h3>Motion Graphics</h3><p>Animated typography, charts, diagrams and brand elements for campaigns, presentations and digital communication.</p></div></article>
       </div>
     </div>
   </section>
+
+  <!-- Video scroll: structure only, no real links yet — Arun will supply
+       them; placeholder tiles instead of invented portfolio videos. -->
   <section class="section bg-paper">
     <div class="wrap">
-      <div class="eyebrow">02 / Our Approach</div>
+      <div class="eyebrow">02 / See It in Motion</div>
+      <h2>2D Animation in Motion.</h2>
+      <div class="video-carousel" aria-label="2D animation examples (pending)">
+        <div class="video-carousel__track">
+          <article class="video-card">
+            <div class="video-card__visual video-card__visual--pending">
+              <span class="video-card__play" aria-hidden="true">▶</span>
+            </div>
+            <span class="video-card__title">Video pending</span>
+          </article>
+          <article class="video-card">
+            <div class="video-card__visual video-card__visual--pending">
+              <span class="video-card__play" aria-hidden="true">▶</span>
+            </div>
+            <span class="video-card__title">Video pending</span>
+          </article>
+          <article class="video-card">
+            <div class="video-card__visual video-card__visual--pending">
+              <span class="video-card__play" aria-hidden="true">▶</span>
+            </div>
+            <span class="video-card__title">Video pending</span>
+          </article>
+        </div>
+      </div>
+      <div class="review-note">2D animation examples for this page are pending — final approved video links will be added here.</div>
+    </div>
+  </section>
+
+  <section class="section bg-white">
+    <div class="wrap">
+      <div class="eyebrow">03 / Our Approach</div>
       <h2>Concept to Delivery.</h2>
       <div class="step-row step-row--3">
         <div class="step"><span class="num">01</span><h3>Concept &amp; Script</h3></div>
         <div class="step"><span class="num">02</span><h3>Style Frames</h3></div>
-        <div class="step"><span class="num">03</span><h3>Storyboard</h3></div>
+        <div class="step step--feature"><span class="num">03</span><h3>Storyboard</h3></div>
         <div class="step"><span class="num">04</span><h3>Animation</h3></div>
         <div class="step"><span class="num">05</span><h3>Sound &amp; Final Delivery</h3></div>
-      </div>
-    </div>
-  </section>
-  <section class="section bg-white">
-    <div class="wrap">
-      <div class="eyebrow">03 / In the Studio</div>
-      <h2>Reviewed Frame by Frame.</h2>
-
-      <div class="editorial-rows">
-        <article class="editorial-row">
-          <div class="editorial-row-media">
-            <img data-no-hero-pick src="../../assets/images/2d-animation/animation-review-session.webp"
-                 alt="Director and animator reviewing a 2D animated character sequence on screen, with storyboard panels on the wall behind them">
-          </div>
-          <div class="editorial-row-text">
-            <span class="num">01</span>
-            <h3>Storyboard to Screen</h3>
-            <p>Our team reviews each sequence against the storyboard, refining character motion and timing before it goes to final render.</p>
-          </div>
-        </article>
       </div>
     </div>
   </section>
