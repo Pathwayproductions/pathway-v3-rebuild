@@ -1,19 +1,19 @@
 /**
- * Pathway Productions — "Book a call" popup (homepage trial only)
+ * Pathway Productions — "Book a call" popup (homepage only)
  *
- * Replaces the sitewide sticky mini contact-form bar on this page (see
- * cta-widgets.js's disableStickyBar flag, set below in index.html) with a
- * proactive nudge toward booking a HubSpot Meetings slot — a different
+ * A proactive nudge toward booking a HubSpot Meetings slot — a different
  * alternate path than the enquiry forms on the page, not a duplicate of one.
+ * Opens the same booking modal as the sitewide header "Book a call" button,
+ * via window.PathwayMeetings.open() (assets/js/meeting-widget.js, which must
+ * be loaded on this page before this file).
  *
  * Behaviour:
  *   - Slides in bottom-left after a short delay, or earlier if the visitor
  *     scrolls halfway down the page — same dual-trigger pattern the old
  *     sticky bar used, since it already matched how people actually read
  *     this page.
- *   - "Book a call" opens the HubSpot Meetings scheduler in an on-page modal
- *     (the official embed snippet HubSpot generates for this meeting link),
- *     rather than sending the visitor away to a separate HubSpot page.
+ *   - "Book a call" opens the shared booking modal rather than sending the
+ *     visitor away to a separate HubSpot page.
  *   - Dismissing it (the × or booking a call) remembers the choice in
  *     localStorage so it never nags a returning visitor again.
  *   - Yields to HubSpot's live chat widget if that's open, same courtesy
@@ -25,10 +25,6 @@
   var STORAGE_KEY = 'pw_meeting_popup_v1';
   var DELAY_MS = 18000;
   var SCROLL_PCT = 50;
-
-  // From the embed code HubSpot generated for this meeting link.
-  var MEETINGS_SRC = 'https://meetings-na2.hubspot.com/karthik-ravi?embed=true';
-  var MEETINGS_SCRIPT = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
 
   function dismissedBefore() {
     try {
@@ -72,37 +68,11 @@
     return el;
   }
 
-  function buildModal() {
-    var el = document.createElement('div');
-    el.className = 'meet-modal';
-    el.setAttribute('role', 'dialog');
-    el.setAttribute('aria-modal', 'true');
-    el.setAttribute('aria-label', 'Book a call with Pathway Productions');
-    el.innerHTML =
-      '<div class="meet-modal-backdrop"></div>' +
-      '<div class="meet-modal-panel">' +
-        '<button type="button" class="meet-modal-close" aria-label="Close">&times;</button>' +
-        '<div class="meetings-iframe-container" data-src="' + MEETINGS_SRC + '"></div>' +
-      '</div>';
-    document.body.appendChild(el);
-    return el;
-  }
-
-  var meetingsScriptLoaded = false;
-  function ensureMeetingsScript() {
-    if (meetingsScriptLoaded) return;
-    meetingsScriptLoaded = true;
-    var s = document.createElement('script');
-    s.src = MEETINGS_SCRIPT;
-    s.async = true;
-    document.body.appendChild(s);
-  }
-
   function init() {
     if (dismissedBefore()) return;
+    if (!window.PathwayMeetings) return; // meeting-widget.js failed to load — fail quiet, no broken popup
 
     var popup = buildPopup();
-    var modal = null;
 
     function closePopup(remember) {
       popup.classList.remove('is-visible');
@@ -112,26 +82,12 @@
       }, 350);
     }
 
-    function openModal() {
-      if (!modal) modal = buildModal();
-      ensureMeetingsScript();
-      modal.classList.add('is-open');
-      document.body.classList.add('meet-modal-open');
-      closePopup(true);
-    }
-
     popup.querySelector('.meet-popup-close').addEventListener('click', function () {
       closePopup(true);
     });
-    popup.querySelector('.meet-popup-cta').addEventListener('click', openModal);
-
-    document.addEventListener('click', function (e) {
-      if (!modal || !modal.classList.contains('is-open')) return;
-      if (e.target === modal.querySelector('.meet-modal-backdrop') ||
-          e.target.closest('.meet-modal-close')) {
-        modal.classList.remove('is-open');
-        document.body.classList.remove('meet-modal-open');
-      }
+    popup.querySelector('.meet-popup-cta').addEventListener('click', function () {
+      window.PathwayMeetings.open();
+      closePopup(true);
     });
 
     var revealed = false;

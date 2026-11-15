@@ -1,19 +1,13 @@
 /* ==========================================================================
-   Pathway Productions — "Book a call" popup (homepage trial only)
-   Replaces the sitewide sticky mini contact-form bar (cta-widgets.js,
-   disabled on this page via window.CTAW_CONFIG.disableStickyBar) with a
-   proactive nudge toward booking a HubSpot Meetings slot instead of filling
-   in another form. Deliberately NOT styled or labelled like a chat bubble —
-   that's what made the old sticky bar read as "the chat thing" by mistake.
+   Pathway Productions — "Book a call" popup (homepage only)
+   A proactive nudge toward booking a HubSpot Meetings slot instead of
+   filling in another form. Deliberately NOT styled or labelled like a chat
+   bubble — that's what made the old sticky bar read as "the chat thing" by
+   mistake. Opens the same booking modal as the sitewide header "Book a
+   call" button (assets/css/meeting-widget.css, which also defines the
+   --meet-* variables used below and must be loaded on this page alongside
+   this file).
    ========================================================================== */
-
-:root {
-  --meet-blue: #269CC2;
-  --meet-ink: #292D31;
-  --meet-muted: #666D70;
-  --meet-shadow: 0 10px 30px rgba(41, 45, 49, 0.18);
-  --meet-radius: 14px;
-}
 
 /* ---- The slide-in invite card -------------------------------------------- */
 .meet-popup {
@@ -109,65 +103,4 @@
 
 @media (max-width: 480px) {
   .meet-popup { left: 12px; width: calc(100vw - 24px); bottom: 12px; padding: 18px 16px 16px; }
-}
-
-/* ---- The booking modal (HubSpot Meetings embed) --------------------------- */
-.meet-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-.meet-modal.is-open { display: flex; }
-
-.meet-modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(20, 24, 28, 0.55);
-}
-
-.meet-modal-panel {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 880px;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 30px 70px rgba(10, 20, 25, 0.4);
-  padding: 8px;
-}
-
-.meet-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 2;
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  color: var(--meet-ink);
-  font-size: 18px;
-  line-height: 1;
-  cursor: pointer;
-}
-.meet-modal-close:hover { background: #F1F3F5; }
-
-/* The HubSpot embed script sizes its own iframe once it loads; this just
-   gives it a sane minimum so the panel doesn't collapse to nothing while
-   the calendar is still fetching. */
-.meetings-iframe-container { min-height: 480px; }
-
-body.meet-modal-open { overflow: hidden; }
-
-@media (max-width: 600px) {
-  .meet-modal { padding: 0; }
-  .meet-modal-panel { max-width: 100%; max-height: 100vh; height: 100%; border-radius: 0; }
 }

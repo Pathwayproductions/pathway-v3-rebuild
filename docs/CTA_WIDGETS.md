@@ -1,9 +1,33 @@
-# Lead-capture widgets — WhatsApp, HubSpot chat
+# Lead-capture widgets — WhatsApp, HubSpot chat, book-a-call
 
 Added 2026-11-14. Implements, in code, the items from the CTA & Lead-Capture
 Widget Plan that were blocked on WordPress admin access on the live site.
 This is the new build (pathway-v3-rebuild); nothing here touches the live
 pathwayproductions.in site.
+
+## 2026-11-15 update: sitewide "Book a call" header CTA + mobile-only call button
+
+Added a deliberate, always-available way to book a HubSpot Meetings slot,
+separate from the homepage's proactive popup (which nudges people who
+weren't necessarily looking to talk). Lives in the header on all 35 pages:
+
+- **Desktop/tablet:** a second button next to "Get in Touch ↗", styled the
+  same (`.outline`) — "Book a call". Opens the booking modal in place, no
+  page navigation.
+- **Mobile:** the same trigger appears as a link inside the hamburger menu
+  (below "Contact"), since the header's `.outline` buttons are hidden at
+  that width to avoid crowding.
+- **Mobile-only tap-to-call icon** next to the Menu button (phone, `tel:`
+  link) — not shown on desktop/tablet by request, since dialling is only a
+  one-tap action on a phone. Uses the main number (+91 80569 94433); the
+  Contact page keeps all three numbers as before.
+
+The modal itself — building the HubSpot Meetings iframe, loading its embed
+script, open/close handling — now lives in `assets/css/meeting-widget.css`
+and `assets/js/meeting-widget.js`, loaded on every page. The homepage's
+popup (`meeting-popup.css`/`.js`) was refactored to call
+`window.PathwayMeetings.open()` instead of building its own copy of the
+modal, so there's exactly one modal implementation sitewide.
 
 ## 2026-11-15 update: sticky mini contact-form bar removed sitewide
 
