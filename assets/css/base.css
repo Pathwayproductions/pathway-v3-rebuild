@@ -177,8 +177,14 @@ h1,h2,h3{margin:0}
 .footrow{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:#697074;font-size:13px;padding-top:28px;border-top:1px solid var(--line);margin-top:40px}
 .footrow a{margin-right:16px}
 
-/* Full sitemap — every page reachable from every page, grouped by section. */
-.footer-sitemap{display:grid;grid-template-columns:1.3fr 1.3fr 1fr;gap:40px}
+/* Full sitemap — every page reachable from every page, grouped by section.
+   Four equal columns site-wide (Creative Productions / Digital Marketing /
+   Strategy & Consulting / Company) — originally trialled on the homepage
+   only, now the standard everywhere so the footer is identical on every
+   page. Digital Marketing's long list splits into its execution services
+   and its strategy/consulting services, so no single column runs away
+   from the others. */
+.footer-sitemap{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
 .footer-col h4{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;font-weight:700;color:#5c6267;margin:0 0 16px}
 .footer-col h4 a{color:inherit}
 .footer-col h4 a:hover{color:var(--blue-text)}
@@ -186,11 +192,9 @@ h1,h2,h3{margin:0}
 .footer-col a:hover{color:var(--blue-text)}
 @media(max-width:850px){
   .footer-sitemap{grid-template-columns:1fr 1fr;gap:28px}
-  .footer-col:nth-child(3){grid-column:1/-1;border-top:1px solid var(--line);padding-top:20px;margin-top:4px}
 }
 @media(max-width:480px){
   .footer-sitemap{grid-template-columns:1fr}
-  .footer-col:nth-child(3){grid-column:auto;border-top:none;padding-top:0;margin-top:0}
 }
 
 /* ---------- Pending-route interception banner (internal review build only) ---------- */

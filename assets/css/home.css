@@ -261,23 +261,11 @@
   #clients>.wrap{padding-top:60px;padding-bottom:60px}
 }
 
-/* ---- Footer, homepage trial only: four equal columns instead of the
-   site-wide three (which ran 9/12/7 links deep and read as mismatched).
-   Every link site-wide is still here — nothing dropped — just regrouped:
-   Digital Marketing's long list splits into its execution services and
-   its strategy/consulting services, so no single column runs away from
-   the others. The page ends here — no "Get in Touch" row below the
-   columns (phone numbers, socials, a second lead form): the homepage's
-   own enquiry form in section 05 is the only one on this page, by
-   request. Scoped to --home so the other 34 pages' shared footer markup
-   and layout are untouched. ---- */
-.footer-sitemap--home{grid-template-columns:repeat(4,1fr)}
-@media(max-width:850px){
-  .footer-sitemap--home{grid-template-columns:1fr 1fr}
-}
-@media(max-width:480px){
-  .footer-sitemap--home{grid-template-columns:1fr}
-}
+/* ---- The four-column footer sitemap trialled here is now the sitewide
+   default — see .footer-sitemap in base.css. The page ends here — no
+   "Get in Touch" row below the columns (phone numbers, socials, a second
+   lead form): the homepage's own enquiry form in section 05 is the only
+   one on this page, by request. ---- */
 
 @media(max-width:850px){
   .hero{min-height:750px;align-items:flex-start}
