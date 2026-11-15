@@ -21,6 +21,15 @@ Whiteboard Animations, Pay Per Click (PPC), Search Engine Optimization
 (SEO), Social Media Marketing (SMM) — matching the list on the old
 HubSpot-embedded form used elsewhere, which does submit successfully.
 
+That fixed the option values but not the actual 400 — a real submission
+afterwards still failed, and the Network tab's Response body named the real
+cause: `"Error in 'fields.service_required'. Required field
+'service_required' is missing"`. The field itself was named wrong — every
+form sent it as `services`, but HubSpot's form expects `service_required`.
+Fixed by renaming that one field's `name` attribute sitewide (35 pages);
+the select's `id` (`hc-services` / `cp-services`) and its option list were
+already correct and untouched.
+
 ## 2026-11-15 update: sitewide header/footer/form consistency pass
 
 At Arun's request — the homepage had picked up header social icons, the
