@@ -85,6 +85,14 @@
   flex-wrap: wrap;
   gap: 12px 14px;
 }
+/* The rule above (a class selector) otherwise beats the browser's own
+   [hidden]{display:none} rule (an attribute selector) in specificity, so
+   lead-form.js setting form.hidden=true on a successful submission had no
+   visible effect — the form (and its "Sending…" button, stuck mid-submit)
+   stayed on screen right alongside the "Thanks" message underneath it. */
+:is(.footer-contact-form, .contact-form-panel) .hs-form[hidden] {
+  display: none;
+}
 :is(.footer-contact-form, .contact-form-panel) .hs-form-field {
   flex: 1 1 100%;
   margin: 0;
