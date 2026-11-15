@@ -1,95 +1,38 @@
 /**
- * Pathway Productions — Lead-capture widgets (WhatsApp, sticky form, chat)
+ * Pathway Productions — WhatsApp floating button
  *
- * What this implements (see docs/CTA_WIDGETS.md for the full rationale):
- *   WEB-003 — sticky form bar and HubSpot chat don't compete for attention:
- *             the sticky bar yields (hides) while chat is open.
- *   WEB-004 — the sticky form carries a hidden "service interest" field,
- *             pre-set per page, mapped to the same HubSpot "Service Required"
- *             property the chatbot now saves to.
- *   WEB-005 — the sticky bar's trigger delay is longer on blog pages than on
- *             service pages, so it doesn't interrupt someone mid-read.
+ * This file used to also build a sitewide sticky mini contact-form bar
+ * labelled "Let's have a chat". Removed 2026-11-15 at Arun's request: it was
+ * easy to mistake for HubSpot's actual live-chat widget (same bottom-corner
+ * popup pattern, chat-style label), while it was really just a compact copy
+ * of the enquiry form already on every page — duplicate coverage, not a
+ * distinct option. See docs/CTA_WIDGETS.md for the full history.
  *
- * No per-page config file is needed: global constants live in GLOBAL below,
- * and each page's service-interest / page-type is resolved from its URL
- * path via SERVICE_BY_PATH / BLOG_PATHS, so adding the two includes below is
- * the only per-page change required:
+ * The homepage's old "book a call" replacement for that slot predates this
+ * removal and is unaffected — see assets/js/meeting-popup.js.
+ *
+ * Only the WhatsApp button remains here. Per-page usage is unchanged:
  *   <link rel="stylesheet" href="assets/css/cta-widgets.css">
  *   <script src="assets/js/cta-widgets.js" defer></script>
  * (adjust the relative path depth to match the page, same as main.js)
  *
- * A page can still override anything by setting window.CTAW_CONFIG before
- * this script runs — useful for a one-off page that needs a different
- * WhatsApp message, etc. Whatever it sets wins over the computed defaults.
- *
- * window.CTAW_CONFIG = { disableStickyBar: true } skips building the sticky
- * form bar entirely (WhatsApp still appears as normal) — for a page that
- * carries its own separate lead-capture popup instead, so the two don't
- * compete. The homepage uses this; every other page is unaffected.
+ * A page can still override the WhatsApp number/message by setting
+ * window.CTAW_CONFIG = { whatsappNumber: '...', whatsappMessage: '...' }
+ * before this script runs.
  */
 (function () {
   'use strict';
 
   var GLOBAL = {
-    hubspotPortalId: '3873487',
-    // HubSpot form GUID the sticky form submits to — the portal's existing
-    // "Contact Us" form, reused rather than creating a new one. See
-    // docs/CTA_WIDGETS.md for the field-name assumption this relies on.
-    hubspotFormId: '37061c22-4d48-4a76-80de-fc8b6425c50d',
-    // The portal's forms are served from the na2 region (js-na2.hsforms.net
-    // in the form's own embed snippet) — the submission endpoint has to
-    // match that region, not the default global one.
-    hubspotRegion: 'na2',
     whatsappNumber: '918056994433',
     whatsappMessage: "Hi, I'd like to know more about your services."
   };
 
-  // Path prefix -> HubSpot "Service Required" picklist value (exact match
-  // to the property's own options, so chat and site forms tag leads the
-  // same way). Longest/most-specific prefix wins; unmatched pages get null.
-  var SERVICE_BY_PATH = [
-    ['/digital-marketing/ppc/', 'Pay Per Click (PPC)'],
-    ['/digital-marketing/seo-ai-search/', 'Search Engine Optimization (SEO)'],
-    ['/digital-marketing/social-media/', 'Social Media Marketing (SMM)'],
-    ['/digital-marketing/web-development/', 'Website Development'],
-    ['/explainer-video-company/2d-animation/', '2D Animations'],
-    ['/explainer-video-company/live-action-explainers/', 'Explainer Videos'],
-    ['/explainer-video-company/ai-video-production/', 'Explainer Videos'],
-    ['/explainer-video-company/', 'Explainer Videos'],
-    ['/ad-films/', 'Ad Films'],
-    ['/corporate-video-productions/', 'Corporate Videos']
-  ];
-  var BLOG_PATH_PREFIX = '/blogs/';
-
-  function resolvePageDefaults() {
-    var path = window.location.pathname;
-    var service = null;
-    var bestLen = 0;
-    for (var i = 0; i < SERVICE_BY_PATH.length; i++) {
-      var prefix = SERVICE_BY_PATH[i][0];
-      if (path.indexOf(prefix) !== -1 && prefix.length > bestLen) {
-        service = SERVICE_BY_PATH[i][1];
-        bestLen = prefix.length;
-      }
-    }
-    return {
-      serviceInterest: service,
-      pageType: path.indexOf(BLOG_PATH_PREFIX) !== -1 ? 'blog' : 'default'
-    };
-  }
-
   var cfg = {};
-  var defaults = resolvePageDefaults();
   var override = window.CTAW_CONFIG || {};
-  [GLOBAL, defaults, override].forEach(function (src) {
+  [GLOBAL, override].forEach(function (src) {
     for (var k in src) { if (src[k] !== undefined) cfg[k] = src[k]; }
   });
-
-  var DELAY_MS = {
-    default: 25000, // matches the HubSpot chat trigger delay already tuned live
-    blog: 45000     // WEB-005: longer delay on blog posts
-  };
-  var SCROLL_PCT = 50; // show after 50% scroll, OR the time delay, whichever first
 
   function onReady(fn) {
     if (document.readyState === 'loading') {
@@ -112,163 +55,11 @@
     return a;
   }
 
-  function buildStickyBar() {
-    var wrap = document.createElement('div');
-    wrap.className = 'ctaw-sticky';
-
-    var bar = document.createElement('div');
-    bar.className = 'ctaw-sticky-bar';
-    bar.setAttribute('role', 'button');
-    bar.setAttribute('tabindex', '0');
-    bar.setAttribute('aria-expanded', 'false');
-    bar.innerHTML =
-      '<span class="ctaw-sticky-bar-label">Let’s have a chat</span>' +
-      '<svg class="ctaw-sticky-bar-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">' +
-      '<path d="M5 7.5l5 5 5-5" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-
-    var body = document.createElement('div');
-    body.className = 'ctaw-sticky-body';
-
-    var form = document.createElement('form');
-    form.className = 'ctaw-sticky-form';
-    form.noValidate = true;
-    form.innerHTML =
-      '<input type="text" name="firstname" placeholder="Name" required autocomplete="name">' +
-      '<input type="tel" name="phone" placeholder="Phone" required autocomplete="tel">' +
-      '<input type="email" name="email" placeholder="Email" required autocomplete="email">' +
-      '<textarea name="message" placeholder="How can we help?" rows="2"></textarea>' +
-      '<button type="submit">Send</button>' +
-      '<div class="ctaw-sticky-status" aria-live="polite"></div>';
-
-    body.appendChild(form);
-    wrap.appendChild(bar);
-    wrap.appendChild(body);
-
-    function toggle() {
-      var open = wrap.classList.toggle('is-open');
-      bar.setAttribute('aria-expanded', String(open));
-    }
-    bar.addEventListener('click', toggle);
-    bar.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-    });
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      submitStickyForm(form);
-    });
-
-    return wrap;
-  }
-
-  function submitStickyForm(form) {
-    var statusEl = form.querySelector('.ctaw-sticky-status');
-    var btn = form.querySelector('button');
-
-    if (!cfg.hubspotFormId || !cfg.hubspotPortalId) {
-      statusEl.textContent = "This form isn't connected yet — please call or WhatsApp us instead.";
-      statusEl.className = 'ctaw-sticky-status is-error';
-      return;
-    }
-
-    var fields = [
-      { name: 'firstname', value: form.firstname.value.trim() },
-      { name: 'phone', value: form.phone.value.trim() },
-      { name: 'email', value: form.email.value.trim() },
-      { name: 'message', value: form.message.value.trim() }
-    ];
-    if (cfg.serviceInterest) {
-      fields.push({ name: 'service_required', value: cfg.serviceInterest });
-    }
-
-    btn.disabled = true;
-    statusEl.textContent = 'Sending…';
-    statusEl.className = 'ctaw-sticky-status';
-
-    var apiHost = cfg.hubspotRegion ? 'api-' + cfg.hubspotRegion + '.hsforms.com' : 'api.hsforms.com';
-    var endpoint = 'https://' + apiHost + '/submissions/v3/integration/submit/' +
-      encodeURIComponent(cfg.hubspotPortalId) + '/' + encodeURIComponent(cfg.hubspotFormId);
-
-    fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fields: fields,
-        context: {
-          pageUri: window.location.href,
-          pageName: document.title
-        }
-      })
-    })
-      .then(function (res) {
-        if (!res.ok) throw new Error('submit_failed');
-        statusEl.textContent = "Thanks — we'll be in touch shortly.";
-        statusEl.className = 'ctaw-sticky-status is-success';
-        form.reset();
-        btn.disabled = false;
-      })
-      .catch(function () {
-        statusEl.textContent = "Something went wrong — please call or WhatsApp us instead.";
-        statusEl.className = 'ctaw-sticky-status is-error';
-        btn.disabled = false;
-      });
-  }
-
   function init() {
     var waBtn = buildWhatsApp();
     if (waBtn) {
       document.body.appendChild(waBtn);
-      // WhatsApp is a small, expected, always-there control — unlike the
-      // sticky form it has no reveal delay, it's just visible right away.
       requestAnimationFrame(function () { waBtn.classList.add('is-visible'); });
-    }
-
-    if (cfg.disableStickyBar) return;
-
-    var sticky = buildStickyBar();
-    document.body.appendChild(sticky);
-
-    var delay = DELAY_MS[cfg.pageType] || DELAY_MS.default;
-    var revealed = false;
-
-    function reveal() {
-      if (revealed) return;
-      revealed = true;
-      sticky.classList.add('is-visible');
-      if (waBtn) waBtn.classList.add('ctaw-yield-bar');
-    }
-
-    var timer = setTimeout(reveal, delay);
-
-    function onScroll() {
-      var scrolled = window.scrollY || window.pageYOffset;
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      if (max > 0 && (scrolled / max) * 100 >= SCROLL_PCT) {
-        clearTimeout(timer);
-        reveal();
-        window.removeEventListener('scroll', onScroll);
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-
-    // WEB-003: yield to HubSpot chat when it opens, come back when it closes.
-    if (window.HubSpotConversations) {
-      wireChatEvents();
-    } else {
-      window.hsConversationsOnReady = window.hsConversationsOnReady || [];
-      window.hsConversationsOnReady.push(wireChatEvents);
-    }
-
-    function wireChatEvents() {
-      if (!window.HubSpotConversations || !window.HubSpotConversations.on) return;
-      window.HubSpotConversations.on('widgetOpen', function () {
-        sticky.classList.add('ctaw-yield-chat');
-        if (waBtn) waBtn.classList.remove('ctaw-yield-bar');
-      });
-      window.HubSpotConversations.on('widgetClosed', function () {
-        sticky.classList.remove('ctaw-yield-chat');
-        if (waBtn && sticky.classList.contains('is-visible')) waBtn.classList.add('ctaw-yield-bar');
-      });
     }
   }
 
