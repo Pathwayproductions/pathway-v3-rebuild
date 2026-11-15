@@ -21,6 +21,11 @@
  * A page can still override anything by setting window.CTAW_CONFIG before
  * this script runs — useful for a one-off page that needs a different
  * WhatsApp message, etc. Whatever it sets wins over the computed defaults.
+ *
+ * window.CTAW_CONFIG = { disableStickyBar: true } skips building the sticky
+ * form bar entirely (WhatsApp still appears as normal) — for a page that
+ * carries its own separate lead-capture popup instead, so the two don't
+ * compete. The homepage uses this; every other page is unaffected.
  */
 (function () {
   'use strict';
@@ -217,6 +222,8 @@
       // sticky form it has no reveal delay, it's just visible right away.
       requestAnimationFrame(function () { waBtn.classList.add('is-visible'); });
     }
+
+    if (cfg.disableStickyBar) return;
 
     var sticky = buildStickyBar();
     document.body.appendChild(sticky);
