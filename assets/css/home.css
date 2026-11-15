@@ -240,40 +240,17 @@
    Every link site-wide is still here — nothing dropped — just regrouped:
    Digital Marketing's long list splits into its execution services and
    its strategy/consulting services, so no single column runs away from
-   the others. Below the four columns, a fifth row ("Get in Touch") carries
-   the phone numbers/social links alongside a compact lead-capture form
-   (the same custom form as section 05, see footer-contact-form below),
-   which is also where the font-size mismatch from the earlier column
-   version got fixed (the phone links now match the sitemap links' size).
-   Scoped to --home so the other 34 pages' shared footer markup and
-   layout are untouched. ---- */
+   the others. The page ends here — no "Get in Touch" row below the
+   columns (phone numbers, socials, a second lead form): the homepage's
+   own enquiry form in section 05 is the only one on this page, by
+   request. Scoped to --home so the other 34 pages' shared footer markup
+   and layout are untouched. ---- */
 .footer-sitemap--home{grid-template-columns:repeat(4,1fr)}
-.footer-col--touch-row{
-  grid-column:1/-1;border-top:1px solid var(--line);
-  padding-top:24px;margin-top:6px;
-  display:flex;flex-wrap:wrap;gap:36px 48px;align-items:flex-start;
-}
-.footer-touch-info{flex:1 1 280px}
-.footer-contact-row-inner{display:flex;flex-wrap:wrap;align-items:center;gap:22px 32px;margin-top:4px}
-.footer-contact-row-inner .footer-contact-phones{
-  flex-direction:row;flex-wrap:wrap;gap:4px 22px;margin:0;
-}
-.footer-contact-row-inner .footer-contact-phones a{
-  font-size:13px;font-weight:400;color:#51585c;
-}
-.footer-contact-row-inner .footer-contact-phones a:hover{color:var(--blue-text)}
-.footer-contact-row-inner .footer-social{margin:0}
-/* The footer's own copy of .footer-contact-form (shared skin, see
-   footer-form.css) just needs its width here — a touch narrower than the
-   Contact page/section-05 card since it's sharing the row with the phone
-   numbers, not a whole column to itself. */
-.footer-col--touch-row .footer-contact-form{flex:1 1 380px;max-width:440px}
 @media(max-width:850px){
   .footer-sitemap--home{grid-template-columns:1fr 1fr}
 }
 @media(max-width:480px){
   .footer-sitemap--home{grid-template-columns:1fr}
-  .footer-contact-row-inner{gap:16px}
 }
 
 @media(max-width:850px){
