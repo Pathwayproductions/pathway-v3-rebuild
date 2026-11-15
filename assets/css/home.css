@@ -188,10 +188,16 @@
 .pi-reveal-btn--burst[aria-expanded="true"] .pi-burst-ray{stroke-dashoffset:0;opacity:1}
 
 .clients-reveal{position:relative;margin-top:10px;min-height:70px}
-.clients-reveal-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:16px 56px;padding:46px 10px 10px}
-.clients-reveal .client-marquee-caption{text-align:center}
+.clients-reveal-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+  gap:18px;
+  padding:46px 10px 10px;
+}
+.clients-reveal .client-marquee-caption{text-align:center;margin-top:36px}
 .clients-reveal[data-state] .client-wordmark{
   display:inline-block;
+  width:100%;
   transition:opacity .5s cubic-bezier(.17,.89,.32,1.49),transform .5s cubic-bezier(.17,.89,.32,1.49);
   transition-delay:calc(var(--d,0) * 110ms);
 }
@@ -206,6 +212,27 @@
 .clients-reveal.cp-reduced-motion .client-wordmark,
 .clients-reveal.cp-reduced-motion .client-marquee-caption{transition:opacity .2s linear !important;transform:none !important}
 .clients-reveal.cp-reduced-motion[data-state="hidden"] .client-wordmark{opacity:.15;transform:none}
+
+/* ---- Individual client logo tile --------------------------------------
+   A plain white card behind every logo, regardless of whether that logo's
+   own file has a transparent or an opaque white background — with 24 files
+   from several different sources, that's the one treatment that looks
+   consistent across all of them without editing each file by hand. ---- */
+.client-logo-card{
+  display:flex;align-items:center;justify-content:center;
+  height:60px;padding:10px 18px;
+  background:#fff;border-radius:10px;
+  box-shadow:0 2px 10px rgba(0,0,0,.16);
+}
+.client-logo-card img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
+@media(max-width:850px){
+  .clients-reveal-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;padding:36px 4px 4px}
+  .client-logo-card{height:52px;padding:8px 14px}
+}
+@media(max-width:480px){
+  .clients-reveal-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .client-logo-card{height:46px;padding:7px 10px}
+}
 
 /* ---- The "Our clients" section itself: collapsed to zero height until
    "Meet Our Clients" is clicked, so it isn't just faded out — it isn't
