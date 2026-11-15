@@ -5,6 +5,22 @@ Widget Plan that were blocked on WordPress admin access on the live site.
 This is the new build (pathway-v3-rebuild); nothing here touches the live
 pathwayproductions.in site.
 
+## 2026-11-16 update: form "services" dropdown fixed to match HubSpot's form
+
+Every enquiry form's "What can we help you with?" dropdown (`hc-services` on
+all 34 pages, `cp-services` on the Contact page) sent one of four generic
+values — Video Production, Digital Marketing, Brand Strategy & Consulting,
+Not sure yet. HubSpot's form (portal 3873487, form
+`c0552dea-d52c-4f60-af04-a931e0d8cd62`) is configured with its own fixed
+option list for that field, which these didn't match — the form was
+rejecting every submission with an HTTP 400 ("Something went wrong sending
+this") because of the mismatch, confirmed from the live site via the
+browser's Network tab. Replaced the options sitewide with HubSpot's actual
+list: Ad Films, Corporate Videos, Explainer Videos, 2D Animations,
+Whiteboard Animations, Pay Per Click (PPC), Search Engine Optimization
+(SEO), Social Media Marketing (SMM) — matching the list on the old
+HubSpot-embedded form used elsewhere, which does submit successfully.
+
 ## 2026-11-15 update: sitewide header/footer/form consistency pass
 
 At Arun's request — the homepage had picked up header social icons, the
