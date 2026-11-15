@@ -5,6 +5,46 @@ Widget Plan that were blocked on WordPress admin access on the live site.
 This is the new build (pathway-v3-rebuild); nothing here touches the live
 pathwayproductions.in site.
 
+## 2026-11-15 update: sitewide header/footer/form consistency pass
+
+At Arun's request — the homepage had picked up header social icons, the
+inline "Start a conversation" form and a simplified footer, but the other
+34 pages hadn't caught up. Brought every page in line with the homepage:
+
+- **Header social icons** (Facebook, Instagram, LinkedIn, YouTube) added to
+  all 34 non-homepage pages, same markup and position as the homepage
+  (between the nav and "Get in Touch"). Hidden on mobile everywhere, same
+  as the homepage (`.header-social{display:none}` under 850px in
+  `base.css`) — nothing new needed there.
+- **Inline lead-capture form** replacing every banner-only "Begin a
+  conversation" section: the 27 pages using `.close-cta`, plus three
+  one-off variants (`digital-marketing/amazon-ads` `.cta-split`,
+  `creative-productions` `.cp-final`, `corporate-video-productions`
+  `.img-cta`) were all converted to the homepage's `.wrap.split` +
+  `.contact-form-panel` form, keeping each page's own eyebrow/heading/blurb
+  copy. `amazon-ads` and `corporate-video-productions` each dropped a
+  supporting image from this section to make room for the form — both
+  images are decorative repeats of imagery already used higher up their
+  own page, so nothing is lost. Blogs, Careers and Films had no such
+  section at all; each got a new one with fresh copy (Careers' is the same
+  general enquiry form, not a job-application form — flag to Arun if a
+  dedicated careers form is wanted later).
+- **Footer simplified** on all 34 non-homepage pages to match the
+  homepage's: the `.footer-contact` block (the "Get in touch" heading,
+  phone numbers, social icons and the embedded HubSpot form in
+  `#footer-hs-form`) is gone everywhere. That also removed the
+  `hbspt.forms.create(...)` script block and the
+  `js-na2.hsforms.net/forms/embed/v2.js` include on every page that had
+  them — the `.contact-form-panel` custom forms (lead-form.js) do the same
+  job without the second, differently-styled embed sitting in the footer.
+- **Phone numbers, Contact page only:** removing `.footer-contact`
+  sitewide would also have stripped the Contact page's only place showing
+  the three phone numbers — the one page they're meant to stay on. Added
+  them inline in the Contact page's main form section, next to the
+  existing email line, so they're still visible there and nowhere else.
+- `.contact-alt-email` ("Prefer email?") moved from `home.css` to the
+  shared `footer-form.css` so every page's new form section can use it.
+
 ## 2026-11-15 update: HubSpot live chat removed sitewide
 
 Dropped at Arun's request — its chatflow was set to auto-open on every page

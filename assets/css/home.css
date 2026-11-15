@@ -135,10 +135,9 @@
    renders as a white card floating on the charcoal section (.contact-form-panel,
    shared with the Contact page — see footer-form.css) so it can reuse the
    light-surface input styling from footer-form.css as-is, rather than
-   needing a separate dark-mode skin. ---- */
-.contact-alt-email{font-size:13px;color:var(--on-dark-muted);margin:0}
-.contact-alt-email a{color:#9ad4e4;font-weight:600}
-.contact-alt-email a:hover{color:#fff}
+   needing a separate dark-mode skin. (.contact-alt-email itself now lives in
+   footer-form.css, shared sitewide, since every page's "Begin a conversation"
+   section reuses this same "Prefer email?" line.) ---- */
 
 /* ---- Clients section: a short line and a centered reveal button — no
    big heading, since the names themselves are the content and today
