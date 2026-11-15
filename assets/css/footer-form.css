@@ -90,7 +90,8 @@
   margin: 0;
 }
 :is(.footer-contact-form, .contact-form-panel) .hs-form-field.hs-firstname,
-:is(.footer-contact-form, .contact-form-panel) .hs-form-field.hs-lastname {
+:is(.footer-contact-form, .contact-form-panel) .hs-form-field.hs-lastname,
+:is(.footer-contact-form, .contact-form-panel) .hs-form-field--half {
   flex: 1 1 calc(50% - 7px);
 }
 :is(.footer-contact-form, .contact-form-panel) label {
@@ -130,6 +131,15 @@
   align-items: flex-start;
   gap: 6px;
 }
+:is(.footer-contact-form, .contact-form-panel) .hs-form-booleancheckbox-display input[type="checkbox"] {
+  flex: none;
+  margin: 2px 0 0;
+}
+:is(.footer-contact-form, .contact-form-panel) .field-optional {
+  font-weight: 400;
+  text-transform: none;
+  color: var(--muted);
+}
 :is(.footer-contact-form, .contact-form-panel) .actions {
   flex: 1 1 100%;
   margin: 2px 0 0;
@@ -146,13 +156,46 @@
   transition: background 0.15s ease;
 }
 :is(.footer-contact-form, .contact-form-panel) .hs-button:hover { background: var(--blue-btn-hover); }
+:is(.footer-contact-form, .contact-form-panel) .hs-button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
 :is(.footer-contact-form, .contact-form-panel) .submitted-message {
   font-size: 14px;
   color: var(--ink);
+}
+/* Inline status line for a custom-coded form's own submit feedback (see
+   lead-form.js) — distinct from .submitted-message, which replaces the form
+   entirely on success. This one sits below the button for an error that
+   still leaves the form visible and filled in, so nothing typed is lost. */
+:is(.footer-contact-form, .contact-form-panel) .lead-form-status {
+  flex: 1 1 100%;
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--ink);
+}
+:is(.footer-contact-form, .contact-form-panel) .lead-form-status.is-error {
+  color: #b3261e;
 }
 
 @media (max-width: 760px) {
   .footer-contact { flex-direction: column; gap: 24px; }
   .footer-contact-text { flex: none; }
   .footer-contact-form { flex: none; max-width: none; width: 100%; }
+}
+
+/* ---- Floating white form card: originally homepage-only (home.css), moved
+   here once the Contact page's own on-page form needed the identical
+   treatment. Generic enough for either a dark section (homepage's "Start a
+   conversation") or a light one (the Contact page's bg-paper section) —
+   the shadow gives it definition against either background. ---- */
+.contact-form-panel {
+  background: #fff;
+  border-radius: 14px;
+  padding: 30px 32px;
+  box-shadow: 0 22px 48px rgba(10, 20, 25, .32);
+  align-self: start;
+}
+@media (max-width: 850px) {
+  .contact-form-panel { padding: 26px 24px; }
 }

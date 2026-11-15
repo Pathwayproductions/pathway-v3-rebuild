@@ -193,15 +193,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </section>
   <section class="section bg-paper">
-    <div class="wrap">
-      <div class="eyebrow">What Would You Like to Discuss?</div>
-      <h2>Tell Us About Your Requirement.</h2>
-      <p style="max-width:460px;">Name, email, organisation, area of interest and a short message are all we need to start.</p>
-      <div style="display:flex;align-items:center;gap:14px;font-size:16px;margin:18px 0;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color:var(--blue-text);flex:none;" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m4 6 8 7 8-7"/></svg>
-        <a class="link" href="mailto:contact@pathwayproductions.in">contact@pathwayproductions.in</a>
+    <div class="wrap split">
+      <div>
+        <div class="eyebrow">What Would You Like to Discuss?</div>
+        <h2>Tell Us About Your Requirement.</h2>
+        <p style="max-width:460px;">Name, mobile number, email, the kind of help you need and a short message are all we need to start.</p>
+        <div style="display:flex;align-items:center;gap:14px;font-size:16px;margin:18px 0;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20" style="color:var(--blue-text);flex:none;" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m4 6 8 7 8-7"/></svg>
+          <a class="link" href="mailto:contact@pathwayproductions.in">contact@pathwayproductions.in</a>
+        </div>
       </div>
-      <div class="review-note">This is a review-only page. The enquiry form will be enabled here once backend, consent and tracking checks are complete — email is the working way to reach us in the meantime.</div>
+      <div class="contact-form-panel">
+        <form class="hs-form lead-form" data-lead-form data-portal-id="3873487" data-form-id="c0552dea-d52c-4f60-af04-a931e0d8cd62" data-page-name="Pathway Contact Page" method="post" action="#">
+          <div class="hs-form-field hs-form-field--half">
+            <label for="cp-firstname">First name</label>
+            <input type="text" id="cp-firstname" name="firstname" autocomplete="given-name" required>
+          </div>
+          <div class="hs-form-field hs-form-field--half">
+            <label for="cp-lastname">Last name</label>
+            <input type="text" id="cp-lastname" name="lastname" autocomplete="family-name" required>
+          </div>
+          <div class="hs-form-field hs-form-field--half">
+            <label for="cp-mobile">Mobile number</label>
+            <input type="tel" id="cp-mobile" name="mobilephone" autocomplete="tel" inputmode="tel" required>
+          </div>
+          <div class="hs-form-field hs-form-field--half">
+            <label for="cp-email">Email</label>
+            <input type="email" id="cp-email" name="email" autocomplete="email" required>
+          </div>
+          <div class="hs-form-field">
+            <label for="cp-services">What can we help you with?</label>
+            <select id="cp-services" name="services" required>
+              <option value="" disabled selected>Select a service</option>
+              <option>Video Production</option>
+              <option>Digital Marketing</option>
+              <option>Brand Strategy &amp; Consulting</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="hs-form-field">
+            <label for="cp-message">Tell us about your project <span class="field-optional">(optional)</span></label>
+            <textarea id="cp-message" name="message" rows="4"></textarea>
+          </div>
+          <div class="hs-form-field">
+            <div class="hs-form-booleancheckbox-display">
+              <input type="checkbox" id="cp-consent" required>
+              <label for="cp-consent">I agree to be contacted by Pathway Productions about my enquiry.</label>
+            </div>
+          </div>
+          <div class="actions">
+            <button type="submit" class="hs-button">Send message</button>
+          </div>
+          <p class="lead-form-status" role="status" aria-live="polite" hidden></p>
+        </form>
+        <p class="submitted-message" hidden>Thanks — we'll be in touch within one business day.</p>
+      </div>
     </div>
   </section>
 
@@ -280,6 +326,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </div>
 
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/lead-form.js"></script>
 <script src="../assets/js/consent-banner.js" defer></script>
 <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/3873487.js"></script>
 <script src="../assets/js/cta-widgets.js" defer></script>
