@@ -33,15 +33,6 @@
   pointer-events: auto;
   visibility: visible;
 }
-/* Yield to live HubSpot chat if it's open, same courtesy the old sticky bar
-   gave it — no two floating prompts competing for attention at once. */
-.meet-popup.is-chat-open {
-  opacity: 0;
-  transform: translateY(16px) scale(0.98);
-  pointer-events: none;
-  visibility: hidden;
-}
-
 .meet-popup-close {
   position: absolute;
   top: 10px;

@@ -1,9 +1,27 @@
-# Lead-capture widgets — WhatsApp, HubSpot chat, book-a-call
+# Lead-capture widgets — WhatsApp, book-a-call
 
 Added 2026-11-14. Implements, in code, the items from the CTA & Lead-Capture
 Widget Plan that were blocked on WordPress admin access on the live site.
 This is the new build (pathway-v3-rebuild); nothing here touches the live
 pathwayproductions.in site.
+
+## 2026-11-15 update: HubSpot live chat removed sitewide
+
+Dropped at Arun's request — its chatflow was set to auto-open on every page
+load (so it reappeared on every refresh, not just real new visits), and with
+WhatsApp already covering that same "pop and nudge the visitor" job, the
+chat widget wasn't earning its upkeep (branding, needs active staffing to be
+worth it). That's a HubSpot-account-side display-rule setting, not something
+fixable from the site code, so the loader script is removed instead.
+
+Removed the `<script id="hs-script-loader" ...>` tag
+(`//js.hs-scripts.com/3873487.js`) from all 35 pages, and the dead
+`window.HubSpotConversations` / `hsConversationsOnReady` "yield to chat"
+wiring from `assets/js/meeting-popup.js` and `assets/css/meeting-popup.css`
+(the homepage's "book a call" popup no longer needs to duck out of the way
+of a chat panel that doesn't exist). The HubSpot forms embed on the Contact
+page (`js-na2.hsforms.net/forms/embed/v2.js`, the separate footer form) is
+unrelated and untouched — that's HubSpot Forms, not HubSpot Conversations.
 
 ## 2026-11-15 update: sitewide "Book a call" header CTA + mobile-only call button
 
@@ -52,18 +70,19 @@ The homepage separately replaced this same slot, a day earlier, with a
 - `assets/css/cta-widgets.css` — styling for the floating WhatsApp button.
 - `assets/js/cta-widgets.js` — the WhatsApp button's behaviour. A page only
   needs the two includes below, no per-page config file.
-- HubSpot's chat loader (`//js.hs-scripts.com/3873487.js`) is included on
-  every page. It carries over the live portal's chat settings automatically
-  — including the 25-second trigger delay already fixed there — because that
-  config lives in the HubSpot account, not in site code.
+- `assets/css/meeting-widget.css` / `assets/js/meeting-widget.js` — the
+  sitewide "Book a call" header button and its HubSpot Meetings booking
+  modal (see the update above).
+- No HubSpot live chat anywhere on the site as of 2026-11-15 (see above).
 
 Every one of the 35 built pages now includes, matching the page's existing
 relative-path depth to `assets/`:
 ```html
 <link rel="stylesheet" href="assets/css/cta-widgets.css">
+<link rel="stylesheet" href="assets/css/meeting-widget.css">
 ...
-<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/3873487.js"></script>
 <script src="assets/js/cta-widgets.js" defer></script>
+<script src="assets/js/meeting-widget.js" defer></script>
 ```
 
 ## Behaviour implemented (original sticky-bar build — superseded, see above)

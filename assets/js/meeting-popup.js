@@ -16,8 +16,6 @@
  *     visitor away to a separate HubSpot page.
  *   - Dismissing it (the × or booking a call) remembers the choice in
  *     localStorage so it never nags a returning visitor again.
- *   - Yields to HubSpot's live chat widget if that's open, same courtesy
- *     cta-widgets.js already gives it.
  */
 (function () {
   'use strict';
@@ -108,24 +106,6 @@
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
-
-    // Same courtesy cta-widgets.js gives HubSpot's live chat: don't sit on
-    // top of it if it's open.
-    function wireChatEvents() {
-      if (!window.HubSpotConversations || !window.HubSpotConversations.on) return;
-      window.HubSpotConversations.on('widgetOpen', function () {
-        popup.classList.add('is-chat-open');
-      });
-      window.HubSpotConversations.on('widgetClosed', function () {
-        popup.classList.remove('is-chat-open');
-      });
-    }
-    if (window.HubSpotConversations) {
-      wireChatEvents();
-    } else {
-      window.hsConversationsOnReady = window.hsConversationsOnReady || [];
-      window.hsConversationsOnReady.push(wireChatEvents);
-    }
   }
 
   onReady(init);
