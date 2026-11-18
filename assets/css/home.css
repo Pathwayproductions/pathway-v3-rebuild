@@ -225,36 +225,72 @@
 }
 .client-logo-card img{max-width:100%;max-height:100%;width:auto;height:auto;display:block}
 
-/* ---- The one "open" tile at the end of the client grid — not a logo,
-   an invitation. A faint placeholder mark standing in for a client who
-   hasn't joined the list yet, styled to sit quietly among the real logos
-   rather than calling attention to itself. Clicking it scrolls straight to
-   the enquiry form, turning a nice detail into an actual soft lead. ---- */
+/* ---- The one "open" tile at the end of the client grid — not a logo, an
+   invitation. Unlike the real logos it carries the site's own accent
+   color and a deeper, tinted shadow so it reads as a little badge rather
+   than disappearing next to brands with much bolder marks of their own.
+   Clicking it scrolls straight to the enquiry form, turning a nice detail
+   into an actual soft lead. Appears well after the rest of the grid has
+   finished popping in (see .client-wordmark--reserved below) so it reads
+   as its own small moment, not one more tile in the batch. ---- */
 .client-reserved-slot{
   flex-direction:column;
-  gap:5px;
-  color:#9aa2a8;
+  gap:6px;
+  background:#eaf5f8;
+  border:1.5px solid rgba(15,111,143,.4);
+  color:var(--blue-text);
   text-decoration:none;
-  transition:color .2s ease,transform .2s ease,box-shadow .2s ease;
+  box-shadow:0 7px 18px rgba(15,111,143,.3),0 2px 5px rgba(0,0,0,.14);
+  transition:transform .2s ease,box-shadow .2s ease,background .2s ease;
 }
 .client-reserved-slot:hover,
 .client-reserved-slot:focus-visible{
-  color:#5c6267;
-  transform:translateY(-2px);
-  box-shadow:0 4px 14px rgba(0,0,0,.2);
+  background:#ddeef4;
+  transform:translateY(-3px);
+  box-shadow:0 11px 24px rgba(15,111,143,.4),0 4px 8px rgba(0,0,0,.18);
 }
-.client-reserved-icon{flex:none;opacity:.6}
+.client-reserved-icon{flex:none}
 .client-reserved-text{
-  font-size:9.5px;
+  font-size:12.5px;
   line-height:1.3;
   text-align:center;
-  font-weight:600;
+  font-weight:700;
   letter-spacing:.1px;
 }
 @media(max-width:480px){
-  .client-reserved-icon{width:14px;height:14px}
-  .client-reserved-text{font-size:8.5px}
+  .client-reserved-icon{width:19px;height:19px}
+  .client-reserved-text{font-size:11px}
 }
+
+/* Pops in roughly two seconds after the rest of the grid has finished its
+   own staggered reveal (last real logo: --d:7 → .77s delay + .5s to land),
+   instead of sharing their quick 0–770ms stagger. Set up independently of
+   the shared [data-state="hidden"]/[data-state="revealed"] pair above: on
+   the very first "Meet Our Clients" click, home-clients-reveal.js sets
+   data-state straight to "revealed" (it only ever sets "hidden" when
+   re-collapsing), so every other logo's opacity is already at its
+   resting value and nothing actually transitions, let alone staggers —
+   the one-time pop only shows up on a second open. This tile needs its
+   delayed entrance to work the first time too, so it carries its own
+   unconditional starting state rather than depending on that attribute
+   ever having been "hidden". */
+.client-wordmark--reserved{
+  opacity:0;
+  transform:translateY(-22px) rotate(-3deg) scale(.9);
+  transition:opacity .5s cubic-bezier(.17,.89,.32,1.49),transform .5s cubic-bezier(.17,.89,.32,1.49);
+  transition-delay:3.2s;
+}
+.clients-reveal[data-state="revealed"] .client-wordmark--reserved{
+  opacity:1;
+  transform:translateY(0) rotate(0) scale(1);
+  transition-delay:3.2s;
+}
+.clients-reveal[data-state="hidden"] .client-wordmark--reserved{
+  opacity:0;
+  transform:translateY(-22px) rotate(-3deg) scale(.9);
+  transition-delay:0s;
+}
+.clients-reveal.cp-reduced-motion .client-wordmark--reserved{transition:opacity .2s linear !important;transform:none !important;opacity:1}
 @media(max-width:850px){
   .clients-reveal-grid{grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:14px;padding:36px 4px 4px}
   .client-logo-card{height:52px;padding:8px 14px}
