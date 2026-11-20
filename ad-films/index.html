@@ -331,43 +331,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p style="max-width:460px;">A simple view of how the idea becomes a finished film.</p>
 
       <!-- Each image is a fully designed card (number, title and caption
-           already laid into the artwork), so the matching text isn't
-           repeated separately below it the way the plain-photo version did.
-           Square source images are shown uncropped (aspect-ratio:1/1
-           override) rather than forced into the usual 4:3 frame, so none of
-           that baked-in text gets cut off. -->
-      <div class="timeline-row timeline-row--designed">
-        <div class="tl-step">
-          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+           already laid into the artwork). At 4-up the baked-in text was too
+           small to read, so this scrolls one large card at a time instead —
+           reusing the same carousel wiring/CSS as the video sections above
+           (video-carousel__track grid-scroll + arrow buttons), just with a
+           wider single-card column and no play button, since .video-card
+           already gives us scroll-snap-align for free. -->
+      <div class="video-carousel video-carousel--single" data-video-carousel aria-label="From your brief to a finished film — process steps">
+        <div class="video-carousel__track">
+          <div class="video-card process-step-card">
             <picture>
               <source srcset="../assets/images/ad-films/process-01-discover.webp" type="image/webp">
               <img src="../assets/images/ad-films/process-01-discover.jpg" alt="Discover — What your audience should understand. A director and assistant discuss notes on location while a camera is set up nearby.">
             </picture>
           </div>
-        </div>
-        <div class="tl-step">
-          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+          <div class="video-card process-step-card">
             <picture>
               <source srcset="../assets/images/ad-films/process-02-develop.webp" type="image/webp">
               <img src="../assets/images/ad-films/process-02-develop.jpg" alt="Develop — Story, script and visual treatment. Two people reviewing a storyboard and script at a desk.">
             </picture>
           </div>
-        </div>
-        <div class="tl-step">
-          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+          <div class="video-card process-step-card">
             <picture>
               <source srcset="../assets/images/ad-films/process-03-capture.webp" type="image/webp">
               <img src="../assets/images/ad-films/process-03-capture.jpg" alt="Capture — Your people and work on film. A crew filming a talent on a swing in a garden setting.">
             </picture>
           </div>
-        </div>
-        <div class="tl-step">
-          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+          <div class="video-card process-step-card">
             <picture>
               <source srcset="../assets/images/ad-films/process-04-deliver.webp" type="image/webp">
               <img src="../assets/images/ad-films/process-04-deliver.jpg" alt="Deliver — Edit, sound and final formats. A creative team reviewing a colour-graded cut together in an edit suite.">
             </picture>
           </div>
+        </div>
+        <div class="video-carousel__controls">
+          <button type="button" class="video-carousel__arrow" data-video-prev aria-label="Previous step">←</button>
+          <button type="button" class="video-carousel__arrow" data-video-next aria-label="Next step">→</button>
         </div>
       </div>
     </div>

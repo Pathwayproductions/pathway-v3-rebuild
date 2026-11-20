@@ -764,6 +764,15 @@
 @media(max-width:600px){.video-carousel__track{grid-auto-columns:86%;gap:14px}.video-card__title{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.video-carousel__track{scroll-behavior:auto}}
 
+/* One large card per view instead of 3-up — used for the Ad Films "Process"
+   steps, where each image has its own baked-in heading/body text that needs
+   real size to read. Same scroll-snap/arrow wiring as the video carousels,
+   just a wider column so one card (plus a peek of the next) fills the view. */
+.video-carousel--single .video-carousel__track{grid-auto-columns:min(560px,86%)}
+.process-step-card{scroll-snap-align:center}
+.process-step-card picture{display:block;border-radius:8px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.14)}
+.process-step-card img{display:block;width:100%;height:auto}
+
 /* Image-led hero review: high-contrast readable text on responsive imagery. */
 .hero-light.hero-image-review{position:relative;isolation:isolate;display:flex;align-items:center;min-height:490px;padding:100px 0 72px;background:#18262c;color:#fff;overflow:hidden}
 .hero-image-review::before{content:"";position:absolute;inset:0;z-index:-2;background-image:var(--review-hero-image);background-position:var(--review-hero-position,center);background-size:cover;background-repeat:no-repeat}
