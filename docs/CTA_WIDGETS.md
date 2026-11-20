@@ -18,9 +18,10 @@ address
 traced to how HubSpot syncs a non-natively-connected calendar for its
 Meetings tool.
 
-Replaced with Karthik's own Google Calendar appointment-scheduling page,
-embedded the same way (an iframe inside the existing modal), which sidesteps
-HubSpot's Meetings tool — and that forwarding address — entirely:
+Replaced with a Google Calendar appointment-scheduling page on the
+`contact@pathwayproductions.in` Google account, embedded the same way (an
+iframe inside the existing modal), which sidesteps HubSpot's Meetings tool —
+and that forwarding address — entirely:
 - `MEETINGS_SRC` in `meeting-widget.js` now points at the Google Calendar
   booking URL instead of the HubSpot one; the HubSpot embed also needed a
   companion script (`MeetingsEmbedCode.js`) to build its own iframe, which
@@ -33,11 +34,14 @@ Separately, the lead-capture forms (`lead-form.js`, posting straight to
 HubSpot's Forms API) are untouched by this — this only affects the "Book a
 call" modal's scheduling page, not form-submission handling.
 
-**Not yet confirmed:** whether a booking on the Google Calendar page still
-gets logged to the matching HubSpot contact. That depends on HubSpot's
-Calendar Sync being connected to this same Google account on the
-HubSpot side (Settings → User Preferences → Calendar) — worth Arun
-confirming/testing once a real booking goes through.
+**2026-11-20, confirmed:** a dedicated HubSpot user was created for
+`contact@pathwayproductions.in`, and that user's Google account is Connected
+in HubSpot with Calendar Sync enabled (Settings → User Preferences →
+Calendar → Account Settings). Since the booking page above is on that same
+Google account, bookings land on its primary Google Calendar and HubSpot
+Calendar Sync logs them to the matching CRM contact automatically — no
+further setup needed. Still worth a real test booking to confirm end-to-end
+once convenient.
 
 ## 2026-11-16 update: form "services" dropdown fixed to match HubSpot's form
 
