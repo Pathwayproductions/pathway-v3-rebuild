@@ -89,6 +89,35 @@ document.querySelectorAll('[data-video-carousel]').forEach(carousel=>{
   track.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();
 });
 
+/* Click-to-embed video cards: a plain left-click swaps the thumbnail/play
+   button for a real YouTube iframe that plays in place, instead of
+   navigating away — this is what makes the videos actual on-page content
+   (for the VideoObject schema each video-section page now carries) rather
+   than just outbound links. The <a href> stays in the markup untouched, so
+   a middle-click, a right-click "open in new tab", a screen reader, or a
+   visitor with JS off all still get the plain YouTube link as a working
+   fallback — only an ordinary left-click is intercepted. youtube-nocookie.com
+   is used for the embed to avoid setting YouTube cookies before playback is
+   actually requested. */
+document.querySelectorAll('.video-card__link[data-yt-id]').forEach(link=>{
+  link.addEventListener('click',e=>{
+    e.preventDefault();
+    if(link.classList.contains('is-playing'))return;
+    const visual=link.querySelector('.video-card__visual');
+    if(!visual)return;
+    const id=link.dataset.ytId;
+    const title=link.querySelector('.video-card__title');
+    const iframe=document.createElement('iframe');
+    iframe.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0';
+    iframe.title=title?title.textContent:'YouTube video player';
+    iframe.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen=true;
+    iframe.loading='lazy';
+    visual.replaceChildren(iframe);
+    link.classList.add('is-playing');
+  });
+});
+
 /* Review-only hero treatment: reuse a genuine page-local image where one exists.
    If a page has no real image of its own, the hero stays plain text — it must
    never borrow another page's photo (that reads as one reused placeholder
