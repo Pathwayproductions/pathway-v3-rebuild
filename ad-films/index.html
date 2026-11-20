@@ -330,34 +330,44 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <h2>From Your Brief to a Finished Film</h2>
       <p style="max-width:460px;">A simple view of how the idea becomes a finished film.</p>
 
-      <div class="timeline-row">
+      <!-- Each image is a fully designed card (number, title and caption
+           already laid into the artwork), so the matching text isn't
+           repeated separately below it the way the plain-photo version did.
+           Square source images are shown uncropped (aspect-ratio:1/1
+           override) rather than forced into the usual 4:3 frame, so none of
+           that baked-in text gets cut off. -->
+      <div class="timeline-row timeline-row--designed">
         <div class="tl-step">
-          <div class="tl-media placeholder-media concept-media"><img src="../assets/concept-previews/batch2/11-team-collaboration.webp" alt="Four colleagues gathered around a laptop discussing, smiling, bright office" style="object-position:center 70%"><span class="concept-tag">Concept preview — not final</span></div>
-          <span class="num">01</span>
-          <h3>Discover</h3>
-          <p>What your audience should understand.</p>
-        </div>
-        <div class="tl-step">
-          <div class="tl-media placeholder-media concept-media"><img src="../assets/concept-previews/batch2/16-storyboard-planning.webp" alt="Hand-drawn storyboard panels on a desk, pencil in hand" style="object-position:center 75%"><span class="concept-tag">Concept preview — not final</span></div>
-          <span class="num">02</span>
-          <h3>Develop</h3>
-          <p>Story, script and visual treatment.</p>
-        </div>
-        <div class="tl-step">
-          <div class="tl-media placeholder-media concept-media"><img src="../assets/concept-previews/batch2/14-sunset-film-crew.webp" alt="Crew and camera operator filming on location at sunset" style="object-position:center 78%"><span class="concept-tag">Concept preview — not final</span></div>
-          <span class="num">03</span>
-          <h3>Capture</h3>
-          <p>Your people and work on film.</p>
-        </div>
-        <div class="tl-step">
-          <div class="tl-media placeholder-media concept-media">
-            <img src="../assets/concept-previews/corporate-films/post-production-editor.webp"
-                 alt="Editor at a dual-monitor edit suite reviewing a colour-graded sequence, headphones on">
-            <span class="concept-tag">Concept preview — not final</span>
+          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+            <picture>
+              <source srcset="../assets/images/ad-films/process-01-discover.webp" type="image/webp">
+              <img src="../assets/images/ad-films/process-01-discover.jpg" alt="Discover — What your audience should understand. A director and assistant discuss notes on location while a camera is set up nearby.">
+            </picture>
           </div>
-          <span class="num">04</span>
-          <h3>Deliver</h3>
-          <p>Edit, sound and final formats.</p>
+        </div>
+        <div class="tl-step">
+          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+            <picture>
+              <source srcset="../assets/images/ad-films/process-02-develop.webp" type="image/webp">
+              <img src="../assets/images/ad-films/process-02-develop.jpg" alt="Develop — Story, script and visual treatment. Two people reviewing a storyboard and script at a desk.">
+            </picture>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+            <picture>
+              <source srcset="../assets/images/ad-films/process-03-capture.webp" type="image/webp">
+              <img src="../assets/images/ad-films/process-03-capture.jpg" alt="Capture — Your people and work on film. A crew filming a talent on a swing in a garden setting.">
+            </picture>
+          </div>
+        </div>
+        <div class="tl-step">
+          <div class="tl-media" style="aspect-ratio:1/1;margin-bottom:0;">
+            <picture>
+              <source srcset="../assets/images/ad-films/process-04-deliver.webp" type="image/webp">
+              <img src="../assets/images/ad-films/process-04-deliver.jpg" alt="Deliver — Edit, sound and final formats. A creative team reviewing a colour-graded cut together in an edit suite.">
+            </picture>
+          </div>
         </div>
       </div>
     </div>
