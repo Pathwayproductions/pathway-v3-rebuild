@@ -3,7 +3,7 @@
    Loaded on every page. Provides:
      1. The header "Book a call" button (desktop, next to "Get in Touch")
         and its mobile-menu equivalent.
-     2. The HubSpot Meetings booking modal those buttons open.
+     2. The Google Calendar booking modal those buttons open.
      3. A mobile-only tap-to-call icon in the header (hidden on desktop and
         tablet, by request — phone is a deliberate, one-tap mobile action,
         not something we want competing for space on larger screens).
@@ -74,7 +74,7 @@
   .call-btn { display: inline-flex; margin-right: 10px; }
 }
 
-/* ---- The booking modal (HubSpot Meetings embed) --------------------------- */
+/* ---- The booking modal (Google Calendar scheduling embed) ----------------- */
 .meet-modal {
   position: fixed;
   inset: 0;
@@ -123,14 +123,17 @@
 }
 .meet-modal-close:hover { background: #F1F3F5; }
 
-/* The HubSpot embed script sizes its own iframe once it loads; this just
-   gives it a sane minimum so the panel doesn't collapse to nothing while
-   the calendar is still fetching. */
+/* Google Calendar's scheduling page doesn't size its own iframe the way the
+   previous HubSpot embed script did, so the iframe gets a fixed height here
+   directly; min-height on the container is a fallback for the instant
+   before it paints. */
 .meetings-iframe-container { min-height: 480px; }
+.meetings-iframe-container iframe { display: block; width: 100%; height: 600px; border: 0; }
 
 body.meet-modal-open { overflow: hidden; }
 
 @media (max-width: 600px) {
   .meet-modal { padding: 0; }
   .meet-modal-panel { max-width: 100%; max-height: 100vh; height: 100%; border-radius: 0; }
+  .meetings-iframe-container iframe { height: 100%; min-height: 480px; }
 }

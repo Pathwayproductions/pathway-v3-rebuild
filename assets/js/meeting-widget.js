@@ -1,22 +1,33 @@
 /**
  * Pathway Productions — sitewide "Book a call" modal
  *
- * Loaded on every page. Builds the HubSpot Meetings booking modal on demand
- * and wires it up to any trigger element marked [data-open-meeting] —
- * currently the header "Book a call" button (desktop) and its mobile-menu
- * equivalent. Exposes window.PathwayMeetings.open() so the homepage's
- * proactive popup (meeting-popup.js) can reuse the exact same modal instead
- * of building a second one.
+ * Loaded on every page. Builds the booking modal on demand and wires it up
+ * to any trigger element marked [data-open-meeting] — currently the header
+ * "Book a call" button (desktop) and its mobile-menu equivalent. Exposes
+ * window.PathwayMeetings.open() so the homepage's proactive popup
+ * (meeting-popup.js) can reuse the exact same modal instead of building a
+ * second one.
+ *
+ * Switched 2026-11-20 from the embedded HubSpot Meetings link
+ * (meetings-na2.hubspot.com/karthik-ravi) to Karthik's Google Calendar
+ * appointment-scheduling page, at Arun's request — the HubSpot meeting link
+ * was generating an extra confirmation email via a HubSpot-side forwarding
+ * address (karthik+2Eravi=pathwayproductions.in@hubspotfree.na2.hs-send.com)
+ * on every booking. Google's scheduling page is a plain iframe embed with no
+ * companion script, unlike HubSpot's, which needed MeetingsEmbedCode.js to
+ * inject the iframe itself — see the removed MEETINGS_SCRIPT/
+ * ensureMeetingsScript() below this comment in git history if that's ever
+ * needed again.
  */
 (function () {
   'use strict';
 
-  // From the embed code HubSpot generated for this meeting link.
-  var MEETINGS_SRC = 'https://meetings-na2.hubspot.com/karthik-ravi?embed=true';
-  var MEETINGS_SCRIPT = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
+  // Karthik's Google Calendar appointment-scheduling page (the booking URL
+  // from its own "Book an appointment" embed code), used directly as an
+  // iframe src.
+  var MEETINGS_SRC = 'https://calendar.google.com/calendar/appointments/AcZssZ3B8BFrWMxSdg3XB4nxTj-WbX8R7FZxxCVp7i4=?gv=true';
 
   var modal = null;
-  var meetingsScriptLoaded = false;
 
   function onReady(fn) {
     if (document.readyState === 'loading') {
@@ -36,7 +47,9 @@
       '<div class="meet-modal-backdrop"></div>' +
       '<div class="meet-modal-panel">' +
         '<button type="button" class="meet-modal-close" aria-label="Close">&times;</button>' +
-        '<div class="meetings-iframe-container" data-src="' + MEETINGS_SRC + '"></div>' +
+        '<div class="meetings-iframe-container">' +
+          '<iframe src="' + MEETINGS_SRC + '" title="Book a call — Google Calendar scheduling" frameborder="0"></iframe>' +
+        '</div>' +
       '</div>';
     document.body.appendChild(el);
 
@@ -45,18 +58,8 @@
     return el;
   }
 
-  function ensureMeetingsScript() {
-    if (meetingsScriptLoaded) return;
-    meetingsScriptLoaded = true;
-    var s = document.createElement('script');
-    s.src = MEETINGS_SCRIPT;
-    s.async = true;
-    document.body.appendChild(s);
-  }
-
   function openModal() {
     if (!modal) modal = buildModal();
-    ensureMeetingsScript();
     modal.classList.add('is-open');
     document.body.classList.add('meet-modal-open');
   }

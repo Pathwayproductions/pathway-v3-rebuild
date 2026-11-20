@@ -5,6 +5,40 @@ Widget Plan that were blocked on WordPress admin access on the live site.
 This is the new build (pathway-v3-rebuild); nothing here touches the live
 pathwayproductions.in site.
 
+## 2026-11-20 update: "Book a call" modal switched from HubSpot Meetings to Google Calendar
+
+At Arun's request. The sitewide "Book a call" modal
+(`assets/js/meeting-widget.js` / `assets/css/meeting-widget.css`, opened from
+the header button on all 35 pages and the homepage's proactive popup) had
+been embedding Karthik's HubSpot Meetings link
+(`meetings-na2.hubspot.com/karthik-ravi`). Every booking through it also
+triggered an extra confirmation email from a HubSpot-generated forwarding
+address
+(`karthik+2Eravi=pathwayproductions.in@hubspotfree.na2.hs-send.com`),
+traced to how HubSpot syncs a non-natively-connected calendar for its
+Meetings tool.
+
+Replaced with Karthik's own Google Calendar appointment-scheduling page,
+embedded the same way (an iframe inside the existing modal), which sidesteps
+HubSpot's Meetings tool — and that forwarding address — entirely:
+- `MEETINGS_SRC` in `meeting-widget.js` now points at the Google Calendar
+  booking URL instead of the HubSpot one; the HubSpot embed also needed a
+  companion script (`MeetingsEmbedCode.js`) to build its own iframe, which
+  Google's doesn't, so that loader was removed.
+- `meeting-widget.css` gives the iframe an explicit height (Google doesn't
+  self-size it the way HubSpot's script did).
+- No per-page changes needed — both files are shared includes.
+
+Separately, the lead-capture forms (`lead-form.js`, posting straight to
+HubSpot's Forms API) are untouched by this — this only affects the "Book a
+call" modal's scheduling page, not form-submission handling.
+
+**Not yet confirmed:** whether a booking on the Google Calendar page still
+gets logged to the matching HubSpot contact. That depends on HubSpot's
+Calendar Sync being connected to this same Google account on the
+HubSpot side (Settings → User Preferences → Calendar) — worth Arun
+confirming/testing once a real booking goes through.
+
 ## 2026-11-16 update: form "services" dropdown fixed to match HubSpot's form
 
 Every enquiry form's "What can we help you with?" dropdown (`hc-services` on

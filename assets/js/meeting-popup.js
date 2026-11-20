@@ -1,7 +1,7 @@
 /**
  * Pathway Productions — "Book a call" popup (homepage only)
  *
- * A proactive nudge toward booking a HubSpot Meetings slot — a different
+ * A proactive nudge toward booking a Google Calendar slot — a different
  * alternate path than the enquiry forms on the page, not a duplicate of one.
  * Opens the same booking modal as the sitewide header "Book a call" button,
  * via window.PathwayMeetings.open() (assets/js/meeting-widget.js, which must
