@@ -17,10 +17,16 @@
  * HubSpot syncing a non-natively-connected calendar. That's since been
  * fixed properly (a dedicated HubSpot user with native Calendar Sync
  * enabled — see docs/CTA_WIDGETS.md), so the HubSpot embed is back, using
- * that user's own meetings link. HubSpot's embed needs its companion
- * script (MeetingsEmbedCode.js) to turn the data-src div into a live
- * iframe; that script is loaded once, up front, so it's already running
- * by the time someone opens the modal.
+ * that user's own meetings link.
+ *
+ * HubSpot's companion script (MeetingsEmbedCode.js) replaces the
+ * .meetings-iframe-container[data-src] div with its own iframe — but it
+ * only scans the page for that div once, right when it finishes loading;
+ * it does not watch for one added later. The modal (and its container
+ * div) is therefore built eagerly below, as soon as the page is ready and
+ * hidden with CSS, *before* the script is requested — not lazily on first
+ * click, which left the script with nothing to find and produced a blank
+ * popup. openModal()/closeModal() just toggle visibility from here on.
  */
 (function () {
   'use strict';
@@ -70,7 +76,6 @@
   }
 
   function openModal() {
-    ensureMeetingsScript();
     if (!modal) modal = buildModal();
     modal.classList.add('is-open');
     document.body.classList.add('meet-modal-open');
@@ -102,6 +107,7 @@
 
   onReady(function () {
     wireTriggers();
+    modal = buildModal();
     ensureMeetingsScript();
   });
 })();
