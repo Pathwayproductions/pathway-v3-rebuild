@@ -5,7 +5,31 @@ Widget Plan that were blocked on WordPress admin access on the live site.
 This is the new build (pathway-v3-rebuild); nothing here touches the live
 pathwayproductions.in site.
 
+## 2026-11-21 update: "Book a call" modal switched back from Google Calendar to HubSpot Meetings
+
+At Arun's request, now that the root cause behind the 2026-11-20 switch (see
+below) has been fixed properly. The modal
+(`assets/js/meeting-widget.js` / `assets/css/meeting-widget.css`) now embeds
+HubSpot's own Meetings link for the dedicated, Calendar-Sync-enabled user —
+`meetings-na2.hubspot.com/pathway` — using HubSpot's standard embed code
+(a `.meetings-iframe-container[data-src]` div plus its `MeetingsEmbedCode.js`
+companion script, which turns the div into an iframe and self-sizes it):
+- `MEETINGS_SRC` points at the new `/pathway` meetings link (not the old
+  `/karthik-ravi` one) and `MEETINGS_SCRIPT` loads
+  `MeetingsEmbedCode.js` once, up front, on every page — not just when the
+  modal opens — so its own element-watcher is already running by the time
+  the modal's div gets created.
+- `meeting-widget.css`'s iframe height rules (added for the 2026-11-20
+  Google Calendar version, which didn't self-size) are reverted — the
+  fixed `height: 600px` is gone so it doesn't fight HubSpot's own sizing.
+- No per-page changes needed — both files are shared includes.
+- The brief Google Calendar iframe version is still in git history
+  (2026-11-20 commit) if it's ever needed again.
+
 ## 2026-11-20 update: "Book a call" modal switched from HubSpot Meetings to Google Calendar
+
+**Superseded 2026-11-21, above** — kept here for the history of why the
+switch happened in the first place.
 
 At Arun's request. The sitewide "Book a call" modal
 (`assets/js/meeting-widget.js` / `assets/css/meeting-widget.css`, opened from

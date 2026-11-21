@@ -8,26 +8,30 @@
  * (meeting-popup.js) can reuse the exact same modal instead of building a
  * second one.
  *
- * Switched 2026-11-20 from the embedded HubSpot Meetings link
- * (meetings-na2.hubspot.com/karthik-ravi) to Karthik's Google Calendar
- * appointment-scheduling page, at Arun's request — the HubSpot meeting link
- * was generating an extra confirmation email via a HubSpot-side forwarding
- * address (karthik+2Eravi=pathwayproductions.in@hubspotfree.na2.hs-send.com)
- * on every booking. Google's scheduling page is a plain iframe embed with no
- * companion script, unlike HubSpot's, which needed MeetingsEmbedCode.js to
- * inject the iframe itself — see the removed MEETINGS_SCRIPT/
- * ensureMeetingsScript() below this comment in git history if that's ever
- * needed again.
+ * Switched back 2026-11-21 to the HubSpot Meetings embed, at Arun's
+ * request — now pointed at the dedicated "pathway" meetings link
+ * (meetings-na2.hubspot.com/pathway) rather than the earlier
+ * meetings-na2.hubspot.com/karthik-ravi link. The karthik-ravi link was
+ * swapped out on 2026-11-20 for a plain Google Calendar iframe because it
+ * was generating a stray confirmation email on every booking — traced to
+ * HubSpot syncing a non-natively-connected calendar. That's since been
+ * fixed properly (a dedicated HubSpot user with native Calendar Sync
+ * enabled — see docs/CTA_WIDGETS.md), so the HubSpot embed is back, using
+ * that user's own meetings link. HubSpot's embed needs its companion
+ * script (MeetingsEmbedCode.js) to turn the data-src div into a live
+ * iframe; that script is loaded once, up front, so it's already running
+ * by the time someone opens the modal.
  */
 (function () {
   'use strict';
 
-  // Karthik's Google Calendar appointment-scheduling page (the booking URL
-  // from its own "Book an appointment" embed code), used directly as an
-  // iframe src.
-  var MEETINGS_SRC = 'https://calendar.google.com/calendar/appointments/AcZssZ3B8BFrWMxSdg3XB4nxTj-WbX8R7FZxxCVp7i4=?gv=true';
+  // HubSpot's own "pathway" meetings link, used exactly as HubSpot's embed
+  // code provides it.
+  var MEETINGS_SRC = 'https://meetings-na2.hubspot.com/pathway?embed=true';
+  var MEETINGS_SCRIPT = 'https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js';
 
   var modal = null;
+  var scriptRequested = false;
 
   function onReady(fn) {
     if (document.readyState === 'loading') {
@@ -35,6 +39,15 @@
     } else {
       fn();
     }
+  }
+
+  function ensureMeetingsScript() {
+    if (scriptRequested || document.querySelector('script[src="' + MEETINGS_SCRIPT + '"]')) return;
+    scriptRequested = true;
+    var s = document.createElement('script');
+    s.src = MEETINGS_SCRIPT;
+    s.async = true;
+    document.body.appendChild(s);
   }
 
   function buildModal() {
@@ -47,9 +60,7 @@
       '<div class="meet-modal-backdrop"></div>' +
       '<div class="meet-modal-panel">' +
         '<button type="button" class="meet-modal-close" aria-label="Close">&times;</button>' +
-        '<div class="meetings-iframe-container">' +
-          '<iframe src="' + MEETINGS_SRC + '" title="Book a call — Google Calendar scheduling" frameborder="0"></iframe>' +
-        '</div>' +
+        '<div class="meetings-iframe-container" data-src="' + MEETINGS_SRC + '"></div>' +
       '</div>';
     document.body.appendChild(el);
 
@@ -59,6 +70,7 @@
   }
 
   function openModal() {
+    ensureMeetingsScript();
     if (!modal) modal = buildModal();
     modal.classList.add('is-open');
     document.body.classList.add('meet-modal-open');
@@ -88,5 +100,8 @@
 
   window.PathwayMeetings = { open: openModal, close: closeModal };
 
-  onReady(wireTriggers);
+  onReady(function () {
+    wireTriggers();
+    ensureMeetingsScript();
+  });
 })();
