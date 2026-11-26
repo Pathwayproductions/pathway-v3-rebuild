@@ -168,6 +168,20 @@
 .bg-charcoal .link-list,.bg-charcoal-alt .link-list{border-color:var(--on-dark-line)}
 .bg-charcoal .link-list a,.bg-charcoal-alt .link-list a{border-color:var(--on-dark-line);color:#fff}
 
+/* ---- Film logline (a single, distinct pull-out line above the synopsis) ---- */
+.logline{font-family:var(--serif);font-size:23px;font-style:italic;color:var(--blue-text);margin:10px 0 22px;max-width:680px;line-height:1.45}
+.bg-charcoal .logline,.bg-charcoal-alt .logline{color:var(--on-dark)}
+
+/* ---- Cast list (name prominent, character secondary) ---- */
+.cast-list{border-top:1px solid var(--line);margin-top:26px;max-width:680px}
+.cast-row{border-bottom:1px solid var(--line);display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 20px;padding:20px 0}
+.cast-name{font-family:var(--serif);font-size:26px;font-weight:400;letter-spacing:-.01em;color:var(--ink)}
+.cast-role{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;white-space:nowrap}
+.bg-charcoal .cast-list,.bg-charcoal-alt .cast-list{border-color:var(--on-dark-line)}
+.bg-charcoal .cast-row,.bg-charcoal-alt .cast-row{border-color:var(--on-dark-line)}
+.bg-charcoal .cast-name,.bg-charcoal-alt .cast-name{color:#fff}
+.bg-charcoal .cast-role,.bg-charcoal-alt .cast-role{color:var(--on-dark-muted)}
+
 /* ---- Closing CTA band ---- */
 .close-cta{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:end}
 .close-cta h2{font-family:var(--serif);font-weight:400;letter-spacing:-.03em;font-size:clamp(30px,3.6vw,46px);line-height:1.12;margin:0;max-width:580px}
@@ -739,7 +753,7 @@
 
 /* Existing WordPress project videos: responsive, swipeable portfolio carousel. */
 .video-carousel{margin-top:28px;max-width:100%;min-width:0}
-.video-carousel__track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/3);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-inline:contain;scrollbar-width:none;padding:0 0 10px}
+.video-carousel__track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 40px)/2.82);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;overscroll-behavior-inline:contain;scrollbar-width:none;padding:0 0 10px}
 .video-carousel__track::-webkit-scrollbar{display:none}
 .video-card{min-width:0;scroll-snap-align:start}
 .video-card__link{display:block;text-decoration:none;color:inherit}
@@ -761,7 +775,7 @@
 .video-carousel__arrow{width:42px;height:42px;cursor:pointer;border:1px solid #87949b;border-radius:50%;background:transparent;color:inherit;font:inherit;font-size:22px}
 .video-carousel__arrow:disabled{opacity:.3;cursor:default}
 .video-carousel__note{margin-top:16px;font-size:13px;opacity:.75}
-@media(max-width:900px){.video-carousel__track{grid-auto-columns:calc((100% - 16px)/2);gap:16px}}
+@media(max-width:900px){.video-carousel__track{grid-auto-columns:calc((100% - 16px)/1.78);gap:16px}}
 @media(max-width:600px){.video-carousel__track{grid-auto-columns:86%;gap:14px}.video-card__title{font-size:17px}}
 @media(prefers-reduced-motion:reduce){.video-carousel__track{scroll-behavior:auto}}
 
@@ -773,6 +787,10 @@
 .process-step-card{scroll-snap-align:center}
 .process-step-card picture{display:block;border-radius:8px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.14)}
 .process-step-card img{display:block;width:100%;height:auto}
+
+/* A single, non-scrolling trailer card (one video, not a carousel) —
+   same .video-card markup/click-to-embed behaviour, just capped in width. */
+.video-single{max-width:560px;margin-top:28px}
 
 /* Image-led hero review: high-contrast readable text on responsive imagery. */
 .hero-light.hero-image-review{position:relative;isolation:isolate;display:flex;align-items:center;min-height:490px;padding:100px 0 72px;background:#18262c;color:#fff;overflow:hidden}
