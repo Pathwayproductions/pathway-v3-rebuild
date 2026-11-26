@@ -305,7 +305,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main>
 
-  <section class="hero-photo hero-full">
+  <section class="hero-photo hero-full" id="cp-hero">
+    <style>
+      /* TEMPORARY — mobile crop A/B test (Option B: show the whole photo,
+         letterboxed, instead of cropping it to fill the frame). Scoped to
+         this page's hero only via #cp-hero; remove once a direction is
+         picked and apply the winner site-wide instead. */
+      @media(max-width:850px){
+        #cp-hero .hero-photo-media{background:#18262c}
+        #cp-hero .hero-photo-media img{object-fit:contain!important;object-position:center bottom!important}
+        #cp-hero .hero-photo-media::after{background:linear-gradient(180deg,rgba(18,22,25,.1) 0%,rgba(18,22,25,.55) 72%,rgba(18,22,25,.88) 100%)}
+      }
+    </style>
     <div class="hero-photo-media">
       <picture>
         <source srcset="../assets/images/pathway-creative-productions-hero.webp" type="image/webp">

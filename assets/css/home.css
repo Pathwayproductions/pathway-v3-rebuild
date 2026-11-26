@@ -333,10 +333,15 @@
    one on this page, by request. ---- */
 
 @media(max-width:850px){
-  .hero{min-height:750px;align-items:flex-start}
+  /* TEMPORARY — mobile crop A/B test (Option A: reshape the frame and
+     retarget the crop point instead of cropping less by showing the
+     whole photo). Once a direction is picked, fold the winner into the
+     base rules above and drop this comment. */
+  .hero{min-height:620px;align-items:flex-start}
   .hero-media{inset:390px 0 0 0}
   .hero-media::after{background:linear-gradient(180deg,#fff,transparent 25%)}
   .hero.hero-full .hero-media{inset:0}
+  .hero.hero-full .hero-media img{object-position:78% 62%}
   .hero.hero-full .hero-media::after{background:linear-gradient(180deg,rgba(18,22,25,.18) 0%,rgba(18,22,25,.55) 55%,rgba(18,22,25,.78) 100%)}
   .hero .wrap{padding-top:58px;padding-bottom:350px}
   .hero.hero-full .wrap{padding-bottom:58px}
@@ -351,7 +356,7 @@
   .v3-capabilities-head p{max-width:600px}
 }
 @media(max-width:480px){
-  .hero{min-height:780px}
+  .hero{min-height:660px}
   .hero-media{top:440px}
   .hero h1{font-size:42px}
   .process{grid-template-columns:1fr}
