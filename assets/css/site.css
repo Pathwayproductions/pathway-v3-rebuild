@@ -111,21 +111,107 @@
   .hero-digmkt .wrap{padding-top:28px}
   .hero-digmkt h1{font-size:38px;margin:10px 0 12px}
 
-  /* Amazon Advertising: the source graphic is a bright, light-blue
-     ecosystem diagram rather than the darker photography most
-     hero-full pages use, so the generic top-light/bottom-dark mobile
-     gradient above isn't dark enough where the text actually sits.
-     A stronger, more uniform wash keeps it legible over the logo
-     bubbles at every scroll position. */
+  /* ---- Remaining 26 inner pages: same dedicated-mobile-hero recipe as
+     Ad Films / Digital Marketing above, each scoped to its own page class
+     so no other hero-full page is touched. All 26 were supplied with a
+     purpose-shot mobile hero photo (…-hero-mobile.webp) with a quiet band
+     for the heading; anchored top like the others. ---- */
+  .hero-creativeprod,.hero-corpvideo,.hero-explainer,.hero-musicvideos,.hero-featurefilms,
+  .hero-prodservices,.hero-prodmgmt,.hero-crewequip,.hero-ottbiz,.hero-tvcommercial,.hero-filmmktg,
+  .hero-seoai,.hero-ppc,.hero-socialmedia,.hero-webdev,.hero-ecommerce,.hero-amazonads,
+  .hero-consulting,.hero-bot,.hero-managedsvc,.hero-mktgintel,.hero-qualleads,
+  .hero-about,.hero-contact,.hero-ourwork,.hero-industries{min-height:620px}
+
+  .hero-creativeprod .hero-photo-media img,.hero-corpvideo .hero-photo-media img,.hero-explainer .hero-photo-media img,.hero-musicvideos .hero-photo-media img,.hero-featurefilms .hero-photo-media img,
+  .hero-prodservices .hero-photo-media img,.hero-prodmgmt .hero-photo-media img,.hero-crewequip .hero-photo-media img,.hero-ottbiz .hero-photo-media img,.hero-tvcommercial .hero-photo-media img,.hero-filmmktg .hero-photo-media img,
+  .hero-seoai .hero-photo-media img,.hero-ppc .hero-photo-media img,.hero-socialmedia .hero-photo-media img,.hero-webdev .hero-photo-media img,.hero-ecommerce .hero-photo-media img,.hero-amazonads .hero-photo-media img,
+  .hero-consulting .hero-photo-media img,.hero-bot .hero-photo-media img,.hero-managedsvc .hero-photo-media img,.hero-mktgintel .hero-photo-media img,.hero-qualleads .hero-photo-media img,
+  .hero-about .hero-photo-media img,.hero-contact .hero-photo-media img,.hero-ourwork .hero-photo-media img,.hero-industries .hero-photo-media img{object-position:center top !important}
+
+  .hero-creativeprod .hero-photo-media::after,.hero-corpvideo .hero-photo-media::after,.hero-explainer .hero-photo-media::after,.hero-musicvideos .hero-photo-media::after,.hero-featurefilms .hero-photo-media::after,
+  .hero-prodservices .hero-photo-media::after,.hero-prodmgmt .hero-photo-media::after,.hero-crewequip .hero-photo-media::after,.hero-ottbiz .hero-photo-media::after,.hero-tvcommercial .hero-photo-media::after,.hero-filmmktg .hero-photo-media::after,
+  .hero-seoai .hero-photo-media::after,.hero-ppc .hero-photo-media::after,.hero-socialmedia .hero-photo-media::after,.hero-webdev .hero-photo-media::after,.hero-ecommerce .hero-photo-media::after,
+  .hero-consulting .hero-photo-media::after,.hero-bot .hero-photo-media::after,.hero-managedsvc .hero-photo-media::after,.hero-mktgintel .hero-photo-media::after,.hero-qualleads .hero-photo-media::after,
+  .hero-about .hero-photo-media::after,.hero-contact .hero-photo-media::after,.hero-ourwork .hero-photo-media::after,.hero-industries .hero-photo-media::after{background:linear-gradient(180deg,rgba(10,14,17,.45) 0%,rgba(10,14,17,.22) 28%,rgba(10,14,17,.05) 42%,transparent 58%)}
+
+  .hero-creativeprod .wrap,.hero-corpvideo .wrap,.hero-explainer .wrap,.hero-musicvideos .wrap,.hero-featurefilms .wrap,
+  .hero-prodservices .wrap,.hero-prodmgmt .wrap,.hero-crewequip .wrap,.hero-ottbiz .wrap,.hero-tvcommercial .wrap,.hero-filmmktg .wrap,
+  .hero-seoai .wrap,.hero-ppc .wrap,.hero-socialmedia .wrap,.hero-webdev .wrap,.hero-ecommerce .wrap,.hero-amazonads .wrap,
+  .hero-consulting .wrap,.hero-bot .wrap,.hero-managedsvc .wrap,.hero-mktgintel .wrap,.hero-qualleads .wrap,
+  .hero-about .wrap,.hero-contact .wrap,.hero-ourwork .wrap,.hero-industries .wrap{position:absolute;top:0;left:0;right:0;padding-bottom:24px}
+
+  .hero-creativeprod .eyebrow,.hero-corpvideo .eyebrow,.hero-explainer .eyebrow,.hero-musicvideos .eyebrow,.hero-featurefilms .eyebrow,
+  .hero-prodservices .eyebrow,.hero-prodmgmt .eyebrow,.hero-crewequip .eyebrow,.hero-ottbiz .eyebrow,.hero-tvcommercial .eyebrow,.hero-filmmktg .eyebrow,
+  .hero-seoai .eyebrow,.hero-ppc .eyebrow,.hero-socialmedia .eyebrow,.hero-webdev .eyebrow,.hero-ecommerce .eyebrow,.hero-amazonads .eyebrow,
+  .hero-consulting .eyebrow,.hero-bot .eyebrow,.hero-managedsvc .eyebrow,.hero-mktgintel .eyebrow,.hero-qualleads .eyebrow,
+  .hero-about .eyebrow,.hero-contact .eyebrow,.hero-ourwork .eyebrow,.hero-industries .eyebrow{font-size:14px;margin-bottom:8px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+
+  .hero-creativeprod h1,.hero-corpvideo h1,.hero-explainer h1,.hero-musicvideos h1,.hero-featurefilms h1,
+  .hero-prodservices h1,.hero-prodmgmt h1,.hero-crewequip h1,.hero-ottbiz h1,.hero-tvcommercial h1,.hero-filmmktg h1,
+  .hero-seoai h1,.hero-ppc h1,.hero-socialmedia h1,.hero-webdev h1,.hero-ecommerce h1,.hero-amazonads h1,
+  .hero-consulting h1,.hero-bot h1,.hero-managedsvc h1,.hero-mktgintel h1,.hero-qualleads h1,
+  .hero-about h1,.hero-contact h1,.hero-ourwork h1,.hero-industries h1{line-height:1.16;max-width:100%;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+
+  .hero-creativeprod p,.hero-corpvideo p,.hero-explainer p,.hero-musicvideos p,.hero-featurefilms p,
+  .hero-prodservices p,.hero-prodmgmt p,.hero-crewequip p,.hero-ottbiz p,.hero-tvcommercial p,.hero-filmmktg p,
+  .hero-seoai p,.hero-ppc p,.hero-socialmedia p,.hero-webdev p,.hero-ecommerce p,.hero-amazonads p,
+  .hero-consulting p,.hero-bot p,.hero-managedsvc p,.hero-mktgintel p,.hero-qualleads p,
+  .hero-about p,.hero-contact p,.hero-ourwork p,.hero-industries p{display:none}
+
+  .hero-creativeprod .actions,.hero-corpvideo .actions,.hero-explainer .actions,.hero-musicvideos .actions,.hero-featurefilms .actions,
+  .hero-prodservices .actions,.hero-prodmgmt .actions,.hero-crewequip .actions,.hero-ottbiz .actions,.hero-tvcommercial .actions,.hero-filmmktg .actions,
+  .hero-seoai .actions,.hero-ppc .actions,.hero-socialmedia .actions,.hero-webdev .actions,.hero-ecommerce .actions,.hero-amazonads .actions,
+  .hero-consulting .actions,.hero-bot .actions,.hero-managedsvc .actions,.hero-mktgintel .actions,.hero-qualleads .actions,
+  .hero-about .actions,.hero-contact .actions,.hero-ourwork .actions,.hero-industries .actions{margin-top:14px}
+
+  .hero-creativeprod .actions a,.hero-corpvideo .actions a,.hero-explainer .actions a,.hero-musicvideos .actions a,.hero-featurefilms .actions a,
+  .hero-prodservices .actions a,.hero-prodmgmt .actions a,.hero-crewequip .actions a,.hero-ottbiz .actions a,.hero-tvcommercial .actions a,.hero-filmmktg .actions a,
+  .hero-seoai .actions a,.hero-ppc .actions a,.hero-socialmedia .actions a,.hero-webdev .actions a,.hero-ecommerce .actions a,.hero-amazonads .actions a,
+  .hero-consulting .actions a,.hero-bot .actions a,.hero-managedsvc .actions a,.hero-mktgintel .actions a,.hero-qualleads .actions a,
+  .hero-about .actions a,.hero-contact .actions a,.hero-ourwork .actions a,.hero-industries .actions a{padding:14px 22px;font-size:14px}
+
+  .hero-creativeprod .actions .btn,.hero-corpvideo .actions .btn,.hero-explainer .actions .btn,.hero-musicvideos .actions .btn,.hero-featurefilms .actions .btn,
+  .hero-prodservices .actions .btn,.hero-prodmgmt .actions .btn,.hero-crewequip .actions .btn,.hero-ottbiz .actions .btn,.hero-tvcommercial .actions .btn,.hero-filmmktg .actions .btn,
+  .hero-seoai .actions .btn,.hero-ppc .actions .btn,.hero-socialmedia .actions .btn,.hero-webdev .actions .btn,.hero-ecommerce .actions .btn,.hero-amazonads .actions .btn,
+  .hero-consulting .actions .btn,.hero-bot .actions .btn,.hero-managedsvc .actions .btn,.hero-mktgintel .actions .btn,.hero-qualleads .actions .btn,
+  .hero-about .actions .btn,.hero-contact .actions .btn,.hero-ourwork .actions .btn,.hero-industries .actions .btn{background:rgba(22,126,159,.4);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.3)}
+
+  .hero-creativeprod .actions .outline,.hero-corpvideo .actions .outline,.hero-explainer .actions .outline,.hero-musicvideos .actions .outline,.hero-featurefilms .actions .outline,
+  .hero-prodservices .actions .outline,.hero-prodmgmt .actions .outline,.hero-crewequip .actions .outline,.hero-ottbiz .actions .outline,.hero-tvcommercial .actions .outline,.hero-filmmktg .actions .outline,
+  .hero-seoai .actions .outline,.hero-ppc .actions .outline,.hero-socialmedia .actions .outline,.hero-webdev .actions .outline,.hero-ecommerce .actions .outline,.hero-amazonads .actions .outline,
+  .hero-consulting .actions .outline,.hero-bot .actions .outline,.hero-managedsvc .actions .outline,.hero-mktgintel .actions .outline,.hero-qualleads .actions .outline,
+  .hero-about .actions .outline,.hero-contact .actions .outline,.hero-ourwork .actions .outline,.hero-industries .actions .outline{background:rgba(10,14,17,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+  /* Four "earlier batch" photos (Corporate Video, Explainer Videos, Music
+     Videos, Feature Films) have little to no blank band — busy content
+     starts almost immediately below the top edge. A taller, stronger wash
+     keeps the heading legible without the subheading's extra room; text
+     block kept short to clear the busy area with margin, per-photo. */
+  .hero-corpvideo .hero-photo-media::after,.hero-explainer .hero-photo-media::after,.hero-musicvideos .hero-photo-media::after,.hero-featurefilms .hero-photo-media::after{
+    background:linear-gradient(180deg,rgba(8,12,15,.82) 0%,rgba(8,12,15,.62) 32%,rgba(8,12,15,.22) 52%,transparent 68%);
+  }
+  .hero-corpvideo h1,.hero-musicvideos h1,.hero-featurefilms h1{font-size:34px;margin:14px 0 16px}
+  .hero-explainer h1{font-size:36px;margin:14px 0 16px}
+
+  /* Amazon Advertising: bright light-blue ecosystem diagram rather than
+     photography — the generic wash above isn't dark enough over the logo
+     bubbles, so it keeps its own stronger, more uniform overlay. */
   .hero-photo.hero-full.hero-amazonads .hero-photo-media::after{background:linear-gradient(180deg,rgba(8,12,15,.78) 0%,rgba(8,12,15,.7) 45%,rgba(8,12,15,.82) 100%)}
 }
 @media(max-width:480px){
   .hero-photo{min-height:780px}
   .hero-photo-media{top:440px}
   .hero-photo h1{font-size:38px}
-  .hero-adfilms,.hero-digmkt{min-height:660px}
+  .hero-adfilms,.hero-digmkt,
+  .hero-creativeprod,.hero-corpvideo,.hero-explainer,.hero-musicvideos,.hero-featurefilms,
+  .hero-prodservices,.hero-prodmgmt,.hero-crewequip,.hero-ottbiz,.hero-tvcommercial,.hero-filmmktg,
+  .hero-seoai,.hero-ppc,.hero-socialmedia,.hero-webdev,.hero-ecommerce,.hero-amazonads,
+  .hero-consulting,.hero-bot,.hero-managedsvc,.hero-mktgintel,.hero-qualleads,
+  .hero-about,.hero-contact,.hero-ourwork,.hero-industries{min-height:660px}
   .hero-adfilms h1{font-size:34px}
   .hero-digmkt h1{font-size:37px}
+  .hero-corpvideo h1,.hero-musicvideos h1,.hero-featurefilms h1{font-size:29px}
+  .hero-explainer h1{font-size:31px}
 }
 
 /* ---- Light text hero (strategy/marketing/company pages) ---- */
