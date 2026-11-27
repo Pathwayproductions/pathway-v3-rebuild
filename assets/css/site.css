@@ -769,6 +769,11 @@
    rather than the darker photography used on most hero-full pages.
    min-width-scoped so it doesn't fight the mobile-specific override below. ---- */
 @media(min-width:851px){
+  /* The ecosystem diagram's ring of logos runs nearly edge-to-edge
+     vertically, so the sitewide 570px hero height crops a large band
+     off the top and bottom -- reading as "zoomed in" rather than a
+     clean full-bleed photo crop. Taller box = less of the ring lost. */
+  .hero-photo.hero-full.hero-amazonads{min-height:760px}
   .hero-photo.hero-full.hero-amazonads .hero-photo-media::after{background:linear-gradient(90deg,rgba(8,12,15,.92) 0%,rgba(8,12,15,.85) 35%,rgba(8,12,15,.5) 52%,rgba(8,12,15,.14) 66%,transparent 80%)}
 }
 
