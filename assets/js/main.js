@@ -118,6 +118,28 @@ document.querySelectorAll('.video-card__link[data-yt-id]').forEach(link=>{
   });
 });
 
+/* Industry filter (Our Work page): clicking an industry button shows only
+   the video cards tagged with that industry (data-industries, space-
+   separated for a card that fits more than one) and hides the rest; "All
+   Industries" clears the filter. Plain show/hide, no page reload — same
+   spirit as the video-carousel wiring above. */
+document.querySelectorAll('[data-industry-grid]').forEach(grid=>{
+  const filterBar=grid.parentElement.querySelector('.industry-filter');
+  if(!filterBar)return;
+  const buttons=[...filterBar.querySelectorAll('[data-industry-filter]')];
+  const cards=[...grid.querySelectorAll('.video-card')];
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const value=btn.dataset.industryFilter;
+      buttons.forEach(b=>b.classList.toggle('is-active',b===btn));
+      cards.forEach(card=>{
+        const tags=(card.dataset.industries||'').split(' ');
+        card.hidden=value!=='all'&&!tags.includes(value);
+      });
+    });
+  });
+});
+
 /* Review-only hero treatment: reuse a genuine page-local image where one exists.
    If a page has no real image of its own, the hero stays plain text — it must
    never borrow another page's photo (that reads as one reused placeholder
