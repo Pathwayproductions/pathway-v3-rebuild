@@ -169,6 +169,8 @@
 .svc-card--feature h3,.svc-card--feature h4{color:#fff}
 .svc-card--feature p{color:rgba(255,255,255,.85)}
 .svc-card--feature .svc-link,.svc-card--feature .link{color:#fff}
+.svc-card--feature .takeaways{color:rgba(255,255,255,.85)}
+.svc-card--feature .takeaways li::before{background:#fff}
 
 /* ---- Step / process row (3 or 4 columns) ---- */
 .step-row{display:grid;border-top:1px solid var(--line);margin-top:30px}
