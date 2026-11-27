@@ -66,15 +66,31 @@
   .hero-photo-media{inset:390px 0 0 0}
   .hero-photo-media::after{background:linear-gradient(180deg,#fff,transparent 25%)}
   .hero-photo.hero-full .hero-photo-media{inset:0}
-  .hero-photo.hero-full .hero-photo-media::after{background:linear-gradient(180deg,rgba(18,22,25,.18) 0%,rgba(18,22,25,.55) 55%,rgba(18,22,25,.78) 100%)}
+  /* Both mobile hero photos (ad-films / digital-marketing) reserve a
+     blank band across their top ~35% for the heading. Anchor to the top
+     edge, overriding each page's desktop object-position (set inline on
+     the <img> for the split-panel layout), so that band stays on-screen
+     at every width in this breakpoint instead of being cropped away as
+     the viewport widens. */
+  .hero-photo.hero-full .hero-photo-media img{object-position:center top !important}
+  .hero-photo.hero-full .hero-photo-media::after{background:linear-gradient(180deg,rgba(10,14,17,.45) 0%,rgba(10,14,17,.22) 28%,rgba(10,14,17,.05) 42%,transparent 58%)}
   .hero-photo .wrap{padding-top:58px;padding-bottom:350px}
-  .hero-photo.hero-full .wrap{padding-bottom:58px}
+  /* hero-full: the photo's blank space sits only at the top of the
+     frame, so pull the text block up and compact it to stay inside that
+     band instead of spilling down over the photo below. */
+  .hero-photo.hero-full .wrap{position:absolute;top:0;left:0;right:0;padding-top:26px;padding-bottom:24px}
+  .hero-photo.hero-full .eyebrow{font-size:11px;margin-bottom:4px}
+  .hero-photo.hero-full h1{font-size:27px;line-height:1.14;margin:8px 0 8px;max-width:100%}
+  .hero-photo.hero-full p{display:none}
+  .hero-photo.hero-full .actions{margin-top:2px}
+  .hero-photo.hero-full .actions a{padding:11px 16px;font-size:12.5px}
   .hero-photo h1{font-size:44px;max-width:550px}
 }
 @media(max-width:480px){
   .hero-photo{min-height:780px}
   .hero-photo-media{top:440px}
   .hero-photo h1{font-size:38px}
+  .hero-photo.hero-full h1{font-size:25px}
 }
 
 /* ---- Light text hero (strategy/marketing/company pages) ---- */
