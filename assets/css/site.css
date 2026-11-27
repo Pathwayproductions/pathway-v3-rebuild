@@ -66,38 +66,50 @@
   .hero-photo-media{inset:390px 0 0 0}
   .hero-photo-media::after{background:linear-gradient(180deg,#fff,transparent 25%)}
   .hero-photo.hero-full .hero-photo-media{inset:0}
-  /* Both mobile hero photos (ad-films / digital-marketing) reserve a
-     blank band across their top ~35% for the heading. Anchor to the top
-     edge, overriding each page's desktop object-position (set inline on
-     the <img> for the split-panel layout), so that band stays on-screen
-     at every width in this breakpoint instead of being cropped away as
-     the viewport widens. */
-  .hero-photo.hero-full .hero-photo-media img{object-position:center top !important}
-  .hero-photo.hero-full .hero-photo-media::after{background:linear-gradient(180deg,rgba(10,14,17,.45) 0%,rgba(10,14,17,.22) 28%,rgba(10,14,17,.05) 42%,transparent 58%)}
+  .hero-photo.hero-full .hero-photo-media::after{background:linear-gradient(180deg,rgba(18,22,25,.18) 0%,rgba(18,22,25,.55) 55%,rgba(18,22,25,.78) 100%)}
   .hero-photo .wrap{padding-top:58px;padding-bottom:350px}
-  /* hero-full: the photo's blank space sits only at the top of the
-     frame, so pull the text block up and compact it to stay inside that
-     band instead of spilling down over the photo below. */
-  .hero-photo.hero-full .wrap{position:absolute;top:0;left:0;right:0;padding-top:40px;padding-bottom:24px}
-  .hero-photo.hero-full .eyebrow{font-size:14px;margin-bottom:8px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
-  .hero-photo.hero-full h1{font-size:46px;line-height:1.16;margin:16px 0 18px;max-width:100%;text-shadow:0 2px 10px rgba(0,0,0,.35)}
-  .hero-photo.hero-full p{display:none}
-  /* The blank part of the photo ends a little after the heading, so the
-     CTA is allowed to sit over the start of the busier picture below it
-     rather than being squeezed into the blank band alone — made
-     translucent (frosted-glass) instead of solid so the photo still
-     reads through it. */
-  .hero-photo.hero-full .actions{margin-top:16px}
-  .hero-photo.hero-full .actions a{padding:16px 24px;font-size:16px}
-  .hero-photo.hero-full .actions .btn{background:rgba(22,126,159,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3)}
-  .hero-photo.hero-full .actions .outline{background:rgba(10,14,17,.3);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .hero-photo.hero-full .wrap{padding-bottom:58px}
   .hero-photo h1{font-size:44px;max-width:550px}
+
+  /* Ad Films / Digital Marketing only: both were supplied with a
+     dedicated mobile hero photo (…-hero-mobile.webp), framed with a
+     blank band across its top for the heading + CTA, same idea as the
+     homepage hero. Matched to the homepage's own mobile box height
+     (620px) so the photo is fully visible without scrolling, same as
+     the homepage — the previous 750px box here was taller than the
+     viewport on most phones and forced a scroll to see the rest of the
+     photo. Scoped to .hero-adfilms / .hero-digmkt (added only on these
+     two pages' hero sections) so every other .hero-photo.hero-full
+     page above is untouched. */
+  .hero-adfilms,.hero-digmkt{min-height:620px}
+  .hero-adfilms .hero-photo-media img,.hero-digmkt .hero-photo-media img{object-position:center top !important}
+  .hero-adfilms .hero-photo-media::after,.hero-digmkt .hero-photo-media::after{background:linear-gradient(180deg,rgba(10,14,17,.45) 0%,rgba(10,14,17,.22) 28%,rgba(10,14,17,.05) 42%,transparent 58%)}
+  .hero-adfilms .wrap,.hero-digmkt .wrap{position:absolute;top:0;left:0;right:0;padding-bottom:24px}
+  .hero-adfilms .eyebrow,.hero-digmkt .eyebrow{font-size:14px;margin-bottom:8px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .hero-adfilms h1,.hero-digmkt h1{line-height:1.16;max-width:100%;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+  .hero-adfilms p,.hero-digmkt p{display:none}
+  .hero-adfilms .actions,.hero-digmkt .actions{margin-top:16px}
+  .hero-adfilms .actions a,.hero-digmkt .actions a{padding:16px 24px;font-size:16px}
+  .hero-adfilms .actions .btn,.hero-digmkt .actions .btn{background:rgba(22,126,159,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3)}
+  .hero-adfilms .actions .outline,.hero-digmkt .actions .outline{background:rgba(10,14,17,.3);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+
+  /* Ad Films' headline is shorter and wraps less than Digital
+     Marketing's, so it gets its own (larger) type scale to land in the
+     same ~45-49% band rather than sharing one size that overfills one
+     page and underfills the other. */
+  .hero-adfilms .wrap{padding-top:58px}
+  .hero-adfilms h1{font-size:46px;margin:20px 0 26px}
+  .hero-adfilms .actions{margin-top:22px}
+  .hero-digmkt .wrap{padding-top:40px}
+  .hero-digmkt h1{font-size:44px;margin:14px 0 16px}
 }
 @media(max-width:480px){
   .hero-photo{min-height:780px}
   .hero-photo-media{top:440px}
   .hero-photo h1{font-size:38px}
-  .hero-photo.hero-full h1{font-size:38px}
+  .hero-adfilms,.hero-digmkt{min-height:660px}
+  .hero-adfilms h1{font-size:34px}
+  .hero-digmkt h1{font-size:37px}
 }
 
 /* ---- Light text hero (strategy/marketing/company pages) ---- */
