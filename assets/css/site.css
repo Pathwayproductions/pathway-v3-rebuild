@@ -172,6 +172,22 @@
 .svc-card--feature .takeaways{color:rgba(255,255,255,.85)}
 .svc-card--feature .takeaways li::before{background:#fff}
 
+/* ---- Case-study results cards: client name, one-line context, then a
+   short column of figures. Figures are the thing worth reading, so they
+   get the bold/blue weight; everything else stays quiet. ---- */
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line);border-top:1px solid var(--line);margin-top:30px}
+.case-card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px 26px;background:inherit}
+.case-card .case-tag{font-size:11px;letter-spacing:.08em;color:var(--blue-text);text-transform:uppercase;margin:0 0 10px}
+.case-card h3{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.015em;margin:0 0 8px}
+.case-card .case-brief{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px;max-width:280px}
+.case-card .case-stats{list-style:none;margin:0;padding:18px 0 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:14px}
+.case-card .case-stats li{display:flex;align-items:baseline;gap:10px}
+.case-card .case-stats .case-num{font-family:var(--serif);font-size:26px;font-weight:400;color:var(--blue-text);white-space:nowrap}
+.case-card .case-stats .case-label{font-size:12px;color:var(--muted);line-height:1.4}
+@media(max-width:850px){
+  .case-grid{grid-template-columns:1fr}
+}
+
 /* ---- Step / process row (3 or 4 columns) ---- */
 .step-row{display:grid;border-top:1px solid var(--line);margin-top:30px}
 .step-row--2{grid-template-columns:repeat(2,1fr)}
