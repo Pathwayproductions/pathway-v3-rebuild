@@ -110,6 +110,14 @@
      tightened to clear it rather than running into it. */
   .hero-digmkt .wrap{padding-top:28px}
   .hero-digmkt h1{font-size:38px;margin:10px 0 12px}
+
+  /* Amazon Advertising: the source graphic is a bright, light-blue
+     ecosystem diagram rather than the darker photography most
+     hero-full pages use, so the generic top-light/bottom-dark mobile
+     gradient above isn't dark enough where the text actually sits.
+     A stronger, more uniform wash keeps it legible over the logo
+     bubbles at every scroll position. */
+  .hero-photo.hero-full.hero-amazonads .hero-photo-media::after{background:linear-gradient(180deg,rgba(8,12,15,.78) 0%,rgba(8,12,15,.7) 45%,rgba(8,12,15,.82) 100%)}
 }
 @media(max-width:480px){
   .hero-photo{min-height:780px}
@@ -748,13 +756,13 @@
 .cta-split .blue-period{color:#5fc2db}
 .cta-split-text p{font-size:14px;line-height:1.7;color:var(--on-dark-muted);max-width:360px;margin-bottom:20px}
 
-/* ---- Bright asymmetric split hero (image in a contained panel, not full-bleed) ---- */
-.hero-split{padding:92px 0 56px}
-.hero-split .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
-.hero-split h1{font-family:var(--serif);font-weight:400;letter-spacing:-.04em;font-size:clamp(32px,4.4vw,54px);line-height:1.1;margin:16px 0 18px}
-.hero-split h1 em{color:var(--blue-text);font-style:normal;font-weight:400}
-.hero-split p{font-size:16px;line-height:1.75;color:var(--muted);max-width:460px;margin:0 0 26px}
-.hero-split-media{aspect-ratio:16/9;position:relative;overflow:hidden;border:1px solid var(--line);align-self:stretch;min-height:280px}
+/* ---- Amazon Ads hero: same full-bleed hero-photo.hero-full pattern as other
+   pages, with a stronger overlay since the source graphic is bright/light
+   rather than the darker photography used on most hero-full pages.
+   min-width-scoped so it doesn't fight the mobile-specific override below. ---- */
+@media(min-width:851px){
+  .hero-photo.hero-full.hero-amazonads .hero-photo-media::after{background:linear-gradient(90deg,rgba(8,12,15,.92) 0%,rgba(8,12,15,.85) 35%,rgba(8,12,15,.5) 52%,rgba(8,12,15,.14) 66%,transparent 80%)}
+}
 
 /* ---- Single editorial image+text split (one row, not repeated) ---- */
 .split-feature{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
@@ -782,8 +790,6 @@
   .timeline-row .tl-step:nth-child(2n) .tl-media{margin-top:0}
   .img-cta .wrap{grid-template-columns:1fr;padding:48px 0;gap:24px}
   .cta-split{grid-template-columns:1fr;gap:24px}
-  .hero-split .wrap{grid-template-columns:1fr;gap:26px}
-  .hero-split-media{min-height:0;order:-1}
   .split-feature,.split-feature.reverse{grid-template-columns:1fr;gap:22px}
   .split-feature.reverse .split-feature-media{order:0}
   .split-feature.reverse .split-feature-text{order:0}
