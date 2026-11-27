@@ -139,6 +139,7 @@
 .svc-grid--2{grid-template-columns:repeat(2,1fr)}
 .svc-grid--3{grid-template-columns:repeat(3,1fr)}
 .svc-grid--4{grid-template-columns:repeat(4,1fr)}
+.svc-grid--5{grid-template-columns:repeat(5,1fr)}
 .svc-card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 24px;min-height:168px;display:flex;flex-direction:column;background:inherit}
 .svc-card h3,.svc-card h4{font-family:var(--serif);font-size:22px;font-weight:400;letter-spacing:-.015em;margin:0 0 8px}
 .svc-card p{font-size:13px;color:var(--muted);line-height:1.6;margin:0;max-width:260px}
@@ -147,6 +148,20 @@
 .bg-charcoal .svc-card p,.bg-charcoal-alt .svc-card p{color:var(--on-dark-muted)}
 .bg-charcoal .svc-grid,.bg-charcoal-alt .svc-grid{border-color:var(--on-dark-line)}
 .svc-card .svc-link{margin-top:auto;padding-top:14px;font-size:12px}
+
+/* ---- One sample video per category, placed under a svc-grid row.
+   Responsive 16:9 embed, one per column, same order as the row above. ---- */
+.work-video-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-top:18px}
+.work-video{margin:0}
+.video-embed{position:relative;width:100%;padding-top:56.25%;background:#15181a;overflow:hidden}
+.video-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.work-video figcaption{font-size:12px;color:var(--muted);line-height:1.4;margin-top:10px}
+@media(max-width:1000px){
+  .work-video-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+  .work-video-grid{grid-template-columns:1fr}
+}
 
 /* Short bullet takeaways inside a svc-card, in place of a paragraph.
    Reuses the same small blue dot marker as .timeline-row's step dots. */
@@ -819,7 +834,7 @@
 @media(max-width:850px){
   .hero-dark{min-height:420px}
   .hero-dark .wrap{padding-top:86px;padding-bottom:44px}
-  .svc-grid--2,.svc-grid--3,.svc-grid--4{grid-template-columns:1fr}
+  .svc-grid--2,.svc-grid--3,.svc-grid--4,.svc-grid--5{grid-template-columns:1fr}
   .step-row--2,.step-row--3,.step-row--4,.step-row--5{grid-template-columns:1fr 1fr}
   .step-row .step:nth-child(2n){border-right:0}
   .media-grid,.media-grid--3{grid-template-columns:1fr;gap:26px}
