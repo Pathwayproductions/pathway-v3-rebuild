@@ -120,9 +120,10 @@ document.querySelectorAll('.video-card__link[data-yt-id]').forEach(link=>{
 
 /* Industry filter (Our Work page): clicking an industry button shows only
    the video cards tagged with that industry (data-industries, space-
-   separated for a card that fits more than one) and hides the rest; "All
-   Industries" clears the filter. Plain show/hide, no page reload — same
-   spirit as the video-carousel wiring above. */
+   separated for a card that fits more than one) and hides the rest.
+   Clicking the active button again (or nothing being active) shows every
+   video. Plain show/hide, no page reload — same spirit as the
+   video-carousel wiring above. */
 document.querySelectorAll('[data-industry-grid]').forEach(grid=>{
   const filterBar=grid.parentElement.querySelector('.industry-filter');
   if(!filterBar)return;
@@ -130,11 +131,13 @@ document.querySelectorAll('[data-industry-grid]').forEach(grid=>{
   const cards=[...grid.querySelectorAll('.video-card')];
   buttons.forEach(btn=>{
     btn.addEventListener('click',()=>{
-      const value=btn.dataset.industryFilter;
-      buttons.forEach(b=>b.classList.toggle('is-active',b===btn));
+      const turningOn=!btn.classList.contains('is-active');
+      buttons.forEach(b=>b.classList.remove('is-active'));
+      if(turningOn)btn.classList.add('is-active');
+      const value=turningOn?btn.dataset.industryFilter:null;
       cards.forEach(card=>{
         const tags=(card.dataset.industries||'').split(' ');
-        card.hidden=value!=='all'&&!tags.includes(value);
+        card.hidden=value!==null&&!tags.includes(value);
       });
     });
   });
