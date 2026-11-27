@@ -348,14 +348,21 @@
   /* hero-full: the photo's blank space is confined to the top of the
      frame, so the text block is pulled up and compacted to fit entirely
      inside it instead of spilling down over the photo below. */
-  .hero.hero-full .wrap{position:absolute;top:0;left:0;right:0;padding-top:30px;padding-bottom:28px}
+  .hero.hero-full .wrap{position:absolute;top:0;left:0;right:0;padding-top:34px;padding-bottom:28px}
   .hero.hero-full .rule{display:none}
-  .hero.hero-full .eyebrow{font-size:11px;margin-bottom:4px}
-  .hero.hero-full h1{font-size:33px;line-height:1.14;margin:8px 0 10px;max-width:100%}
+  .hero.hero-full .eyebrow{font-size:12px;margin-bottom:6px;text-shadow:0 1px 6px rgba(0,0,0,.4)}
+  .hero.hero-full h1{font-size:38px;line-height:1.12;margin:10px 0 12px;max-width:100%;text-shadow:0 2px 10px rgba(0,0,0,.35)}
   .hero.hero-full h2{display:none}
   .hero.hero-full p{display:none}
-  .hero.hero-full .actions{margin-top:2px}
-  .hero.hero-full .actions a{padding:11px 16px;font-size:12.5px}
+  /* The blank part of the photo ends a little after the heading, so the
+     CTAs are allowed to sit over the start of the busier picture below
+     it rather than being squeezed into the blank band alone — made
+     translucent (frosted-glass) instead of solid so the photo still
+     reads through them. */
+  .hero.hero-full .actions{margin-top:10px}
+  .hero.hero-full .actions a{padding:13px 20px;font-size:14px}
+  .hero.hero-full .actions .btn{background:rgba(22,126,159,.62);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3)}
+  .hero.hero-full .actions .outline{background:rgba(10,14,17,.3);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border-color:rgba(255,255,255,.55);color:#fff}
   .hero h1{font-size:49px;max-width:550px}
   .hero h2{font-size:24px}
   .hero p{font-size:14px}
@@ -370,7 +377,7 @@
   .hero{min-height:660px}
   .hero-media{top:440px}
   .hero h1{font-size:42px}
-  .hero.hero-full h1{font-size:29px}
+  .hero.hero-full h1{font-size:33px}
   .process{grid-template-columns:1fr}
   .step{border-right:0;border-bottom:1px solid var(--line);margin-right:0}
   .card{min-height:260px}
