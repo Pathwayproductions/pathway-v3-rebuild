@@ -114,8 +114,24 @@ img{max-width:100%;display:block}
 .breadcrumbs a:hover{color:var(--blue-text)}
 .breadcrumbs li[aria-current="page"]{color:var(--ink);font-weight:600}
 @media(max-width:850px){
-  .breadcrumbs ol{font-size:11px;padding:11px 0}
+  .breadcrumbs ol{font-size:11px;padding:11px 0;flex-wrap:nowrap}
   .breadcrumbs li+li::before{margin:0 7px}
+  /* On a 4+-level trail (e.g. Home / Creative Productions / Production
+     Services in India / Crew & Equipment), showing every level wrapped to
+     an awkward, mis-aligned second line. On narrow screens, collapse
+     everything between the first (Home) and last (current page) item into
+     a single "…", so the trail reads as one line: Home / … / Crew & Equipment.
+     The full trail stays in the DOM and in the page's BreadcrumbList schema
+     either way — this only changes what's visually shown, so no SEO impact.
+     li:last-child wins the cascade over the plain li+li separator above
+     because it's more specific, so no !important is needed. */
+  .breadcrumbs li:not(:first-child):not(:last-child){display:none}
+  .breadcrumbs ol:has(li:not(:first-child):not(:last-child)) li:last-child::before{
+    content:'… /';margin:0 7px;color:#b7bcbe;
+  }
+  /* display:block (not the default li flex) so text-overflow actually
+     applies — it doesn't reliably truncate a flex container's own text. */
+  .breadcrumbs li:last-child{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;max-width:100%}
 }
 
 /* ---------- Type / eyebrow ---------- */
@@ -213,7 +229,7 @@ h1,h2,h3{margin:0}
   .navlinks{display:none;position:absolute;top:72px;left:0;right:0;background:#fff;padding:22px;flex-direction:column;align-items:start;border-bottom:1px solid var(--line);z-index:19;max-height:calc(100vh - 72px);overflow-y:auto}
   .navlinks.open{display:flex}
   .mobile{display:block}
-  .nav>.outline{display:none}
+  .nav>a.outline{display:none} /* "Get in Touch" link only — the .meet-header-btn "Book a call" button (also .outline) stays visible, see meeting-widget.css */
   .header-social{display:none}
   .split{grid-template-columns:1fr;gap:20px}
   .section{padding:60px 0}
@@ -223,7 +239,12 @@ h1,h2,h3{margin:0}
      layout: static, single column, left-rule instead of a floating card). */
   .navdrop{flex-direction:column;align-items:stretch;width:100%;gap:0}
   .navdrop>a{padding:9px 0}
-  .navdrop-toggle{display:block;position:absolute;right:0;top:2px;font-size:16px;padding:10px 6px}
+  /* Enlarged from the original 10px/6px padding (a ~24.5x36px hit area,
+     short of the ~44x44px recommended minimum tap target) without changing
+     the row's own layout height — the toggle is absolutely positioned, so
+     widening it doesn't push sibling rows down; top is nudged up slightly
+     to keep it vertically centred on the row now that it's a bit taller. */
+  .navdrop-toggle{display:block;position:absolute;right:0;top:0;font-size:16px;padding:12px 14px}
   .navdrop-panel{
     position:static;display:none;grid-template-columns:1fr;gap:0;
     opacity:1;visibility:visible;pointer-events:auto;transform:none;

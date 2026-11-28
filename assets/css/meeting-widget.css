@@ -1,8 +1,9 @@
 /* ==========================================================================
    Pathway Productions — sitewide "Book a call" + mobile call button
    Loaded on every page. Provides:
-     1. The header "Book a call" button (desktop, next to "Get in Touch")
-        and its mobile-menu equivalent.
+     1. The header "Book a call" button (desktop, next to "Get in Touch"),
+        kept visible — in a compact size — in the mobile header too, so
+        booking a call doesn't require opening the hamburger menu first.
      2. The Google Calendar booking modal those buttons open.
      3. A mobile-only tap-to-call icon in the header (hidden on desktop and
         tablet, by request — phone is a deliberate, one-tap mobile action,
@@ -31,26 +32,31 @@
 }
 
 /* ---- Header "Book a call" link inside the mobile menu ---------------------
-   The desktop header button is hidden at <=850px along with "Get in Touch"
-   (.nav>.outline rule in base.css) so it doesn't crowd the collapsed header;
-   this is the mobile-menu equivalent, styled to match the other nav links.
-   Hidden by default since .navlinks is a plain visible flex row on desktop
-   (it only collapses into the hamburger panel at <=850px) — without this,
-   the trigger would show up twice, once here and once as .meet-header-btn. */
+   Kept in the markup as a fallback entry point (e.g. if the header button's
+   compact label is ever trimmed further), but hidden by default now that
+   .meet-header-btn itself stays visible in the collapsed mobile header
+   below — showing both would be a redundant second "Book a call" once the
+   hamburger menu is opened. */
 .navlinks .meet-nav-trigger { display: none; }
+
+/* ---- Mobile header: keep "Book a call" visible, just compact --------------
+   At <=850px the header collapses to logo / phone / Book a call / Menu.
+   "Get in Touch" (an outbound link to the Contact page) is still hidden at
+   this width (.nav>a.outline in base.css) since the phone icon and this
+   button already cover one-tap contact and scheduling; this button is a
+   <button>, not an <a>, so that rule doesn't catch it. Sized down from the
+   desktop 14px/20px, 13px type so it fits the four header items on a
+   360-375px screen without crowding the tap targets either side of it. */
 @media (max-width: 850px) {
-  .navlinks .meet-nav-trigger {
-    all: unset;
-    display: block;
-    width: 100%;
-    padding: 9px 0;
-    font: inherit;
-    font-size: 13px;
-    color: var(--blue-text, #0f6f8f);
-    font-weight: 600;
-    cursor: pointer;
+  .meet-header-btn {
+    display: inline-flex;
+    padding: 8px 12px;
+    font-size: 12px;
     white-space: nowrap;
   }
+}
+@media (max-width: 360px) {
+  .meet-header-btn { padding: 8px 9px; font-size: 11px; }
 }
 
 /* ---- Mobile-only tap-to-call icon ------------------------------------------
